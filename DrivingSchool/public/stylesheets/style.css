@@ -1,8 +1,214 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  position: relative;
 }
 
-a {
-  color: #00B7FF;
+#home {
+  padding: 10px 1px 10px 0px;
+  height: 900px;
+}
+
+#personal {
+  padding-top: 50px;
+  height: 1000px;
+}
+
+#location {
+  padding-top: 50px;
+  height: 1000px;
+}
+
+#contact {
+  padding-top: 50px;
+  height: 800px;
+}
+
+#home, #personal, #location, #contact {
+  color: white;
+  background-color: black;
+}
+
+.carousel-inner>.item>img, .carousel-inner>.item>a>img {
+  margin: none;
+  position: relative;
+}
+
+.nav .open>a, .nav .open>a:hover, .nav .open>a:focus {
+  background-color: red;
+  border-bottom: 1px gray solid;
+  color: white;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+  color: white;
+  font-weight: 650;
+  border-bottom: 2px solid transparent;
+  margin: 0px 10px;
+  background-color: black;
+}
+
+.navbar-inverse:hover .navbar-nav>li>a:hover, .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+  color: red;
+  background-color: black;
+  border-bottom: 2px solid red;
+}
+
+.schoolImg {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  height: 800px;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: top center;
+  background-attachment: fixed;
+  z-index: 1;
+}
+
+#img1 {
+  background-image: url('/images/scoala.jpg');
+}
+
+#navCol {
+  background-color: black;
+  border-bottom: 1px gray solid;
+}
+
+table {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 10%;
+  border-radius: 5 px;
+  background-color: white;
+}
+
+table td, table th {
+  margin-left: 0;
+  padding: 8 px;
+
+}
+
+table tr:nth-child(even) {
+  background-color: #ff0000c2;
+}
+
+table tr:nth-child(odd) {
+  background-color: rgba(0, 0, 0, 0.822);
+  color: white;
+}
+
+table tr:hover {
+  background-color: #ddd;
+}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: black;
+  color: #fd7070;
+}
+
+.btn {
+  padding: 10px 20px;
+  background-color: red;
+  color: #f1f1f1;
+  border-radius: 0;
+  transition: .2s;
+  border-radius: 5px;
+}
+
+.btn:hover, .btn:focus {
+  border: 1px solid rgb(223, 58, 58);
+  background-color: rgb(223, 58, 58);
+  color: rgb(250, 254, 255);
+}
+
+footer {
+  background-color: red;
+  color: #f5f5f5;
+  padding: 20px;
+}
+
+footer a {
+  color: #f5f5f5;
+}
+
+footer a:hover {
+  color: #777;
+  text-decoration: none;
+}
+
+#userSvg {
+  position: absolute;
+  left: 15%;
+  height: 15%;
+  width: 15%;
+}
+
+.index-form {
+  width: 90%;
+  padding-top: 20%;
+  padding-left: 5%
+}
+
+.bla {
+  background-color: black;
+  border-radius: 5px;
+  color: black;
+  margin-top: 5%;
+}
+
+#submitBtn {
+  border: 1px solid red;
+  background-color: red;
+  color: azure;
+  border-radius: 5px;
+}
+
+#submitBtn:hover {
+  background-color: rgb(179, 14, 14);
+}
+
+span {
+  margin-right: 2px;
+}
+
+.inner-addon {
+  position: relative;
+}
+
+/* style icon */
+
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+}
+
+i {
+  cursor: arrow;
+}
+
+/* align icon */
+
+.left-addon .glyphicon, #lockClick .glyphicon {
+  left: 0px;
+}
+
+.right-addon .glyphicon, #eyeClick {
+  right: 0px;
+}
+
+/* add padding  */
+
+.left-addon input, .left input {
+  padding-left: 30px;
+}
+
+.right-addon input {
+  padding-right: 30px;
+}
+
+.forgotPass{
+  color:red;
 }
