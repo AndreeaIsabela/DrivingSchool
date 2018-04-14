@@ -9,7 +9,7 @@ let app = new Vue({
         onRegisterRequests: function () {
 
             this.$http
-                .get('/api/instructors')
+                .get('/api/registerrequests')
                 .then(function (response) {
                     console.log(response.data);
                 }).catch(function (err) {
@@ -19,7 +19,7 @@ let app = new Vue({
         onInstructors: function () {
 
             this.$http
-                .get('/api/instructors')
+                .get('/api/students')
                 .then(function (response) {
                     console.log(response.data);
                 }).catch(function (err) {
@@ -38,7 +38,7 @@ let app = new Vue({
         },
         onAdmins: function () {
             this.$http
-                .get('/api/instructors')
+                .get('/api/admins')
                 .then(function (response) {
                     console.log(response.data);
                 }).catch(function (err) {
