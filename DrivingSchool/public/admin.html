@@ -37,13 +37,24 @@
             </div>
             <div class="col col-sm-2"></div>
             <div class="col col-sm-10 sidepage">
-
+                <div class="register-request-view" v-show="currentView == viewIndex.registerRequestView">
+                    Register requests
+                </div>
+                <div class="instructor-view" v-show="currentView == viewIndex.instructorView">
+                    Instructors
+                </div>
+                <div class="student-view" v-show="currentView == viewIndex.studentView">
+                    Students
+                </div>
+                <div class="admin-view" v-show="currentView == viewIndex.adminView">
+                    Admins
+                </div>
             </div>
         </div>
     </div>
 
     <script src="/javascripts/admin.js">
-        
+
     </script>
 </body>
 
