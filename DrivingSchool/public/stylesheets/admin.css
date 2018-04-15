@@ -82,4 +82,10 @@ thead {
 .btn {
     margin-right: 5px;
     display: inline-block;
+    margin-bottom: 20px;
+}
+
+.create-form {
+    width: 70%;
+    margin: 0 auto;
 }

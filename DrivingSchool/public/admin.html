@@ -41,45 +41,52 @@
                     {{ viewInfo[currentView].title }}
                 </h1>
 
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th v-for="(header, index) in viewInfo[currentView].headers" v-bind:style="{width: `${header.width}%`}">
-                                {{header.text}}
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="(item, index) in data" v-bind:class="{ 'selected-row' : index == selectedRowIndex }">
-                            <td v-for="prop in item" v-on:click="selectRow(index)">
-                                {{prop}}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <button class="btn btn-success" v-bind:disabled="!isCreateEnabled()">
-                    <i class="fa fa-plus"></i>
-                    Adauga
-                </button>
-                <button class="btn btn-primary" v-bind:disabled="!isEditEnabled()">
-                    <i class="fa fa-edit"></i>
-                    Editeaza
-                </button>
-                <button class="btn btn-danger" v-bind:disabled="!isDeleteEnabled()">
-                    <i class="fa fa-trash"></i>
-                    Sterge
-                </button>
-                <button class="btn btn-warning" v-bind:disabled="!isDeleteEnabled()">
-                    <i class="fa fa-archive"></i>
-                    Arhiveaza
-                </button>
+                <div v-if="!createFormEnabled">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th v-for="(header, index) in viewInfo[currentView].headers" v-bind:style="{width: `${header.width}%`}">
+                                    {{header.text}}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(item, index) in data" v-bind:class="{ 'selected-row' : index == selectedRowIndex }">
+                                <td v-for="prop in item" v-on:click="selectRow(index)">
+                                    {{prop}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <button class="btn btn-success" v-bind:disabled="!isCreateEnabled()" v-on:click="onCreate">
+                        <i class="fa fa-plus"></i>
+                        Adauga
+                    </button>
+                    <button class="btn btn-primary" v-bind:disabled="!isEditEnabled()" v-on:click="onEdit">
+                        <i class="fa fa-edit"></i>
+                        Editeaza
+                    </button>
+                    <button class="btn btn-danger" v-bind:disabled="!isDeleteEnabled()" v-on:click="onDelete">
+                        <i class="fa fa-trash"></i>
+                        Sterge
+                    </button>
+                    <button class="btn btn-warning" v-bind:disabled="!isDeleteEnabled()" v-on:click="onArchive">
+                        <i class="fa fa-archive"></i>
+                        Arhiveaza
+                    </button>
+                </div>
+                <div v-if="createFormEnabled">
+                    <div v-if="currentView === viewIndex.instructor">
+                        <instructor-form></instructor-form>
+                    </div>
+                    <div v-else-if="currentView === viewIndex.admin">
+                        form admin
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-    <script src="/javascripts/admin.js">
-
-    </script>
 </body>
 
 </html>

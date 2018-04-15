@@ -9,7 +9,6 @@ const router = express.Router();
 /* GET student listing. */
 router.get('/registerrequests', (req, res, next) => {
     let requests = registryController.getRequests();
-    console.log(requests);
     res.json(requests);
 });
 
