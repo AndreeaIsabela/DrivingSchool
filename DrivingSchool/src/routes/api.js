@@ -9,6 +9,7 @@ const router = express.Router();
 /* GET student listing. */
 router.get('/registerrequests', (req, res, next) => {
     let requests = registryController.getRequests();
+    console.log(requests);
     res.json(requests);
 });
 
@@ -20,7 +21,7 @@ router.get('/students', (req, res, next) => {
 
 /* GET instructors listing. */
 router.get('/instructors', (req, res, next) => {
-    let instructors = instructorController.getInstructor();
+    let instructors = instructorController.getInstructors();
     res.json(instructors);
 });
 
