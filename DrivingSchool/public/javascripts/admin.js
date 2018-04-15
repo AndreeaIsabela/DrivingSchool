@@ -77,36 +77,35 @@ let app = new Vue({
         data: [],
         selectedRowIndex: null
     },
+    created: function() {
+        this.onRegisterRequests();
+    },
     methods: {
         onRegisterRequests: function () {
-            this.enableView(this.viewIndex.registerRequest);
-
             this.$http
                 .get('/api/registerrequests')
-                .then(function (response) {
-                    this.data.splice(0, this.data.length);
+                .then(response => {
+                    this.enableView(this.viewIndex.registerRequest);
+                    this.clearTable();
 
-                    console.log(response);
-                    for (let registration of response.data) {
+                    for (let request of response.data) {
                         this.data.push([
-                            registration.id,
-                            registration.lastName + ' ' + registration.firstName,
-                            registration.phone
+                            request.number,
+                            request.name,
+                            request.phone
                         ]);
-                    };
+                    }
                 }).catch(err => {
-                    console.log(err.response);
+                    console.log(err);
                 });
         },
         onInstructors: function () {
-            this.enableView(this.viewIndex.instructor);
-
             this.$http
                 .get('/api/instructors')
                 .then(response => {
-                    this.data.splice(0, this.data.length);
+                    this.enableView(this.viewIndex.instructor);
+                    this.clearTable();
 
-                    console.log(response);
                     for (let instructor of response.data) {
                         this.data.push([
                             instructor.cnp,
@@ -115,18 +114,18 @@ let app = new Vue({
                             instructor.category,
                             instructor.phone
                         ]);
-                    };
+                    }
                 }).catch(function (err) {
                     console.log(err.response);
                 });
         },
         onStudents: function () {
-            this.enableView(this.viewIndex.student);
-
             this.$http
                 .get('/api/students')
                 .then(response => {
-                    console.log(response);
+                    this.enableView(this.viewIndex.student);
+                    this.clearTable();
+
                     for (let student of response.data) {
                         this.data.push([
                             student.cnp,
@@ -141,15 +140,12 @@ let app = new Vue({
                 });
         },
         onAdmins: function () {
-            this.enableView(this.viewIndex.admin);
-
             this.$http
                 .get('/api/admins')
                 .then(response => {
+                    this.enableView(this.viewIndex.admin);
+                    this.clearTable();
 
-                    this.data.splice(0, this.data.length);
-
-                    console.log(response);
                     for (let adminData of response.data) {
                         this.data.push([
                             adminData.name
@@ -164,6 +160,10 @@ let app = new Vue({
         },
         selectRow(rowIndex) {
             this.selectedRowIndex = this.selectedRowIndex == rowIndex ? null : rowIndex;
+        },
+        clearTable() {
+            this.selectedRowIndex = null;
+            this.data.splice(0, this.data.length);
         },
         isCreateEnabled() {
             return this.viewInfo[this.currentView].canCreate;
