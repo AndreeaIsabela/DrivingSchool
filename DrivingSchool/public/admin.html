@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!--[if lt IE 9]>
+       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/stylesheets/admin.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.2/axios.js"></script>
+    <title>Panou administrator</title>
+</head>
+
+<body>
+    <div class="container-fluid" id="app">
+        <div class="row">
+            <div class="col col-sm-2 sidebar">
+                <img src="/images/brand.jpg" class="img-responsive" />
+                <div class="sidebar-item" v-on:click="onRegisterRequests" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.registerRequest}">
+                    {{viewInfo[viewIndex.registerRequest].title}}
+                </div>
+                <div class="sidebar-item" v-on:click="onInstructors" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.instructor}">
+                    {{viewInfo[viewIndex.instructor].title}}
+                </div>
+                <div class="sidebar-item" v-on:click="onStudents" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.student}">
+                    {{viewInfo[viewIndex.student].title}}
+                </div>
+                <div class="sidebar-item" v-on:click="onAdmins" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.admin}">
+                    {{viewInfo[viewIndex.admin].title}}
+                </div>
+            </div>
+            <div class="col col-sm-2"></div>
+            <div class="col col-sm-10 sidepage">
+                <h1 class="view-title">
+                    {{ viewInfo[currentView].title }}
+                </h1>
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th v-for="(header, index) in viewInfo[currentView].headers" v-bind:style="{width: `${header.width}%`}">
+                                {{header.text}}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(item, index) in data" v-bind:class="{ 'selected-row' : index == selectedRowIndex }">
+                            <td v-for="prop in item" v-on:click="selectRow(index)">
+                                {{prop}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="btn btn-success" v-bind:disabled="!isCreateEnabled()">
+                    <i class="fa fa-plus"></i>
+                    Adauga
+                </button>
+                <button class="btn btn-primary" v-bind:disabled="!isEditEnabled()">
+                    <i class="fa fa-edit"></i>
+                    Editeaza
+                </button>
+                <button class="btn btn-danger" v-bind:disabled="!isDeleteEnabled()">
+                    <i class="fa fa-trash"></i>
+                    Sterge
+                </button>
+                <button class="btn btn-warning" v-bind:disabled="!isDeleteEnabled()">
+                    <i class="fa fa-archive"></i>
+                    Arhiveaza
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/javascripts/admin.js">
+
+    </script>
+</body>
+
+</html>
