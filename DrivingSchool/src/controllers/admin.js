@@ -1,10 +1,16 @@
 class AdminController {
     getAdmins() {
-        return [{
-            name: 'Ion'
-        }, {
-            name: 'Ion'
-        }];
+        return [
+            {
+                name: 'Drogon'
+            },
+            {
+                name: 'Jon Snow'
+            },
+            {
+                name: 'Khaleesi'
+            }
+        ];
     }
 }
 

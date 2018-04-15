@@ -74,12 +74,7 @@ let app = new Vue({
             { text: 'Nume', width: 80 },
             { text: 'Action', width: 10 }
         ],
-        data: [
-            [1, 'Ion', 'Ion'],
-            [1, 'Ion', 'Ion'],
-            [1, 'Ion', 'Ion'],
-            [1, 'Ion', 'Ion']
-        ],
+        data: [],
         selectedRowIndex: null
     },
     methods: {
@@ -89,8 +84,17 @@ let app = new Vue({
             this.$http
                 .get('/api/registerrequests')
                 .then(function (response) {
-                    console.log(response.data);
-                }).catch(function (err) {
+                    this.data.splice(0, this.data.length);
+
+                    console.log(response);
+                    for (let registration of response.data) {
+                        this.data.push([
+                            registration.id,
+                            registration.lastName + ' ' + registration.firstName,
+                            registration.phone
+                        ]);
+                    };
+                }).catch(err => {
                     console.log(err.response);
                 });
         },
@@ -98,9 +102,20 @@ let app = new Vue({
             this.enableView(this.viewIndex.instructor);
 
             this.$http
-                .get('/api/students')
-                .then(function (response) {
-                    console.log(response.data);
+                .get('/api/instructors')
+                .then(response => {
+                    this.data.splice(0, this.data.length);
+
+                    console.log(response);
+                    for (let instructor of response.data) {
+                        this.data.push([
+                            instructor.cnp,
+                            instructor.lastName,
+                            instructor.firstName,
+                            instructor.category,
+                            instructor.phone
+                        ]);
+                    };
                 }).catch(function (err) {
                     console.log(err.response);
                 });
@@ -109,9 +124,18 @@ let app = new Vue({
             this.enableView(this.viewIndex.student);
 
             this.$http
-                .get('/api/instructors')
-                .then(function (response) {
-                    console.log(response.data);
+                .get('/api/students')
+                .then(response => {
+                    console.log(response);
+                    for (let student of response.data) {
+                        this.data.push([
+                            student.cnp,
+                            student.lastName,
+                            student.firstName,
+                            student.category,
+                            student.phone
+                        ]);
+                    };
                 }).catch(function (err) {
                     console.log(err.response);
                 });
@@ -121,8 +145,16 @@ let app = new Vue({
 
             this.$http
                 .get('/api/admins')
-                .then(function (response) {
-                    console.log(response.data);
+                .then(response => {
+
+                    this.data.splice(0, this.data.length);
+
+                    console.log(response);
+                    for (let adminData of response.data) {
+                        this.data.push([
+                            adminData.name
+                        ]);
+                    };
                 }).catch(function (err) {
                     console.log(err.response);
                 });
