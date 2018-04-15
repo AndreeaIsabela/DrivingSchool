@@ -14,25 +14,29 @@ let app = new Vue({
                 title: 'Inscrieri',
                 canCreate : false,
                 canEdit : false,
-                canDelete : true
+                canDelete : true,
+                canArchive : false
             },
             {
                 title: 'Instructori',
                 canCreate : true,
                 canEdit : true,
-                canDelete : true
+                canDelete : true,
+                canArchive : false
             },
             {
                 title: 'Cursanti',
                 canCreate : false,
                 canEdit : true,
-                canDelete : true
+                canDelete : true,
+                canArchive : true
             },
             {
                 title: 'Administratori',
                 canCreate : true,
                 canEdit : false,
-                canDelete : false
+                canDelete : false,
+                canArchive : false
             }
         ],
         currentView: 0,

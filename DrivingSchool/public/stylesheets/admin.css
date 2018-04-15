@@ -57,6 +57,10 @@ thead {
     color: white;
 }
 
+.table > tbody tr {
+    background-color: #fafafa;
+}
+
 .table > tbody tr:hover {
     background-color: #9f9f9f;
     color: white;
