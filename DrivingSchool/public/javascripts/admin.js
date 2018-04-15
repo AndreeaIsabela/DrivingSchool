@@ -12,31 +12,53 @@ let app = new Vue({
         viewInfo: [
             {
                 title: 'Inscrieri',
-                canCreate : false,
-                canEdit : false,
-                canDelete : true,
-                canArchive : false
+                canCreate: false,
+                canEdit: false,
+                canDelete: true,
+                canArchive: false,
+                headers: [
+                    { text: 'Numar inscriere', width: 15 },
+                    { text: 'De la', width: 65 },
+                    { text: 'Numar telefon', width: 20 }
+                ]
             },
             {
                 title: 'Instructori',
-                canCreate : true,
-                canEdit : true,
-                canDelete : true,
-                canArchive : false
+                canCreate: true,
+                canEdit: true,
+                canDelete: true,
+                canArchive: false,
+                headers: [
+                    { text: 'CNP', width: 10 },
+                    { text: 'Nume', width: 30 },
+                    { text: 'Prenume', width: 30 },
+                    { text: 'Categorie', width: 10 },
+                    { text: 'Numar telefon', width: 20 }
+                ]
             },
             {
                 title: 'Cursanti',
-                canCreate : false,
-                canEdit : true,
-                canDelete : true,
-                canArchive : true
+                canCreate: false,
+                canEdit: true,
+                canDelete: true,
+                canArchive: true,
+                headers: [
+                    { text: 'CNP', width: 10 },
+                    { text: 'Nume', width: 30 },
+                    { text: 'Prenume', width: 30 },
+                    { text: 'Categorie', width: 10 },
+                    { text: 'Numar telefon', width: 20 }
+                ]
             },
             {
                 title: 'Administratori',
-                canCreate : true,
-                canEdit : false,
-                canDelete : false,
-                canArchive : false
+                canCreate: true,
+                canEdit: false,
+                canDelete: false,
+                canArchive: false,
+                headers: [
+                    { text: 'Nume', width: 100 }
+                ]
             }
         ],
         currentView: 0,
@@ -113,10 +135,10 @@ let app = new Vue({
         },
         isCreateEnabled() {
             return this.viewInfo[this.currentView].canCreate;
-        }, 
+        },
         isEditEnabled() {
             return this.viewInfo[this.currentView].canEdit && this.selectedRowIndex !== null;
-        }, 
+        },
         isDeleteEnabled() {
             return this.viewInfo[this.currentView].canDelete && this.selectedRowIndex !== null;
         }

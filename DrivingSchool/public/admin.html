@@ -44,7 +44,7 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th v-for="(header, index) in headers" v-bind:style="{width: `${header.width}%`}">
+                            <th v-for="(header, index) in viewInfo[currentView].headers" v-bind:style="{width: `${header.width}%`}">
                                 {{header.text}}
                             </th>
                         </tr>
