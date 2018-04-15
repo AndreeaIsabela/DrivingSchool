@@ -4,12 +4,38 @@ let app = new Vue({
     el: '#app',
     data: {
         viewIndex: {
-            registerRequestView: 1,
-            instructorView: 2,
-            studentView: 3,
-            adminView: 4
+            registerRequest: 0,
+            instructor: 1,
+            student: 2,
+            admin: 3
         },
-        currentView: 1,
+        viewInfo: [
+            {
+                title: 'Inscrieri',
+                canCreate : false,
+                canEdit : false,
+                canDelete : true
+            },
+            {
+                title: 'Instructori',
+                canCreate : true,
+                canEdit : true,
+                canDelete : true
+            },
+            {
+                title: 'Cursanti',
+                canCreate : false,
+                canEdit : true,
+                canDelete : true
+            },
+            {
+                title: 'Administratori',
+                canCreate : true,
+                canEdit : false,
+                canDelete : false
+            }
+        ],
+        currentView: 0,
         viewTitle: 'Inscrieri',
         menuOptionText: {
             request: 'Inscrieri',
@@ -32,7 +58,7 @@ let app = new Vue({
     },
     methods: {
         onRegisterRequests: function () {
-            this.enableView(this.viewIndex.registerRequestView);
+            this.enableView(this.viewIndex.registerRequest);
 
             this.$http
                 .get('/api/registerrequests')
@@ -43,7 +69,7 @@ let app = new Vue({
                 });
         },
         onInstructors: function () {
-            this.enableView(this.viewIndex.instructorView);
+            this.enableView(this.viewIndex.instructor);
 
             this.$http
                 .get('/api/students')
@@ -54,7 +80,7 @@ let app = new Vue({
                 });
         },
         onStudents: function () {
-            this.enableView(this.viewIndex.studentView);
+            this.enableView(this.viewIndex.student);
 
             this.$http
                 .get('/api/instructors')
@@ -65,7 +91,7 @@ let app = new Vue({
                 });
         },
         onAdmins: function () {
-            this.enableView(this.viewIndex.adminView);
+            this.enableView(this.viewIndex.admin);
 
             this.$http
                 .get('/api/admins')
@@ -79,8 +105,16 @@ let app = new Vue({
             this.currentView = viewIndex;
         },
         selectRow(rowIndex) {
-            console.log(rowIndex);
             this.selectedRowIndex = this.selectedRowIndex == rowIndex ? null : rowIndex;
+        },
+        isCreateEnabled() {
+            return this.viewInfo[this.currentView].canCreate;
+        }, 
+        isEditEnabled() {
+            return this.viewInfo[this.currentView].canEdit && this.selectedRowIndex !== null;
+        }, 
+        isDeleteEnabled() {
+            return this.viewInfo[this.currentView].canDelete && this.selectedRowIndex !== null;
         }
     }
 });

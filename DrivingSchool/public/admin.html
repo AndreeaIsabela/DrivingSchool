@@ -22,26 +22,26 @@
         <div class="row">
             <div class="col col-sm-2 sidebar">
                 <img src="/images/brand.jpg" class="img-responsive" />
-                <div class="sidebar-item" v-on:click="onRegisterRequests" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.registerRequestView}">
-                    {{menuOptionText.request}}
+                <div class="sidebar-item" v-on:click="onRegisterRequests" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.registerRequest}">
+                    {{viewInfo[viewIndex.registerRequest].title}}
                 </div>
-                <div class="sidebar-item" v-on:click="onInstructors" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.instructorView}">
-                    {{menuOptionText.instructor}}
+                <div class="sidebar-item" v-on:click="onInstructors" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.instructor}">
+                    {{viewInfo[viewIndex.instructor].title}}
                 </div>
-                <div class="sidebar-item" v-on:click="onStudents" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.studentView}">
-                    {{menuOptionText.student}}
+                <div class="sidebar-item" v-on:click="onStudents" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.student}">
+                    {{viewInfo[viewIndex.student].title}}
                 </div>
-                <div class="sidebar-item" v-on:click="onAdmins" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.adminView}">
-                    {{menuOptionText.admin}}
+                <div class="sidebar-item" v-on:click="onAdmins" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.admin}">
+                    {{viewInfo[viewIndex.admin].title}}
                 </div>
             </div>
             <div class="col col-sm-2"></div>
             <div class="col col-sm-10 sidepage">
                 <div style="width: 100%">
-                    <h1 class="view-title">{{viewTitle}}</h1>
+                    <h1 class="view-title">{{ viewInfo[currentView].title }}</h1>
                 </div>
 
-                <table class="table table-striped table-bordered">
+                <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th v-for="(header, index) in headers" v-bind:style="{width: `${header.width}%`}">
@@ -57,9 +57,17 @@
                         </tr>
                     </tbody>
                 </table>
-                <button class="btn btn-primary" v-show="currentView == viewIndex.instructorView || currentView == viewIndex.adminView">
+                <button class="btn btn-success" v-bind:disabled="!isCreateEnabled()">
+                    <i class="fa fa-trash-alt"></i>
                     Adauga
-                    <i class="fa fa-plus"></i>
+                </button>
+                <button class="btn btn-primary" v-bind:disabled="!isEditEnabled()">
+                    <i class="fa fa-edit"></i>
+                    Editeaza
+                </button>
+                <button class="btn btn-danger" v-bind:disabled="!isDeleteEnabled()">
+                    <i class="fa fa-edit"></i>
+                    Sterge
                 </button>
             </div>
         </div>
