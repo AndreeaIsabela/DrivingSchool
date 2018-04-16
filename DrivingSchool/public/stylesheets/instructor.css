@@ -1,0 +1,27 @@
+.sidebar {
+    height: 100%;
+    position: fixed;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+.sidebar-item {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    border-bottom: 1px gray solid;
+}
+
+.sidebar-item:hover {
+    color: red;
+    cursor: pointer;
+    border-bottom: 1px red solid;
+}
+
+.sidebar-item-active, .sidebar-item-active:hover {
+    color: red;
+    cursor: pointer;
+    border-bottom: 1px red solid;
+}

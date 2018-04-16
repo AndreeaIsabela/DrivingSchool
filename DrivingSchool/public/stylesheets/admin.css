@@ -1,5 +1,7 @@
 html, body {
     height: 100%;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    background-color: #3d3d3d;
 }
 
 .container-fluid {
@@ -16,7 +18,7 @@ html, body {
 }
 
 .sidebar img {
-    margin-bottom: 25px;
+    margin-bottom: 30%;
 }
 
 .sidebar-item {
@@ -29,15 +31,15 @@ html, body {
 }
 
 .sidebar-item:hover {
-    color: #c3c3c3;
+    color: red;
     cursor: pointer;
-    border-bottom: 1px #c3c3c3 solid;
+    border-bottom: 1px red solid;
 }
 
 .sidebar-item-active, .sidebar-item-active:hover {
-    color: #f1f1f1;
+    color: red;
     cursor: pointer;
-    border-bottom: 1px #f1f1f1 solid;
+    border-bottom: 1px red solid;
 }
 
 .sidepage {
@@ -58,10 +60,12 @@ html, body {
 thead {
     background-color: #5f5f5f;
     color: white;
+    border-radius: 5px;
 }
 
 .table > tbody tr {
     background-color: #fafafa;
+    border-radius: 5px;
 }
 
 .table > tbody tr:hover {
@@ -77,4 +81,5 @@ thead {
 
 .btn {
     margin-right: 5px;
+    display: inline-block;
 }
