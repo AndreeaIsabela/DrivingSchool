@@ -1,5 +1,5 @@
 Vue.prototype.$http = axios;
-/*
+
 Vue.component('instructor-form', {
     data: function () {
         return {
@@ -40,7 +40,32 @@ Vue.component('instructor-form', {
         <button type="submit" class="btn btn-primary btn-block">Adauga</button>
     </form>`
 });
-*/
+
+Vue.component('admin-form', {
+    data: function () {
+        return {
+            count: 0
+        }
+    },
+    template: `
+    <form class="create-form">
+        <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" class="form-control" id="email" placeholder="example@google.com">
+        </div>
+        <div class="form-group">
+            <label for="password">Parola</label>
+            <input type="password" class="form-control" id="password" placeholder="Parola">
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword">Confirmare parola</label>
+            <input type="password" class="form-control" id="confirmPassword" placeholder="Parola">
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-block">Adauga</button>
+    </form>`
+});
+
 let app = new Vue({
     el: '#app',
     data: {

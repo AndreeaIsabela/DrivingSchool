@@ -21,7 +21,7 @@ html, body {
 .sidebar img {
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 30%;
+    margin-bottom: 20px;
 }
 
 .sidebar-item {
@@ -96,4 +96,8 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.create-form {
+    margin-top: 160px;
 }
