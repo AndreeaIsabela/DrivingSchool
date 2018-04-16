@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <!--[if lt IE 9]>
+       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <![endif]-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/stylesheets/instructor.css">
+
+ 
+
+
+  <title>Scoala de Soferi</title>
+</head>
+
+<body>
+  <!--data-spy="scroll" data-target=".navbar" data-offset="50"-->
+  <header>
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="navCol">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" ><img src="images/brand.jpg"></a>
+        </div>
+        <div class="nav navbar-nav navbar-right collapse navbar-collapse" id="myNavbar">
+         
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container-fluid" id="app">
+    <div class="row">
+        <div class="col col-sm-2 sidebar">
+            <div class="sidebar-item" v-on:click="onSchedule" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.schedule}">
+                {{viewInfo[viewIndex.schedule].title}}
+            </div>
+            <div class="sidebar-item" v-on:click="onStudents" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.student}">
+                {{viewInfo[viewIndex.student].title}}
+            </div>
+           
+        </div>
+
+  <script src="/javascripts/instructor.js">
+
+  </script>
+
+</body>
+</html>

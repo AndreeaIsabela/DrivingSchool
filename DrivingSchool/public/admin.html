@@ -22,6 +22,7 @@
         <div class="row">
             <div class="col col-sm-2 sidebar">
                 <img src="/images/brand.jpg" class="img-responsive" />
+                <hr />
                 <div class="sidebar-item" v-on:click="onRegisterRequests" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.registerRequest}">
                     {{viewInfo[viewIndex.registerRequest].title}}
                 </div>
@@ -37,49 +38,65 @@
             </div>
             <div class="col col-sm-2"></div>
             <div class="col col-sm-10 sidepage">
-                <h1 class="view-title">
-                    {{ viewInfo[currentView].title }}
-                </h1>
 
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th v-for="(header, index) in viewInfo[currentView].headers" v-bind:style="{width: `${header.width}%`}">
-                                {{header.text}}
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="(item, index) in data" v-bind:class="{ 'selected-row' : index == selectedRowIndex }">
-                            <td v-for="prop in item" v-on:click="selectRow(index)">
-                                {{prop}}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <button class="btn btn-success" v-bind:disabled="!isCreateEnabled()">
-                    <i class="fa fa-plus"></i>
-                    Adauga
-                </button>
-                <button class="btn btn-primary" v-bind:disabled="!isEditEnabled()">
-                    <i class="fa fa-edit"></i>
-                    Editeaza
-                </button>
-                <button class="btn btn-danger" v-bind:disabled="!isDeleteEnabled()">
-                    <i class="fa fa-trash"></i>
-                    Sterge
-                </button>
-                <button class="btn btn-warning" v-bind:disabled="!isDeleteEnabled()">
-                    <i class="fa fa-archive"></i>
-                    Arhiveaza
-                </button>
+
+                <div v-if="!createFormEnabled">
+                    <button class="btn btn-success create-btn" v-bind:disabled="!viewInfo[currentView].canCreate" v-on:click="onCreate">
+                        <i class="fa fa-plus"></i>
+                        Adauga
+                    </button>
+                    <div>
+                        <div v-for="(item, index) in data" class="list-item aligner" v-bind:class="{ 'selected-row' : index == selectedRowIndex }">
+                            <div class="list-item-info">
+                                <div v-for="(prop, itemIndex) in item" v-on:click="selectRow(index)">
+                                    <div v-if="itemIndex == 0" class="list-item-name">
+                                        {{prop}}
+                                    </div>
+                                    <div v-else class="list-item-description">
+                                        {{ viewInfo[currentView].descriptors[itemIndex - 1].text }} : {{prop}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-item-actions">
+                                <div class="list-item-actions-center">
+                                    <button v-if="viewInfo[currentView].canAccept" class="btn btn-success" v-on:click="onCreate">
+                                        <i class="fa fa-check"></i>
+                                        Accepta
+                                    </button>
+                                    <button v-if="viewInfo[currentView].canEdit" class="btn btn-primary" v-on:click="onEdit">
+                                        <i class="fa fa-edit"></i>
+                                        Editeaza
+                                    </button>
+                                    <button v-if="viewInfo[currentView].canDelete" class="btn btn-danger" v-on:click="onDelete">
+                                        <i class="fa fa-trash"></i>
+                                        Sterge
+                                    </button>
+                                    <button v-if="viewInfo[currentView].canArchive" class="btn btn-warning" v-on:click="onArchive">
+                                        <i class="fa fa-archive"></i>
+                                        Arhiveaza
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="clear">
+                                <!-- clear -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div v-if="createFormEnabled" class="create-form">
+                    <div v-if="currentView === viewIndex.instructor">
+                        <instructor-form></instructor-form>
+                    </div>
+                    <div v-else-if="currentView === viewIndex.admin">
+                        <admin-form></admin-form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <script src="/javascripts/admin.js">
-
-    </script>
+    <script src="/javascripts/admin.js"></script>
 </body>
 
 </html>

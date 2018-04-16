@@ -1,5 +1,71 @@
 Vue.prototype.$http = axios;
 
+Vue.component('instructor-form', {
+    data: function () {
+        return {
+            count: 0
+        }
+    },
+    template: `
+    <form class="create-form">
+        <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" class="form-control" id="email" placeholder="example@google.com">
+        </div>
+        <div class="form-group">
+            <label for="password">Parola</label>
+            <input type="password" class="form-control" id="password" placeholder="Parola">
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword">Confirmare parola</label>
+            <input type="password" class="form-control" id="confirmPassword" placeholder="Parola">
+        </div>
+        <div class="form-group">
+            <label for="name">Nume</label>
+            <input type="text" class="form-control" id="name">
+        </div>
+        <div class="form-group">
+            <label for="name">Numar autorizatie</label>
+            <input type="text" class="form-control" id="authorization">
+        </div>
+        <div class="form-group">
+            <label for="masina">Numar masina</label>
+            <input type="text" class="form-control" id="masina">
+        </div>
+        <div class="form-group">
+            <label for="phone">Telefon</label>
+            <input type="text" class="form-control" id="phone">
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Adauga</button>
+    </form>`
+});
+
+Vue.component('admin-form', {
+    data: function () {
+        return {
+            count: 0
+        }
+    },
+    template: `
+    <form class="create-form">
+        <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" class="form-control" id="email" placeholder="example@google.com">
+        </div>
+        <div class="form-group">
+            <label for="password">Parola</label>
+            <input type="password" class="form-control" id="password" placeholder="Parola">
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword">Confirmare parola</label>
+            <input type="password" class="form-control" id="confirmPassword" placeholder="Parola">
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-block">Adauga</button>
+    </form>`
+});
+
 let app = new Vue({
     el: '#app',
     data: {
@@ -12,14 +78,11 @@ let app = new Vue({
         viewInfo: [
             {
                 title: 'Inscrieri',
-                canCreate: false,
-                canEdit: false,
+                canAccept: true,
                 canDelete: true,
                 canArchive: false,
-                headers: [
-                    { text: 'Numar inscriere', width: 15 },
-                    { text: 'De la', width: 65 },
-                    { text: 'Numar telefon', width: 20 }
+                descriptors: [
+                    { text: 'Numar telefon' }
                 ]
             },
             {
@@ -27,57 +90,36 @@ let app = new Vue({
                 canCreate: true,
                 canEdit: true,
                 canDelete: true,
-                canArchive: false,
-                headers: [
-                    { text: 'CNP', width: 10 },
-                    { text: 'Nume', width: 30 },
-                    { text: 'Prenume', width: 30 },
-                    { text: 'Categorie', width: 10 },
-                    { text: 'Numar telefon', width: 20 }
+                descriptors: [
+                    { text: 'CNP' },
+                    { text: 'Categorie' },
+                    { text: 'Numar telefon' }
                 ]
             },
             {
                 title: 'Cursanti',
-                canCreate: false,
                 canEdit: true,
                 canDelete: true,
                 canArchive: true,
-                headers: [
-                    { text: 'CNP', width: 10 },
-                    { text: 'Nume', width: 30 },
-                    { text: 'Prenume', width: 30 },
-                    { text: 'Categorie', width: 10 },
-                    { text: 'Numar telefon', width: 20 }
+                descriptors: [
+                    { text: 'CNP' },
+                    { text: 'Categorie' },
+                    { text: 'Numar telefon' }
                 ]
             },
             {
                 title: 'Administratori',
                 canCreate: true,
-                canEdit: false,
-                canDelete: false,
-                canArchive: false,
-                headers: [
-                    { text: 'Nume', width: 100 }
-                ]
+                descriptors: []
             }
         ],
         currentView: 0,
         viewTitle: 'Inscrieri',
-        menuOptionText: {
-            request: 'Inscrieri',
-            instructor: 'Instructori',
-            student: 'Cursanti',
-            admin: 'Administratori'
-        },
-        headers: [
-            { text: 'Numar', width: 10 },
-            { text: 'Nume', width: 80 },
-            { text: 'Action', width: 10 }
-        ],
         data: [],
-        selectedRowIndex: null
+        selectedRowIndex: null,
+        createFormEnabled: false
     },
-    created: function() {
+    created: function () {
         this.onRegisterRequests();
     },
     methods: {
@@ -90,8 +132,7 @@ let app = new Vue({
 
                     for (let request of response.data) {
                         this.data.push([
-                            request.number,
-                            request.name,
+                            request.lastName + ' ' + request.firstName,
                             request.phone
                         ]);
                     }
@@ -108,9 +149,8 @@ let app = new Vue({
 
                     for (let instructor of response.data) {
                         this.data.push([
+                            instructor.lastName + ' ' + instructor.firstName,
                             instructor.cnp,
-                            instructor.lastName,
-                            instructor.firstName,
                             instructor.category,
                             instructor.phone
                         ]);
@@ -128,9 +168,8 @@ let app = new Vue({
 
                     for (let student of response.data) {
                         this.data.push([
+                            student.lastName + ' ' + student.firstName,
                             student.cnp,
-                            student.lastName,
-                            student.firstName,
                             student.category,
                             student.phone
                         ]);
@@ -155,7 +194,21 @@ let app = new Vue({
                     console.log(err.response);
                 });
         },
+        onCreate: function () {
+            console.log(this.viewIndex);
+            this.createFormEnabled = true;
+        },
+        onEdit: function () {
+
+        },
+        onDelete: function () {
+
+        },
+        onArchive: function () {
+
+        },
         enableView: function (viewIndex) {
+            this.createFormEnabled = false;
             this.currentView = viewIndex;
         },
         selectRow(rowIndex) {

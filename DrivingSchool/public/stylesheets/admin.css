@@ -1,5 +1,7 @@
 html, body {
     height: 100%;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    background-color: white;
 }
 
 .container-fluid {
@@ -10,34 +12,38 @@ html, body {
 .sidebar {
     height: 100%;
     position: fixed;
-    background-color: #111;
+    border-right: 1px solid gray;
+    background-color: black;
     overflow-x: hidden;
     padding-top: 20px;
 }
 
 .sidebar img {
-    margin-bottom: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
 }
 
 .sidebar-item {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-size: 25px;
-    color: #818181;
+    color: white;
     display: block;
-    border-bottom: 1px gray solid;
+    border-right: 4px solid white;
+    margin: 20px auto;
 }
 
 .sidebar-item:hover {
-    color: #c3c3c3;
+    color: rgb(196, 102, 73);
     cursor: pointer;
-    border-bottom: 1px #c3c3c3 solid;
+    border-right-color: rgb(196, 102, 73);
 }
 
 .sidebar-item-active, .sidebar-item-active:hover {
-    color: #f1f1f1;
+    color: red;
     cursor: pointer;
-    border-bottom: 1px #f1f1f1 solid;
+    border-right-color: red;
 }
 
 .sidepage {
@@ -47,34 +53,51 @@ html, body {
     padding-bottom: 9999px;
 }
 
-.view-title {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 700;
-    text-align: center;
-    display: block;
-    width: 100%;
-}
-
-thead {
-    background-color: #5f5f5f;
-    color: white;
-}
-
-.table > tbody tr {
-    background-color: #fafafa;
-}
-
-.table > tbody tr:hover {
-    background-color: #9f9f9f;
-    color: white;
-    cursor: pointer;
-}
-
-.selected-row td {
-    background-color: #496fa0;
-    color: white;
+.create-btn {
+    width: 200px;
+    height: 60px;
+    font-size: 24px;
+    margin-bottom: 20px;
 }
 
 .btn {
     margin-right: 5px;
+    display: inline-block;
+}
+
+.create-form {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.list-item {
+    margin-bottom: 10px;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.list-item-info {
+    width: 50%;
+}
+
+.list-item-name {
+    font-size: 20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: 600;
+}
+
+.list-item-actions {
+    width: 50%;
+    text-align: right;
+}
+
+.aligner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.create-form {
+    margin-top: 160px;
 }
