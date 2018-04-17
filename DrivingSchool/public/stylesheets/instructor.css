@@ -5,10 +5,14 @@
     overflow-x: hidden;
     padding-top: 20px;
 }
+.sidebar img {
+    margin-top: 40%;
+    margin-bottom: 30%;
+}
 .sidebar-item {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 15px;
     color: #818181;
     display: block;
     border-bottom: 1px gray solid;
@@ -25,3 +29,54 @@
     cursor: pointer;
     border-bottom: 1px red solid;
 }
+.nav .open>a, .nav .open>a:hover, .nav .open>a:focus {
+    background-color: red;
+    border-bottom: 1px gray solid;
+    color: white;
+  }
+  
+  .navbar-inverse .navbar-nav>li>a {
+    color: white;
+    font-weight: 650;
+    border-bottom: 2px solid transparent;
+    margin: 0px 10px;
+    background-color: black;
+  }
+  
+  .navbar-inverse:hover .navbar-nav>li>a:hover, .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+    color: red;
+    background-color: black;
+    border-bottom: 2px solid red;
+  }
+  #navCol {
+    background-color: black;
+    border-bottom: 1px gray solid;
+  }
+
+  .studentsImg{
+      margin-top:3%;
+  }
+  table {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-top:2%; 
+}
+
+table td, table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+table tr:nth-child(even){background-color: #f2f2f2;}
+
+table tr:hover {background-color: #ddd;}
+
+table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
