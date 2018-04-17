@@ -2,58 +2,109 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
-  <!--[if lt IE 9]>
+    <meta charset="UTF-8">
+    <!--[if lt IE 9]>
        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <![endif]-->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="/stylesheets/instructor.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.2/axios.js"></script>
 
- 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/stylesheets/admin.css">
+    <link rel="stylesheet" href="/stylesheets/instructor.css">
 
 
-  <title>Scoala de Soferi</title>
+
+
+    <title>Scoala de Soferi</title>
 </head>
 
 <body>
-  <!--data-spy="scroll" data-target=".navbar" data-offset="50"-->
-  <header>
-    <nav class="navbar navbar-inverse navbar-fixed-top" id="navCol">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" ><img src="images/brand.jpg"></a>
-        </div>
-        <div class="nav navbar-nav navbar-right collapse navbar-collapse" id="myNavbar">
-         
-        </div>
-      </div>
-    </nav>
-  </header>
+    <!--data-spy="scroll" data-target=".navbar" data-offset="50"-->
+    <header>
+        <nav class="navbar navbar-inverse navbar-fixed-top" id="navCol">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
 
-  <div class="container-fluid" id="app">
-    <div class="row">
-        <div class="col col-sm-2 sidebar">
-            <div class="sidebar-item" v-on:click="onSchedule" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.schedule}">
-                {{viewInfo[viewIndex.schedule].title}}
+                </div>
+                <div class="nav navbar-nav navbar-right collapse navbar-collapse" id="myNavbar">
+                    <ul class=" nav navbar-nav navbar-right">
+                        <li>
+                            <a href="index.html">Log Out</a>
+                        </li>
+
+                    </ul>
+                </div>
+
             </div>
-            <div class="sidebar-item" v-on:click="onStudents" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.student}">
-                {{viewInfo[viewIndex.student].title}}
             </div>
-           
+        </nav>
+    </header>
+
+    <div class="container-fluid" id="app">
+        <div class="row">
+            <div class="col col-sm-2 sidebar">
+                <img src="/images/brand.jpg" class="img-responsive" />
+                <div class="sidebar-item" v-on:click="onSchedule" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.schedule}">
+                    <i class="fa fa-calendar"> Schedule</i>
+                </div>
+                <div class="sidebar-item" v-on:click="onStudents" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.student}">
+                    Students
+                </div>
+
+            </div>
+            <div class="col col-sm-2"></div>
+            <div class="col col-sm-10 sidepage">
+                <img src="images/students.jpg" class="image-responsive studentsImg">
+
+
+                <div class="container">
+
+                    <div>
+                        <div v-for="(item, index) in data" class="list-item aligner">
+                            <div class="list-item-info">
+                                <div v-for="(prop, itemIndex) in item">
+                                    <div v-if="itemIndex == 0" class="list-item-name">
+                                        {{prop}}
+                                    </div>
+                                    <div v-else class="list-item-description">
+                                        {{ viewInfo[currentView].descriptors[itemIndex - 1].text }} : {{prop}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div v-if="createFormEnabled" class="create-form">
+                <div v-if="currentView === viewIndex.instructor">
+                   
+                </div>
+                <div v-else-if="currentView === viewIndex.admin">
+                    
+                </div>
+            </div> -->
+                </div>
+            </div>
         </div>
+    </div>
 
-  <script src="/javascripts/instructor.js">
+    </div>
+    </div>
+    </div>
 
-  </script>
+    <script src="/javascripts/instructor.js">
+
+    </script>
 
 </body>
+
 </html>

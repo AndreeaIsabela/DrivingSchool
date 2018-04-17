@@ -27,11 +27,6 @@ body {
   background-color: black;
 }
 
-.carousel-inner>.item>img, .carousel-inner>.item>a>img {
-  margin: none;
-  position: relative;
-}
-
 .nav .open>a, .nav .open>a:hover, .nav .open>a:focus {
   background-color: red;
   border-bottom: 1px gray solid;
