@@ -1,71 +1,5 @@
 Vue.prototype.$http = axios;
 
-Vue.component('instructor-form', {
-    data: function () {
-        return {
-            count: 0
-        }
-    },
-    template: `
-    <form class="create-form">
-        <div class="form-group">
-            <label for="email">E-mail</label>
-            <input type="email" class="form-control" id="email" placeholder="example@google.com">
-        </div>
-        <div class="form-group">
-            <label for="password">Parola</label>
-            <input type="password" class="form-control" id="password" placeholder="Parola">
-        </div>
-        <div class="form-group">
-            <label for="confirmPassword">Confirmare parola</label>
-            <input type="password" class="form-control" id="confirmPassword" placeholder="Parola">
-        </div>
-        <div class="form-group">
-            <label for="name">Nume</label>
-            <input type="text" class="form-control" id="name">
-        </div>
-        <div class="form-group">
-            <label for="name">Numar autorizatie</label>
-            <input type="text" class="form-control" id="authorization">
-        </div>
-        <div class="form-group">
-            <label for="masina">Numar masina</label>
-            <input type="text" class="form-control" id="masina">
-        </div>
-        <div class="form-group">
-            <label for="phone">Telefon</label>
-            <input type="text" class="form-control" id="phone">
-        </div>
-
-        <button type="submit" class="btn btn-primary btn-block">Adauga</button>
-    </form>`
-});
-
-Vue.component('admin-form', {
-    data: function () {
-        return {
-            count: 0
-        }
-    },
-    template: `
-    <form class="create-form">
-        <div class="form-group">
-            <label for="email">E-mail</label>
-            <input type="email" class="form-control" id="email" placeholder="example@google.com">
-        </div>
-        <div class="form-group">
-            <label for="password">Parola</label>
-            <input type="password" class="form-control" id="password" placeholder="Parola">
-        </div>
-        <div class="form-group">
-            <label for="confirmPassword">Confirmare parola</label>
-            <input type="password" class="form-control" id="confirmPassword" placeholder="Parola">
-        </div>
-        
-        <button type="submit" class="btn btn-primary btn-block">Adauga</button>
-    </form>`
-});
-
 let app = new Vue({
     el: '#app',
     data: {
@@ -74,6 +8,13 @@ let app = new Vue({
             instructor: 1,
             student: 2,
             admin: 3
+        },
+        actionType: {
+            list: 0,
+            edit: 1,
+            delete: 2,
+            archive: 3,
+            create: 4
         },
         viewInfo: [
             {
@@ -114,6 +55,7 @@ let app = new Vue({
             }
         ],
         currentView: 0,
+        currentActionType: 0,
         viewTitle: 'Inscrieri',
         data: [],
         createFormEnabled: false
@@ -123,6 +65,7 @@ let app = new Vue({
     },
     methods: {
         onRegisterRequests: function () {
+            this.setListAction();
             this.$http
                 .get('/api/registerrequests')
                 .then(response => {
@@ -140,6 +83,7 @@ let app = new Vue({
                 });
         },
         onInstructors: function () {
+            this.setListAction();
             this.$http
                 .get('/api/instructors')
                 .then(response => {
@@ -159,6 +103,7 @@ let app = new Vue({
                 });
         },
         onStudents: function () {
+            this.setListAction();
             this.$http
                 .get('/api/students')
                 .then(response => {
@@ -178,6 +123,7 @@ let app = new Vue({
                 });
         },
         onAdmins: function () {
+            this.setListAction();
             this.$http
                 .get('/api/admins')
                 .then(response => {
@@ -194,8 +140,8 @@ let app = new Vue({
                 });
         },
         onCreate: function () {
-            console.log(this.viewIndex);
-            this.createFormEnabled = true;
+            this.currentActionType = this.actionType.create;
+            console.log(this.currentActionType);
         },
         onEdit: function () {
 
@@ -213,6 +159,9 @@ let app = new Vue({
         clearList() {
             this.selectedRowIndex = null;
             this.data.splice(0, this.data.length);
+        },
+        setListAction() {
+            this.currentActionType = this.actionType.list;
         }
     }
 });

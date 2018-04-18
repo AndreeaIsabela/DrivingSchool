@@ -40,7 +40,7 @@
             <div class="col col-sm-10 sidepage">
 
 
-                <div v-if="!createFormEnabled">
+                <div v-if="currentActionType == actionType.list">
                     <button v-if="viewInfo[currentView].canCreate" class="btn btn-success create-btn" v-on:click="onCreate">
                         <i class="fa fa-plus"></i>
                         Adauga
@@ -87,12 +87,58 @@
                     </div>
 
                 </div>
-                <div v-if="createFormEnabled" class="create-form">
+                <div v-if="currentActionType == actionType.create">
                     <div v-if="currentView === viewIndex.instructor">
-                        <instructor-form></instructor-form>
+                        <form class="create-form" v-on:submit.prevent>
+                            <div class="form-group">
+                                <label for="email">E-mail</label>
+                                <input type="email" class="form-control" id="email" placeholder="example@google.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Parola</label>
+                                <input type="password" class="form-control" id="password" placeholder="Parola">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirmare parola</label>
+                                <input type="password" class="form-control" id="confirmPassword" placeholder="Parola">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Nume</label>
+                                <input type="text" class="form-control" id="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Numar autorizatie</label>
+                                <input type="text" class="form-control" id="authorization">
+                            </div>
+                            <div class="form-group">
+                                <label for="masina">Numar masina</label>
+                                <input type="text" class="form-control" id="masina">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Telefon</label>
+                                <input type="text" class="form-control" id="phone">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block">Adauga</button>
+                        </form>
                     </div>
                     <div v-else-if="currentView === viewIndex.admin">
-                        <admin-form></admin-form>
+                        <form class="create-form" v-on:submit.prevent>
+                            <div class="form-group">
+                                <label for="email">E-mail</label>
+                                <input type="email" class="form-control" id="email" placeholder="example@google.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Parola</label>
+                                <input type="password" class="form-control" id="password" placeholder="Parola">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirmare parola</label>
+                                <input type="password" class="form-control" id="confirmPassword" placeholder="Parola">
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-block">Adauga</button>
+                        </form>
                     </div>
                 </div>
             </div>
