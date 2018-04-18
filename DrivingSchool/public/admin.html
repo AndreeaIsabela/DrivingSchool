@@ -40,7 +40,7 @@
             <div class="col col-sm-2"></div>
 
             <div class="col col-sm-10 sidepage">
-                <div v-if="currentActionType == actionType.list">
+                <div v-if="!formEnabled">
                     <button v-if="viewInfo[currentView].canCreate" class="btn btn-success create-btn" v-on:click="onCreate">
                         <i class="fa fa-plus"></i>
                         Adauga
@@ -81,13 +81,10 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="clear">
-                                <!-- clear -->
-                            </div>
                         </div>
                     </div>
                 </div>
-                <div v-if="currentActionType == actionType.create || currentActionType == actionType.edit">
+                <div v-if="formEnabled">
                     <div v-if="currentView === viewIndex.instructor">
                         <form class="create-form" v-on:submit.prevent>
                             <div class="form-group">

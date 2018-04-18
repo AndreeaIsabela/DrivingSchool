@@ -9,13 +9,6 @@ let app = new Vue({
             student: 2,
             admin: 3
         },
-        actionType: {
-            list: 0,
-            edit: 1,
-            delete: 2,
-            archive: 3,
-            create: 4
-        },
         viewInfo: [
             {
                 title: 'Inscrieri',
@@ -55,11 +48,10 @@ let app = new Vue({
             }
         ],
         currentView: 0,
-        currentActionType: 0,
         viewTitle: 'Inscrieri',
         data: [],
         fullData: [],
-        createFormEnabled: false,
+        formEnabled: false,
         formData: {}
     },
     created: function () {
@@ -147,13 +139,13 @@ let app = new Vue({
                 });
         },
         onCreate: function () {
-            this.currentActionType = this.actionType.create;
+            this.formEnabled = true;
         },
         onSubmit: function() {
             console.log(this.formData);
         },
         onEdit: function (index) {
-            this.currentActionType = this.actionType.edit;
+            this.formEnabled = true;
 
             this.formData = {};
             let propertyNames = Object.getOwnPropertyNames(this.fullData[index]);
@@ -166,11 +158,13 @@ let app = new Vue({
                 this.data.splice(index, 1);
             }
         },
-        onArchive: function () {
-
+        onArchive: function (index) {
+            if (confirm('Are you sure you want to archive ' + this.data[index][0] + '?')) {
+                this.data.splice(index, 1);
+            }
         },
         enableView: function (viewIndex) {
-            this.createFormEnabled = false;
+            this.formEnabled = false;
             this.currentView = viewIndex;
         },
         clearList() {
@@ -178,7 +172,7 @@ let app = new Vue({
             this.data.splice(0, this.data.length);
         },
         setListAction() {
-            this.currentActionType = this.actionType.list;
+            this.formEnabled = false;
         }
     }
 });
