@@ -2,31 +2,39 @@ class InstructorController {
     getInstructors() {
         return [
             {
-                cnp: '1900909092000',
+                email: 'ion@gmail.com',
+                password: 'parola',
                 lastName: 'Ionescu',
                 firstName: 'Ion',
-                category: 'B',
+                authorization: '744',
+                carNumber: 'DJ 05 AAA',
                 phone: '0755110011'
             },
             {
-                cnp: '1900909092000',
+                email: 'ion@gmail.com',
+                password: 'parola',
                 lastName: 'Ionescu',
                 firstName: 'Ion',
-                category: 'B',
+                authorization: '744',
+                carNumber: 'DJ 05 AAA',
                 phone: '0755110011'
             },
             {
-                cnp: '1900909092000',
+                email: 'ion@gmail.com',
+                password: 'parola',
                 lastName: 'Ionescu',
                 firstName: 'Ion',
-                category: 'B',
+                authorization: '744',
+                carNumber: 'DJ 05 AAA',
                 phone: '0755110011'
             },
             {
-                cnp: '1900909092000',
+                email: 'ion@gmail.com',
+                password: 'parola',
                 lastName: 'Ionescu',
                 firstName: 'Ion',
-                category: 'B',
+                authorization: '744',
+                carNumber: 'DJ 05 AAA',
                 phone: '0755110011'
             }
         ];

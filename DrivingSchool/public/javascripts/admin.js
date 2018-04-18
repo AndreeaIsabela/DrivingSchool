@@ -27,8 +27,8 @@ let app = new Vue({
                 canEdit: true,
                 canDelete: true,
                 descriptors: [
-                    { text: 'CNP' },
-                    { text: 'Categorie' },
+                    { text: 'Autorizatie' },
+                    { text: 'Masina' },
                     { text: 'Numar telefon' }
                 ]
             },
@@ -102,8 +102,8 @@ let app = new Vue({
                     for (let instructor of response.data) {
                         this.data.push([
                             instructor.lastName + ' ' + instructor.firstName,
-                            instructor.cnp,
-                            instructor.category,
+                            instructor.authorization,
+                            instructor.carNumber,
                             instructor.phone
                         ]);
                     }
@@ -206,6 +206,10 @@ let app = new Vue({
             let propertyNames = Object.getOwnPropertyNames(this.fullData[index]);
             for (let propName of propertyNames) {
                 this.formData[propName] = this.fullData[index][propName];
+            }
+
+            if(this.formData.password) {
+                this.formData.confirmPassword = this.formData.password;
             }
         },
         onDelete: function (index) {
