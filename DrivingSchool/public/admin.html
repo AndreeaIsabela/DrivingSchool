@@ -41,14 +41,17 @@
 
 
                 <div v-if="!createFormEnabled">
-                    <button class="btn btn-success create-btn" v-bind:disabled="!viewInfo[currentView].canCreate" v-on:click="onCreate">
+                    <button v-if="viewInfo[currentView].canCreate" class="btn btn-success create-btn" v-on:click="onCreate">
                         <i class="fa fa-plus"></i>
                         Adauga
                     </button>
+                    <div v-if="!viewInfo[currentView].canCreate" class="create-btn">
+                        <!-- create button placeholder -->
+                    </div>
                     <div>
                         <div v-for="(item, index) in data" class="list-item aligner" v-bind:class="{ 'selected-row' : index == selectedRowIndex }">
                             <div class="list-item-info">
-                                <div v-for="(prop, itemIndex) in item" v-on:click="selectRow(index)">
+                                <div v-for="(prop, itemIndex) in item">
                                     <div v-if="itemIndex == 0" class="list-item-name">
                                         {{prop}}
                                     </div>
@@ -59,19 +62,19 @@
                             </div>
                             <div class="list-item-actions">
                                 <div class="list-item-actions-center">
-                                    <button v-if="viewInfo[currentView].canAccept" class="btn btn-success" v-on:click="onCreate">
+                                    <button v-if="viewInfo[currentView].canAccept" class="btn btn-success" v-on:click="onCreate(index)">
                                         <i class="fa fa-check"></i>
                                         Accepta
                                     </button>
-                                    <button v-if="viewInfo[currentView].canEdit" class="btn btn-primary" v-on:click="onEdit">
+                                    <button v-if="viewInfo[currentView].canEdit" class="btn btn-primary" v-on:click="onEdit(index)">
                                         <i class="fa fa-edit"></i>
                                         Editeaza
                                     </button>
-                                    <button v-if="viewInfo[currentView].canDelete" class="btn btn-danger" v-on:click="onDelete">
+                                    <button v-if="viewInfo[currentView].canDelete" class="btn btn-danger" v-on:click="onDelete(index)">
                                         <i class="fa fa-trash"></i>
                                         Sterge
                                     </button>
-                                    <button v-if="viewInfo[currentView].canArchive" class="btn btn-warning" v-on:click="onArchive">
+                                    <button v-if="viewInfo[currentView].canArchive" class="btn btn-warning" v-on:click="onArchive(index)">
                                         <i class="fa fa-archive"></i>
                                         Arhiveaza
                                     </button>

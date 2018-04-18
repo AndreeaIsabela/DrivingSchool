@@ -116,7 +116,6 @@ let app = new Vue({
         currentView: 0,
         viewTitle: 'Inscrieri',
         data: [],
-        selectedRowIndex: null,
         createFormEnabled: false
     },
     created: function () {
@@ -128,7 +127,7 @@ let app = new Vue({
                 .get('/api/registerrequests')
                 .then(response => {
                     this.enableView(this.viewIndex.registerRequest);
-                    this.clearTable();
+                    this.clearList();
 
                     for (let request of response.data) {
                         this.data.push([
@@ -145,7 +144,7 @@ let app = new Vue({
                 .get('/api/instructors')
                 .then(response => {
                     this.enableView(this.viewIndex.instructor);
-                    this.clearTable();
+                    this.clearList();
 
                     for (let instructor of response.data) {
                         this.data.push([
@@ -164,7 +163,7 @@ let app = new Vue({
                 .get('/api/students')
                 .then(response => {
                     this.enableView(this.viewIndex.student);
-                    this.clearTable();
+                    this.clearList();
 
                     for (let student of response.data) {
                         this.data.push([
@@ -183,7 +182,7 @@ let app = new Vue({
                 .get('/api/admins')
                 .then(response => {
                     this.enableView(this.viewIndex.admin);
-                    this.clearTable();
+                    this.clearList();
 
                     for (let adminData of response.data) {
                         this.data.push([
@@ -211,21 +210,9 @@ let app = new Vue({
             this.createFormEnabled = false;
             this.currentView = viewIndex;
         },
-        selectRow(rowIndex) {
-            this.selectedRowIndex = this.selectedRowIndex == rowIndex ? null : rowIndex;
-        },
-        clearTable() {
+        clearList() {
             this.selectedRowIndex = null;
             this.data.splice(0, this.data.length);
-        },
-        isCreateEnabled() {
-            return this.viewInfo[this.currentView].canCreate;
-        },
-        isEditEnabled() {
-            return this.viewInfo[this.currentView].canEdit && this.selectedRowIndex !== null;
-        },
-        isDeleteEnabled() {
-            return this.viewInfo[this.currentView].canDelete && this.selectedRowIndex !== null;
         }
     }
 });

@@ -101,3 +101,7 @@ html, body {
 .create-form {
     margin-top: 160px;
 }
+
+.hidden {
+    visibility: hidden;
+}
