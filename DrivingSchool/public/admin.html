@@ -35,64 +35,262 @@
                 <div class="sidebar-item" v-on:click="onAdmins" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.admin}">
                     {{viewInfo[viewIndex.admin].title}}
                 </div>
+                <div class="sidebar-item" v-on:click="onStudentArchive" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.archive}">
+                    {{viewInfo[viewIndex.archive].title}}
+                </div>
+                <div class="sidebar-item" v-on:click="onFolder" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.folder}">
+                    {{viewInfo[viewIndex.folder].title}}
+                </div>
+                <div class="sidebar-item" v-on:click="onLogout">
+                    <a href="index.html">Logout</a>
+                </div>
             </div>
+
             <div class="col col-sm-2"></div>
-            <div class="col col-sm-10 sidepage">
+            <div class="col col-sm-1"></div>
 
-
-                <div v-if="!createFormEnabled">
-                    <button class="btn btn-success create-btn" v-bind:disabled="!viewInfo[currentView].canCreate" v-on:click="onCreate">
+            <div class="col col-sm-8 sidepage">
+                <div v-if="!formEnabled">
+                    <button v-if="viewInfo[currentView].canCreate" class="btn btn-success create-btn" v-on:click="onCreate">
                         <i class="fa fa-plus"></i>
                         Adauga
                     </button>
+                    <div v-if="!viewInfo[currentView].canCreate" class="create-btn">
+                        <!-- create button placeholder -->
+                    </div>
                     <div>
                         <div v-for="(item, index) in data" class="list-item aligner" v-bind:class="{ 'selected-row' : index == selectedRowIndex }">
                             <div class="list-item-info">
-                                <div v-for="(prop, itemIndex) in item" v-on:click="selectRow(index)">
-                                    <div v-if="itemIndex == 0" class="list-item-name">
-                                        {{prop}}
-                                    </div>
-                                    <div v-else class="list-item-description">
-                                        {{ viewInfo[currentView].descriptors[itemIndex - 1].text }} : {{prop}}
-                                    </div>
+                                <div class="list-item-name">
+                                    {{item[0]}}
                                 </div>
+                                <span v-for="(prop, itemIndex) in item">
+                                    <span v-if="itemIndex >= 1" class="list-item-description">
+                                        <span v-if="itemIndex > 1" class="list-item-description">
+                                            ,
+                                        </span>
+                                        {{ viewInfo[currentView].descriptors[itemIndex - 1].text }} : {{prop}}
+                                    </span>
+                                </span>
                             </div>
+
                             <div class="list-item-actions">
                                 <div class="list-item-actions-center">
-                                    <button v-if="viewInfo[currentView].canAccept" class="btn btn-success" v-on:click="onCreate">
+                                    <button v-if="viewInfo[currentView].canAccept" class="btn btn-success" v-on:click="onAccept(index)">
                                         <i class="fa fa-check"></i>
                                         Accepta
                                     </button>
-                                    <button v-if="viewInfo[currentView].canEdit" class="btn btn-primary" v-on:click="onEdit">
+                                    <button v-if="viewInfo[currentView].canEdit" class="btn btn-primary" v-on:click="onEdit(index)">
                                         <i class="fa fa-edit"></i>
                                         Editeaza
                                     </button>
-                                    <button v-if="viewInfo[currentView].canDelete" class="btn btn-danger" v-on:click="onDelete">
-                                        <i class="fa fa-trash"></i>
-                                        Sterge
-                                    </button>
-                                    <button v-if="viewInfo[currentView].canArchive" class="btn btn-warning" v-on:click="onArchive">
+                                    <button v-if="viewInfo[currentView].canArchive" class="btn btn-warning" v-on:click="onArchive(index)">
                                         <i class="fa fa-archive"></i>
                                         Arhiveaza
                                     </button>
+                                    <button v-if="viewInfo[currentView].canRestore" class="btn btn-warning" v-on:click="onRestore(index)">
+                                        <i class="fa fa-undo"></i>
+                                        Dezarhiveaza
+                                    </button>
+                                    <button v-if="viewInfo[currentView].canDelete" class="btn btn-danger" v-on:click="onDelete(index)">
+                                        <i class="fa fa-trash"></i>
+                                        Sterge
+                                    </button>
                                 </div>
-                            </div>
-                            <div class="clear">
-                                <!-- clear -->
                             </div>
                         </div>
                     </div>
-
                 </div>
-                <div v-if="createFormEnabled" class="create-form">
+                <div v-if="formEnabled">
                     <div v-if="currentView === viewIndex.instructor">
-                        <instructor-form></instructor-form>
+                        <form class="create-form" v-on:submit.prevent>
+                            <div class="form-group">
+                                <label for="email">E-mail</label>
+                                <input type="email" class="form-control" id="email" autofocus placeholder="example@google.com" v-model="formData.email">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Parola</label>
+                                <input type="password" class="form-control" id="password" placeholder="Parola" v-model="formData.password">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirmare parola</label>
+                                <input type="password" class="form-control" id="confirmPassword" placeholder="Parola" v-model="formData.confirmPassword">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Nume</label>
+                                <input type="text" class="form-control" id="lastName" v-model="formData.lastName" placeholder="Popescu">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Prenume</label>
+                                <input type="text" class="form-control" id="firstName" v-model="formData.firstName" placeholder="Ion">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Numar autorizatie</label>
+                                <input type="text" class="form-control" id="authorization" v-model="formData.authorization" placeholder="7567">
+                            </div>
+                            <div class="form-group">
+                                <label for="carNumber">Numar masina</label>
+                                <input type="text" class="form-control" id="carNumber" v-model="formData.carNumber" placeholder="DJ 04 ABC">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Telefon</label>
+                                <input type="tel" class="form-control" id="phone" v-model="formData.phone" placeholder="07xxxxxxxx">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block submit-btn" v-on:click="onSubmit">Submit</button>
+                        </form>
                     </div>
                     <div v-else-if="currentView === viewIndex.admin">
-                        <admin-form></admin-form>
+                        <form class="create-form" v-on:submit.prevent>
+                            <div class="form-group">
+                                <label for="email">E-mail</label>
+                                <input type="email" class="form-control" id="email" autofocus placeholder="example@google.com" v-model="formData.email">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Parola</label>
+                                <input type="password" class="form-control" id="password" placeholder="Parola" v-model="formData.password">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirmare parola</label>
+                                <input type="password" class="form-control" id="confirmPassword" placeholder="Parola" v-model="formData.confirmPassword">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block submit-btn">Submit</button>
+                        </form>
+                    </div>
+                    <div v-else-if="currentView === viewIndex.student">
+                        <form class="create-form" v-on:submit.prevent>
+                            <div class="form-group">
+                                <label for="Nume">Nume:</label>
+                                <input class="form-control" id="Nume" type="text" autofocus placeholder="Ex: Popescu" v-model="formData.lastName">
+                            </div>
+                            <div class="form-group">
+                                <label for="prenume">Prenume:</label>
+                                <input class="form-control" id="prenume" type="text" placeholder="Ex: Ion" v-model="formData.firstName">
+                            </div>
+                            <div class="form-group">
+                                <label for="prenumeM">Prenume Mama:</label>
+                                <input class="form-control" id="prenumeM" type="text" placeholder="Ex: Maria" v-model="formData.motherFirstName">
+                            </div>
+                            <div class="form-group">
+                                <label for="prenumeT">Prenume Tata:</label>
+                                <input class="form-control" id="prenumeT" type="text" placeholder="ex: Ion" v-model="formData.fatherFirstName">
+                            </div>
+                            <div class="form-group">
+                                <label for="judet">Judet:</label>
+                                <input class="form-control" id="judet" type="text" placeholder="Ex: Dolj" v-model="formData.region">
+                            </div>
+                            <div class="form-group">
+                                <label for="localtate">Localitate:</label>
+                                <input class="form-control" id="localitate" type="text" placeholder="Ex: Craiova" v-model="formData.city">
+                            </div>
+                            <div class="form-group">
+                                <label for="adresa">Adresa:</label>
+                                <input class="form-control" id="adresa" type="text" placeholder="Ex: Bl.75 B2, Sc.3, Ap15.." v-model="formData.address">
+                            </div>
+                            <div class="form-group">
+                                <label for="cnp">CNP:</label>
+                                <input class="form-control" id="cnp" type="text" placeholder="cod numeric personal" v-model="formData.cnp">
+                            </div>
+                            <div class="form-group">
+                                <label for="serie">Serie Buletin:</label>
+                                <input class="form-control" id="serie" type="text" placeholder="Ex: DZ/DX/CZ..." v-model="formData.idSeries">
+                            </div>
+                            <div class="form-group">
+                                <label for="numar">Numar Buletin:</label>
+                                <input class="form-control" id="numar" type="text" placeholder="Number" v-model="formData.idNumber">
+                            </div>
+                            <div class="form-group">
+                                <label for="data">Data Nasterii:</label>
+                                <input class="form-control" id="data" type="date" v-model="formData.dateOfBirth">
+                            </div>
+                            <div class="form-group">
+                                <label for="gender">Sex:</label>
+                                <br />
+                                <input type="radio" name="gender" value="male" checked v-model="formData.gender"> Masculin
+                                <br />
+                                <input type="radio" name="gender" value="female" v-model="formData.gender"> Feminin
+                            </div>
+                            <div class="form-group">
+                                <label for="status">Stare Civila:</label>
+                                <br />
+                                <input type="radio" name="status" value="single" checked v-model="formData.marriageStatus"> Necasatorit/a
+                                <br />
+                                <input type="radio" name="status" value="married" v-model="formData.marriageStatus"> Casatorit/a
+                            </div>
+                            <div class="form-group">
+                                <label for="tel">Telefon:</label>
+                                <input class="form-control" id="tel" type="tel" placeholder="07xxxxxxxx" v-model="formData.phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input class="form-control" id="email" type="email" placeholder="Ex:email@ex.com" v-model="formData.email">
+                            </div>
+                            <div class="form-group">
+                                <label for="parola">Parola:</label>
+                                <input class="form-control" id="parola" type="password" placeholder="Password" v-model="formData.password">
+                            </div>
+                            <div class="form-group">
+                                <label for="cParola">Confirma Parola:</label>
+                                <input class="form-control" id="cParola" type="password" placeholder="Password" v-model="formData.confirmPassword">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block submit-btn">Submit</button>
+                        </form>
+                    </div>
+                    <div v-else-if="currentView === viewIndex.folder">
+                        <form class="create-form" v-on:submit.prevent>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col col-sm-4"></div>
+                                    <div class="form-group col col-sm-4">
+                                        <label for="student">Cursant:</label>
+                                        <select class="form-control" id="student">
+                                            <option v-for="(cursant, index) in formData.students"> {{ cursant }} </option>
+                                        </select>
+                                    </div>
+                                    <div class="col col-sm-4"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col col-sm-4"></div>
+                                    <div class="col col-sm-2">
+                                        <div class="form-group ">
+                                            <input type="checkbox" name="schoolApplication" v-model="formData.schoolApplication"> Cerere de scolarizare
+                                            <br />
+                                            <input type="checkbox" name="contract" v-model="formData.contract"> Contract de scolarizare
+                                            <br />
+                                            <input type="checkbox" name="notebook" v-model="formData.notebook"> Caietul cursantului
+                                            <br />
+                                            <input type="checkbox" name="graduationCertificate" v-model="formData.graduationCertificate"> Adeverinta de absolvire
+                                        </div>
+                                    </div>
+                                    <div class="col col-sm-2">
+                                        <div class="form-group ">
+                                            <input type="checkbox" name="schoolFile" v-model="formData.schoolFile"> Fisa de scolarizare
+                                            <br />
+                                            <input type="checkbox" name="examApplication" v-model="formData.examApplication"> Cerere pentru examen
+                                            <br />
+                                            <input type="checkbox" name="medicalFile" v-model="formData.medicalFile"> Fisa medicala
+                                        </div>
+                                    </div>
+                                    <div class="col col-sm-4"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col col-sm-4"></div>
+                                    <div class="col col-sm-4">
+                                        <button type="submit" class="btn btn-primary btn-block submit-btn" v-on:click="onGenerateFolder">Generare dosar</button>
+                                    </div>
+                                    <div class="col col-sm-4"></div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
+
+            <div class="col col-sm-1"></div>
         </div>
     </div>
 

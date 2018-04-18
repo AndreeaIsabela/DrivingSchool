@@ -11,19 +11,19 @@ class Registry {
                 number: 5,
                 firstName: 'John',
                 lastName: 'John',
-                phone: '0755110011'
+                phone: '0755110012'
             },
             {
                 number: 6,
                 firstName: 'John',
                 lastName: 'John',
-                phone: '0755110011'
+                phone: '0755110013'
             },
             {
                 number: 7,
                 firstName: 'John',
                 lastName: 'John',
-                phone: '0755110011'
+                phone: '0755110014'
             },
         ];
     }

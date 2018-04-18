@@ -18,6 +18,12 @@ router.get('/students', (req, res, next) => {
     res.json(students);
 });
 
+/* GET student archive listing. */
+router.get('/archive', (req, res, next) => {
+    let students = studentController.getArchivedStudents();
+    res.json(students);
+});
+
 /* GET instructors listing. */
 router.get('/instructors', (req, res, next) => {
     let instructors = instructorController.getInstructors();

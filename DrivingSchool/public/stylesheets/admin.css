@@ -34,6 +34,11 @@ html, body {
     margin: 20px auto;
 }
 
+.sidebar-item a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .sidebar-item:hover {
     color: rgb(196, 102, 73);
     cursor: pointer;
@@ -66,8 +71,8 @@ html, body {
 }
 
 .create-form {
-    width: 70%;
     margin: 0 auto;
+    margin-top: 80px;
 }
 
 .list-item {
@@ -98,6 +103,6 @@ html, body {
     justify-content: space-between;
 }
 
-.create-form {
-    margin-top: 160px;
+.submit-btn {
+    margin-bottom: 100px;
 }

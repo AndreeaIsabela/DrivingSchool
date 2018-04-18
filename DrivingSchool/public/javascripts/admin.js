@@ -1,71 +1,5 @@
 Vue.prototype.$http = axios;
 
-Vue.component('instructor-form', {
-    data: function () {
-        return {
-            count: 0
-        }
-    },
-    template: `
-    <form class="create-form">
-        <div class="form-group">
-            <label for="email">E-mail</label>
-            <input type="email" class="form-control" id="email" placeholder="example@google.com">
-        </div>
-        <div class="form-group">
-            <label for="password">Parola</label>
-            <input type="password" class="form-control" id="password" placeholder="Parola">
-        </div>
-        <div class="form-group">
-            <label for="confirmPassword">Confirmare parola</label>
-            <input type="password" class="form-control" id="confirmPassword" placeholder="Parola">
-        </div>
-        <div class="form-group">
-            <label for="name">Nume</label>
-            <input type="text" class="form-control" id="name">
-        </div>
-        <div class="form-group">
-            <label for="name">Numar autorizatie</label>
-            <input type="text" class="form-control" id="authorization">
-        </div>
-        <div class="form-group">
-            <label for="masina">Numar masina</label>
-            <input type="text" class="form-control" id="masina">
-        </div>
-        <div class="form-group">
-            <label for="phone">Telefon</label>
-            <input type="text" class="form-control" id="phone">
-        </div>
-
-        <button type="submit" class="btn btn-primary btn-block">Adauga</button>
-    </form>`
-});
-
-Vue.component('admin-form', {
-    data: function () {
-        return {
-            count: 0
-        }
-    },
-    template: `
-    <form class="create-form">
-        <div class="form-group">
-            <label for="email">E-mail</label>
-            <input type="email" class="form-control" id="email" placeholder="example@google.com">
-        </div>
-        <div class="form-group">
-            <label for="password">Parola</label>
-            <input type="password" class="form-control" id="password" placeholder="Parola">
-        </div>
-        <div class="form-group">
-            <label for="confirmPassword">Confirmare parola</label>
-            <input type="password" class="form-control" id="confirmPassword" placeholder="Parola">
-        </div>
-        
-        <button type="submit" class="btn btn-primary btn-block">Adauga</button>
-    </form>`
-});
-
 let app = new Vue({
     el: '#app',
     data: {
@@ -73,7 +7,9 @@ let app = new Vue({
             registerRequest: 0,
             instructor: 1,
             student: 2,
-            admin: 3
+            admin: 3,
+            archive: 4,
+            folder: 5
         },
         viewInfo: [
             {
@@ -91,8 +27,8 @@ let app = new Vue({
                 canEdit: true,
                 canDelete: true,
                 descriptors: [
-                    { text: 'CNP' },
-                    { text: 'Categorie' },
+                    { text: 'Autorizatie' },
+                    { text: 'Masina' },
                     { text: 'Numar telefon' }
                 ]
             },
@@ -111,13 +47,27 @@ let app = new Vue({
                 title: 'Administratori',
                 canCreate: true,
                 descriptors: []
+            },
+            {
+                title: 'Arhiva cursanti',
+                canDelete: true,
+                canRestore: true,
+                descriptors: [
+                    { text: 'CNP' },
+                    { text: 'Categorie' },
+                    { text: 'Numar telefon' }
+                ]
+            },
+            {
+                title: 'Dosar',
             }
         ],
         currentView: 0,
         viewTitle: 'Inscrieri',
         data: [],
-        selectedRowIndex: null,
-        createFormEnabled: false
+        fullData: [],
+        formEnabled: false,
+        formData: {}
     },
     created: function () {
         this.onRegisterRequests();
@@ -128,8 +78,9 @@ let app = new Vue({
                 .get('/api/registerrequests')
                 .then(response => {
                     this.enableView(this.viewIndex.registerRequest);
-                    this.clearTable();
+                    this.clearList();
 
+                    this.fullData = response.data;
                     for (let request of response.data) {
                         this.data.push([
                             request.lastName + ' ' + request.firstName,
@@ -145,13 +96,14 @@ let app = new Vue({
                 .get('/api/instructors')
                 .then(response => {
                     this.enableView(this.viewIndex.instructor);
-                    this.clearTable();
+                    this.clearList();
 
+                    this.fullData = response.data;
                     for (let instructor of response.data) {
                         this.data.push([
                             instructor.lastName + ' ' + instructor.firstName,
-                            instructor.cnp,
-                            instructor.category,
+                            instructor.authorization,
+                            instructor.carNumber,
                             instructor.phone
                         ]);
                     }
@@ -164,8 +116,9 @@ let app = new Vue({
                 .get('/api/students')
                 .then(response => {
                     this.enableView(this.viewIndex.student);
-                    this.clearTable();
+                    this.clearList();
 
+                    this.fullData = response.data;
                     for (let student of response.data) {
                         this.data.push([
                             student.lastName + ' ' + student.firstName,
@@ -183,9 +136,11 @@ let app = new Vue({
                 .get('/api/admins')
                 .then(response => {
                     this.enableView(this.viewIndex.admin);
-                    this.clearTable();
+                    this.clearList();
 
+                    this.fullData = response.data;
                     for (let adminData of response.data) {
+
                         this.data.push([
                             adminData.name
                         ]);
@@ -194,38 +149,93 @@ let app = new Vue({
                     console.log(err.response);
                 });
         },
+        onStudentArchive: function () {
+            this.$http
+                .get('/api/archive')
+                .then(response => {
+                    this.enableView(this.viewIndex.archive);
+                    this.clearList();
+
+                    this.fullData = response.data;
+                    for (let student of response.data) {
+                        this.data.push([
+                            student.lastName + ' ' + student.firstName,
+                            student.cnp,
+                            student.category,
+                            student.phone
+                        ]);
+                    };
+                }).catch(function (err) {
+                    console.log(err.response);
+                });
+        },
+        onFolder: function () {
+            this.enableView(this.viewIndex.folder);
+            this.formEnabled = true;
+            this.formData = {
+                students: []
+            };
+
+            this.$http
+                .get('/api/students')
+                .then(response => {
+                    for (let student of response.data) {
+                        this.formData.students.push(student.lastName + ' ' + student.firstName);
+                    };
+                }).catch(function (err) {
+                    console.log(err.response);
+                });
+        },
+        onLogout: function() {
+
+        },
+        onGenerateFolder: function() {
+            console.log(this.formData);
+        },
         onCreate: function () {
-            console.log(this.viewIndex);
-            this.createFormEnabled = true;
+            this.formEnabled = true;
         },
-        onEdit: function () {
-
+        onAccept: function (index) {
+            this.data.splice(index, 1);
+            alert(`Student ${this.data[index][0]} has been added`);
         },
-        onDelete: function () {
-
+        onSubmit: function () {
+            console.log(this.formData);
         },
-        onArchive: function () {
+        onEdit: function (index) {
+            this.formEnabled = true;
 
+            this.formData = {};
+            let propertyNames = Object.getOwnPropertyNames(this.fullData[index]);
+            for (let propName of propertyNames) {
+                this.formData[propName] = this.fullData[index][propName];
+            }
+
+            if(this.formData.password) {
+                this.formData.confirmPassword = this.formData.password;
+            }
+        },
+        onDelete: function (index) {
+            if (confirm('Sunteti sigur ca doriti sa stergeti ' + this.data[index][0] + '?')) {
+                this.data.splice(index, 1);
+            }
+        },
+        onArchive: function (index) {
+            if (confirm('Sunteti sigur ca doriti sa arhivati studentul ' + this.data[index][0] + '?')) {
+                this.data.splice(index, 1);
+            }
+        },
+        onRestore: function (index) {
+            this.data.splice(index, 1);
         },
         enableView: function (viewIndex) {
-            this.createFormEnabled = false;
+            this.formEnabled = false;
+            this.formData = {};
             this.currentView = viewIndex;
         },
-        selectRow(rowIndex) {
-            this.selectedRowIndex = this.selectedRowIndex == rowIndex ? null : rowIndex;
-        },
-        clearTable() {
+        clearList() {
             this.selectedRowIndex = null;
             this.data.splice(0, this.data.length);
-        },
-        isCreateEnabled() {
-            return this.viewInfo[this.currentView].canCreate;
-        },
-        isEditEnabled() {
-            return this.viewInfo[this.currentView].canEdit && this.selectedRowIndex !== null;
-        },
-        isDeleteEnabled() {
-            return this.viewInfo[this.currentView].canDelete && this.selectedRowIndex !== null;
         }
     }
 });
