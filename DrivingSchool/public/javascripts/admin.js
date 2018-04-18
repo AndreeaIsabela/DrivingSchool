@@ -168,6 +168,10 @@ let app = new Vue({
         onCreate: function () {
             this.formEnabled = true;
         },
+        onAccept: function (index) {
+            this.data.splice(index, 1);
+            alert(`Student ${this.data[index][0]} has been added`);
+        },
         onSubmit: function () {
             console.log(this.formData);
         },
