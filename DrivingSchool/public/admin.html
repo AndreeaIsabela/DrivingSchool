@@ -36,10 +36,10 @@
                     {{viewInfo[viewIndex.admin].title}}
                 </div>
             </div>
+
             <div class="col col-sm-2"></div>
+
             <div class="col col-sm-10 sidepage">
-
-
                 <div v-if="currentActionType == actionType.list">
                     <button v-if="viewInfo[currentView].canCreate" class="btn btn-success create-btn" v-on:click="onCreate">
                         <i class="fa fa-plus"></i>
@@ -60,9 +60,10 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="list-item-actions">
                                 <div class="list-item-actions-center">
-                                    <button v-if="viewInfo[currentView].canAccept" class="btn btn-success" v-on:click="onCreate(index)">
+                                    <button v-if="viewInfo[currentView].canAccept" class="btn btn-success" v-on:click="onCreate()">
                                         <i class="fa fa-check"></i>
                                         Accepta
                                     </button>
@@ -85,7 +86,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <div v-if="currentActionType == actionType.create">
                     <div v-if="currentView === viewIndex.instructor">

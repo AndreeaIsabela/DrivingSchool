@@ -141,13 +141,14 @@ let app = new Vue({
         },
         onCreate: function () {
             this.currentActionType = this.actionType.create;
-            console.log(this.currentActionType);
         },
-        onEdit: function () {
-
+        onEdit: function (index) {
+            this.currentActionType = this.actionType.edit;
         },
-        onDelete: function () {
-
+        onDelete: function (index) {
+            if (confirm('Are you sure you want to delete ' + this.data[index][0] + '?')) {
+                this.data.splice(index, 1);
+            }
         },
         onArchive: function () {
 
