@@ -151,7 +151,7 @@ let app = new Vue({
         },
         onStudentArchive: function () {
             this.$http
-                .get('/api/students')
+                .get('/api/archive')
                 .then(response => {
                     this.enableView(this.viewIndex.archive);
                     this.clearList();

@@ -31,6 +31,9 @@ class StudentController {
             }
         ];
     }
+    getArchivedStudents() {
+        return this.getStudents();
+    }
 }
 
 module.exports = new StudentController();
