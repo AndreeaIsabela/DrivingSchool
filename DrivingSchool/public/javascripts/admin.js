@@ -8,7 +8,8 @@ let app = new Vue({
             instructor: 1,
             student: 2,
             admin: 3,
-            archive: 4
+            archive: 4,
+            folder: 5
         },
         viewInfo: [
             {
@@ -56,6 +57,9 @@ let app = new Vue({
                     { text: 'Categorie' },
                     { text: 'Numar telefon' }
                 ]
+            },
+            {
+                title: 'Dosar',
             }
         ],
         currentView: 0,
@@ -164,6 +168,26 @@ let app = new Vue({
                 }).catch(function (err) {
                     console.log(err.response);
                 });
+        },
+        onFolder: function () {
+            this.enableView(this.viewIndex.folder);
+            this.formEnabled = true;
+            this.formData = {
+                students: []
+            };
+
+            this.$http
+                .get('/api/students')
+                .then(response => {
+                    for (let student of response.data) {
+                        this.formData.students.push(student.lastName + ' ' + student.firstName);
+                    };
+                }).catch(function (err) {
+                    console.log(err.response);
+                });
+        },
+        onGenerateFolder: function() {
+            console.log(this.formData);
         },
         onCreate: function () {
             this.formEnabled = true;
