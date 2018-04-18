@@ -116,7 +116,7 @@
                                 <input type="text" class="form-control" id="phone" v-model="formData.phone">
                             </div>
 
-                            <button type="submit" class="btn btn-primary btn-block" v-on:click="onSubmit">Adauga</button>
+                            <button type="submit" class="btn btn-primary btn-block submit-btn" v-on:click="onSubmit">Submit</button>
                         </form>
                     </div>
                     <div v-else-if="currentView === viewIndex.admin">
@@ -133,8 +133,88 @@
                                 <label for="confirmPassword">Confirmare parola</label>
                                 <input type="password" class="form-control" id="confirmPassword" placeholder="Parola" v-model="formData.confirmPassword">
                             </div>
-                            
-                            <button type="submit" class="btn btn-primary btn-block">Adauga</button>
+
+                            <button type="submit" class="btn btn-primary btn-block submit-btn">Submit</button>
+                        </form>
+                    </div>
+                    <div v-else-if="currentView === viewIndex.student">
+                        <form class="create-form" v-on:submit.prevent>
+                            <div class="form-group">
+                                <label for="Nume">Nume:</label>
+                                <input class="form-control" id="Nume" type="text" autofocus placeholder="Ex: Popescu">
+                            </div>
+                            <div class="form-group">
+                                <label for="prenume">Prenume:</label>
+                                <input class="form-control" id="prenume" type="text" placeholder="Ex: Ion">
+                            </div>
+                            <div class="form-group">
+                                <label for="prenumeM">Prenume Mama:</label>
+                                <input class="form-control" id="prenumeM" type="text" placeholder="Ex: Maria">
+                            </div>
+                            <div class="form-group">
+                                <label for="prenumeT">Prenume Tata:</label>
+                                <input class="form-control" id="prenumeT" type="text" placeholder="ex: Ion">
+                            </div>
+                            <div class="form-group">
+                                <label for="judet">Judet:</label>
+                                <input class="form-control" id="judet" type="text" placeholder="Ex: Dolj">
+                            </div>
+                            <div class="form-group">
+                                <label for="localtate">Localitate:</label>
+                                <input class="form-control" id="localitate" type="text" placeholder="Ex: Craiova">
+                            </div>
+                            <div class="form-group">
+                                <label for="adresa">Adresa:</label>
+                                <input class="form-control" id="adresa" type="text" placeholder="Ex: Bl.75 B2, Sc.3, Ap15..">
+                            </div>
+                            <div class="form-group">
+                                <label for="cnp">CNP:</label>
+                                <input class="form-control" id="cnp" type="text" placeholder="cod numeric personal">
+                            </div>
+                            <div class="form-group">
+                                <label for="serie">Serie Buletin:</label>
+                                <input class="form-control" id="serie" type="text" placeholder="Ex: DZ/DX/CZ...">
+                            </div>
+                            <div class="form-group">
+                                <label for="numar">Numar Buletin:</label>
+                                <input class="form-control" id="numar" type="text" placeholder="Number">
+                            </div>
+                            <div class="form-group">
+                                <label for="data">Data Nasterii:</label>
+                                <input class="form-control" id="data" type="date">
+                            </div>
+                            <div class="form-group">
+                                <label for="gender">Sex:</label>
+                                <br />
+                                <input type="radio" name="gender" value="male" checked> Feminin
+                                <br />
+                                <input type="radio" name="gender" value="female"> Masculin
+                            </div>
+                            <div class="form-group">
+                                <label for="status">Stare Civila:</label>
+                                <br />
+                                <input type="radio" name="status" value="necasatorit" checked> Necasatorit/a
+                                <br />
+                                <input type="radio" name="status" value="casatorit"> Casatorit/a
+                            </div>
+                            <div class="form-group">
+                                <label for="tel">Telefon:</label>
+                                <input class="form-control" id="tel" type="tel" placeholder="+0 xxx xxx xxx">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input class="form-control" id="email" type="email" placeholder="Ex:email@ex.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="parola">Parola:</label>
+                                <input class="form-control" id="parola" type="password" placeholder="Password">
+                            </div>
+                            <div class="form-group">
+                                <label for="cParola">Confirma Parola:</label>
+                                <input class="form-control" id="cParola" type="password" placeholder="Password">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block submit-btn">Submit</button>
                         </form>
                     </div>
                 </div>

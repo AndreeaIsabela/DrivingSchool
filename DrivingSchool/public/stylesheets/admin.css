@@ -101,3 +101,7 @@ html, body {
 .create-form {
     margin-top: 160px;
 }
+
+.submit-btn {
+    margin-bottom: 100px;
+}
