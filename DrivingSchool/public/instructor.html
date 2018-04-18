@@ -39,7 +39,7 @@
                 <div class="nav navbar-nav navbar-right collapse navbar-collapse" id="myNavbar">
                     <ul class=" nav navbar-nav navbar-right">
                         <li>
-                            <a href="index.html">Log Out</a>
+                            <a href="index.html"><span class="glyphicon glyphicon-log-out"></span> Log Out</a>
                         </li>
 
                     </ul>
@@ -58,7 +58,7 @@
                     <i class="fa fa-calendar"> Schedule</i>
                 </div>
                 <div class="sidebar-item" v-on:click="onStudents" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.student}">
-                    Students
+                        <span class="glyphicon glyphicon-education"></span> Students
                 </div>
 
             </div>
