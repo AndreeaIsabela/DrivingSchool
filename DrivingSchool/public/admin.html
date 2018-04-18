@@ -115,19 +115,23 @@
                             </div>
                             <div class="form-group">
                                 <label for="name">Nume</label>
-                                <input type="text" class="form-control" id="name" v-model="formData.name">
+                                <input type="text" class="form-control" id="lastName" v-model="formData.lastName" placeholder="Popescu">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Prenume</label>
+                                <input type="text" class="form-control" id="firstName" v-model="formData.firstName" placeholder="Ion">
                             </div>
                             <div class="form-group">
                                 <label for="name">Numar autorizatie</label>
-                                <input type="text" class="form-control" id="authorization" v-model="formData.authorization">
+                                <input type="text" class="form-control" id="authorization" v-model="formData.authorization" placeholder="7567">
                             </div>
                             <div class="form-group">
                                 <label for="carNumber">Numar masina</label>
-                                <input type="text" class="form-control" id="carNumber" v-model="formData.carNumber">
+                                <input type="text" class="form-control" id="carNumber" v-model="formData.carNumber" placeholder="DJ 04 ABC">
                             </div>
                             <div class="form-group">
                                 <label for="phone">Telefon</label>
-                                <input type="text" class="form-control" id="phone" v-model="formData.phone">
+                                <input type="tel" class="form-control" id="phone" v-model="formData.phone" placeholder="0755123456">
                             </div>
 
                             <button type="submit" class="btn btn-primary btn-block submit-btn" v-on:click="onSubmit">Submit</button>
@@ -278,8 +282,6 @@
                                     <div class="col col-sm-4"></div>
                                 </div>
                             </div>
-
-
                         </form>
                     </div>
                 </div>
