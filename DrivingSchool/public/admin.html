@@ -87,54 +87,54 @@
                         </div>
                     </div>
                 </div>
-                <div v-if="currentActionType == actionType.create">
+                <div v-if="currentActionType == actionType.create || currentActionType == actionType.edit">
                     <div v-if="currentView === viewIndex.instructor">
                         <form class="create-form" v-on:submit.prevent>
                             <div class="form-group">
                                 <label for="email">E-mail</label>
-                                <input type="email" class="form-control" id="email" placeholder="example@google.com">
+                                <input type="email" class="form-control" id="email" placeholder="example@google.com" v-model="formData.email">
                             </div>
                             <div class="form-group">
                                 <label for="password">Parola</label>
-                                <input type="password" class="form-control" id="password" placeholder="Parola">
+                                <input type="password" class="form-control" id="password" placeholder="Parola" v-model="formData.password">
                             </div>
                             <div class="form-group">
                                 <label for="confirmPassword">Confirmare parola</label>
-                                <input type="password" class="form-control" id="confirmPassword" placeholder="Parola">
+                                <input type="password" class="form-control" id="confirmPassword" placeholder="Parola" v-model="formData.confirmPassword">
                             </div>
                             <div class="form-group">
                                 <label for="name">Nume</label>
-                                <input type="text" class="form-control" id="name">
+                                <input type="text" class="form-control" id="name" v-model="formData.name">
                             </div>
                             <div class="form-group">
                                 <label for="name">Numar autorizatie</label>
-                                <input type="text" class="form-control" id="authorization">
+                                <input type="text" class="form-control" id="authorization" v-model="formData.authorization">
                             </div>
                             <div class="form-group">
-                                <label for="masina">Numar masina</label>
-                                <input type="text" class="form-control" id="masina">
+                                <label for="carNumber">Numar masina</label>
+                                <input type="text" class="form-control" id="carNumber" v-model="formData.carNumber">
                             </div>
                             <div class="form-group">
                                 <label for="phone">Telefon</label>
-                                <input type="text" class="form-control" id="phone">
+                                <input type="text" class="form-control" id="phone" v-model="formData.phone">
                             </div>
 
-                            <button type="submit" class="btn btn-primary btn-block">Adauga</button>
+                            <button type="submit" class="btn btn-primary btn-block" v-on:click="onSubmit">Adauga</button>
                         </form>
                     </div>
                     <div v-else-if="currentView === viewIndex.admin">
                         <form class="create-form" v-on:submit.prevent>
                             <div class="form-group">
                                 <label for="email">E-mail</label>
-                                <input type="email" class="form-control" id="email" placeholder="example@google.com">
+                                <input type="email" class="form-control" id="email" placeholder="example@google.com" v-model="formData.email">
                             </div>
                             <div class="form-group">
                                 <label for="password">Parola</label>
-                                <input type="password" class="form-control" id="password" placeholder="Parola">
+                                <input type="password" class="form-control" id="password" placeholder="Parola" v-model="formData.password">
                             </div>
                             <div class="form-group">
                                 <label for="confirmPassword">Confirmare parola</label>
-                                <input type="password" class="form-control" id="confirmPassword" placeholder="Parola">
+                                <input type="password" class="form-control" id="confirmPassword" placeholder="Parola" v-model="formData.confirmPassword">
                             </div>
                             
                             <button type="submit" class="btn btn-primary btn-block">Adauga</button>
