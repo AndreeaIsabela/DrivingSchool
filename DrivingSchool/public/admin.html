@@ -103,7 +103,7 @@
                         <form class="create-form" v-on:submit.prevent>
                             <div class="form-group">
                                 <label for="email">E-mail</label>
-                                <input type="email" class="form-control" id="email" placeholder="example@google.com" v-model="formData.email">
+                                <input type="email" class="form-control" id="email" autofocus placeholder="example@google.com" v-model="formData.email">
                             </div>
                             <div class="form-group">
                                 <label for="password">Parola</label>
@@ -141,7 +141,7 @@
                         <form class="create-form" v-on:submit.prevent>
                             <div class="form-group">
                                 <label for="email">E-mail</label>
-                                <input type="email" class="form-control" id="email" placeholder="example@google.com" v-model="formData.email">
+                                <input type="email" class="form-control" id="email" autofocus placeholder="example@google.com" v-model="formData.email">
                             </div>
                             <div class="form-group">
                                 <label for="password">Parola</label>
@@ -159,77 +159,77 @@
                         <form class="create-form" v-on:submit.prevent>
                             <div class="form-group">
                                 <label for="Nume">Nume:</label>
-                                <input class="form-control" id="Nume" type="text" autofocus placeholder="Ex: Popescu">
+                                <input class="form-control" id="Nume" type="text" autofocus placeholder="Ex: Popescu" v-model="formData.lastName">
                             </div>
                             <div class="form-group">
                                 <label for="prenume">Prenume:</label>
-                                <input class="form-control" id="prenume" type="text" placeholder="Ex: Ion">
+                                <input class="form-control" id="prenume" type="text" placeholder="Ex: Ion" v-model="formData.firstName">
                             </div>
                             <div class="form-group">
                                 <label for="prenumeM">Prenume Mama:</label>
-                                <input class="form-control" id="prenumeM" type="text" placeholder="Ex: Maria">
+                                <input class="form-control" id="prenumeM" type="text" placeholder="Ex: Maria" v-model="formData.motherFirstName">
                             </div>
                             <div class="form-group">
                                 <label for="prenumeT">Prenume Tata:</label>
-                                <input class="form-control" id="prenumeT" type="text" placeholder="ex: Ion">
+                                <input class="form-control" id="prenumeT" type="text" placeholder="ex: Ion" v-model="formData.fatherFirstName">
                             </div>
                             <div class="form-group">
                                 <label for="judet">Judet:</label>
-                                <input class="form-control" id="judet" type="text" placeholder="Ex: Dolj">
+                                <input class="form-control" id="judet" type="text" placeholder="Ex: Dolj" v-model="formData.region">
                             </div>
                             <div class="form-group">
                                 <label for="localtate">Localitate:</label>
-                                <input class="form-control" id="localitate" type="text" placeholder="Ex: Craiova">
+                                <input class="form-control" id="localitate" type="text" placeholder="Ex: Craiova" v-model="formData.city">
                             </div>
                             <div class="form-group">
                                 <label for="adresa">Adresa:</label>
-                                <input class="form-control" id="adresa" type="text" placeholder="Ex: Bl.75 B2, Sc.3, Ap15..">
+                                <input class="form-control" id="adresa" type="text" placeholder="Ex: Bl.75 B2, Sc.3, Ap15.." v-model="formData.address">
                             </div>
                             <div class="form-group">
                                 <label for="cnp">CNP:</label>
-                                <input class="form-control" id="cnp" type="text" placeholder="cod numeric personal">
+                                <input class="form-control" id="cnp" type="text" placeholder="cod numeric personal" v-model="formData.cnp">
                             </div>
                             <div class="form-group">
                                 <label for="serie">Serie Buletin:</label>
-                                <input class="form-control" id="serie" type="text" placeholder="Ex: DZ/DX/CZ...">
+                                <input class="form-control" id="serie" type="text" placeholder="Ex: DZ/DX/CZ..." v-model="formData.idSeries">
                             </div>
                             <div class="form-group">
                                 <label for="numar">Numar Buletin:</label>
-                                <input class="form-control" id="numar" type="text" placeholder="Number">
+                                <input class="form-control" id="numar" type="text" placeholder="Number" v-model="formData.idNumber">
                             </div>
                             <div class="form-group">
                                 <label for="data">Data Nasterii:</label>
-                                <input class="form-control" id="data" type="date">
+                                <input class="form-control" id="data" type="date" v-model="formData.dateOfBirth">
                             </div>
                             <div class="form-group">
                                 <label for="gender">Sex:</label>
                                 <br />
-                                <input type="radio" name="gender" value="male" checked> Feminin
+                                <input type="radio" name="gender" value="male" checked v-model="formData.gender"> Masculin
                                 <br />
-                                <input type="radio" name="gender" value="female"> Masculin
+                                <input type="radio" name="gender" value="female" v-model="formData.gender"> Feminin
                             </div>
                             <div class="form-group">
                                 <label for="status">Stare Civila:</label>
                                 <br />
-                                <input type="radio" name="status" value="necasatorit" checked> Necasatorit/a
+                                <input type="radio" name="status" value="single" checked v-model="formData.marriageStatus"> Necasatorit/a
                                 <br />
-                                <input type="radio" name="status" value="casatorit"> Casatorit/a
+                                <input type="radio" name="status" value="married" v-model="formData.marriageStatus"> Casatorit/a
                             </div>
                             <div class="form-group">
                                 <label for="tel">Telefon:</label>
-                                <input class="form-control" id="tel" type="tel" placeholder="+0 xxx xxx xxx">
+                                <input class="form-control" id="tel" type="tel" placeholder="+0 xxx xxx xxx" v-model="formData.phone">
                             </div>
                             <div class="form-group">
                                 <label for="email">Email:</label>
-                                <input class="form-control" id="email" type="email" placeholder="Ex:email@ex.com">
+                                <input class="form-control" id="email" type="email" placeholder="Ex:email@ex.com" v-model="formData.email">
                             </div>
                             <div class="form-group">
                                 <label for="parola">Parola:</label>
-                                <input class="form-control" id="parola" type="password" placeholder="Password">
+                                <input class="form-control" id="parola" type="password" placeholder="Password" v-model="formData.password">
                             </div>
                             <div class="form-group">
                                 <label for="cParola">Confirma Parola:</label>
-                                <input class="form-control" id="cParola" type="password" placeholder="Password">
+                                <input class="form-control" id="cParola" type="password" placeholder="Password" v-model="formData.confirmPassword">
                             </div>
 
                             <button type="submit" class="btn btn-primary btn-block submit-btn">Submit</button>
