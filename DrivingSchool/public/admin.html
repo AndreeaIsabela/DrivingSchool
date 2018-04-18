@@ -35,11 +35,15 @@
                 <div class="sidebar-item" v-on:click="onAdmins" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.admin}">
                     {{viewInfo[viewIndex.admin].title}}
                 </div>
+                <div class="sidebar-item" v-on:click="onStudentArchive" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.archive}">
+                    {{viewInfo[viewIndex.archive].title}}
+                </div>
             </div>
 
             <div class="col col-sm-2"></div>
+            <div class="col col-sm-1"></div>
 
-            <div class="col col-sm-10 sidepage">
+            <div class="col col-sm-8 sidepage">
                 <div v-if="!formEnabled">
                     <button v-if="viewInfo[currentView].canCreate" class="btn btn-success create-btn" v-on:click="onCreate">
                         <i class="fa fa-plus"></i>
@@ -51,14 +55,17 @@
                     <div>
                         <div v-for="(item, index) in data" class="list-item aligner" v-bind:class="{ 'selected-row' : index == selectedRowIndex }">
                             <div class="list-item-info">
-                                <div v-for="(prop, itemIndex) in item">
-                                    <div v-if="itemIndex == 0" class="list-item-name">
-                                        {{prop}}
-                                    </div>
-                                    <div v-else class="list-item-description">
-                                        {{ viewInfo[currentView].descriptors[itemIndex - 1].text }} : {{prop}}
-                                    </div>
+                                <div class="list-item-name">
+                                    {{item[0]}}
                                 </div>
+                                <span v-for="(prop, itemIndex) in item">
+                                    <span v-if="itemIndex >= 1" class="list-item-description">
+                                        <span v-if="itemIndex > 1" class="list-item-description">
+                                            ,
+                                        </span>
+                                        {{ viewInfo[currentView].descriptors[itemIndex - 1].text }} : {{prop}}
+                                    </span>
+                                </span>
                             </div>
 
                             <div class="list-item-actions">
@@ -71,13 +78,17 @@
                                         <i class="fa fa-edit"></i>
                                         Editeaza
                                     </button>
-                                    <button v-if="viewInfo[currentView].canDelete" class="btn btn-danger" v-on:click="onDelete(index)">
-                                        <i class="fa fa-trash"></i>
-                                        Sterge
-                                    </button>
                                     <button v-if="viewInfo[currentView].canArchive" class="btn btn-warning" v-on:click="onArchive(index)">
                                         <i class="fa fa-archive"></i>
                                         Arhiveaza
+                                    </button>
+                                    <button v-if="viewInfo[currentView].canRestore" class="btn btn-warning" v-on:click="onRestore(index)">
+                                        <i class="fa fa-undo"></i>
+                                        Dezarhiveaza
+                                    </button>
+                                    <button v-if="viewInfo[currentView].canDelete" class="btn btn-danger" v-on:click="onDelete(index)">
+                                        <i class="fa fa-trash"></i>
+                                        Sterge
                                     </button>
                                 </div>
                             </div>
@@ -219,6 +230,8 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col col-sm-1"></div>
         </div>
     </div>
 

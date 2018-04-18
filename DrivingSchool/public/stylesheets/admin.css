@@ -66,8 +66,8 @@ html, body {
 }
 
 .create-form {
-    width: 70%;
     margin: 0 auto;
+    margin-top: 160px;
 }
 
 .list-item {
@@ -96,10 +96,6 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
-
-.create-form {
-    margin-top: 160px;
 }
 
 .submit-btn {

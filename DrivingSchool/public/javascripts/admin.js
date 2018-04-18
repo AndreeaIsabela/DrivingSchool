@@ -7,7 +7,8 @@ let app = new Vue({
             registerRequest: 0,
             instructor: 1,
             student: 2,
-            admin: 3
+            admin: 3,
+            archive: 4
         },
         viewInfo: [
             {
@@ -45,6 +46,16 @@ let app = new Vue({
                 title: 'Administratori',
                 canCreate: true,
                 descriptors: []
+            },
+            {
+                title: 'Arhiva cursanti',
+                canDelete: true,
+                canRestore: true,
+                descriptors: [
+                    { text: 'CNP' },
+                    { text: 'Categorie' },
+                    { text: 'Numar telefon' }
+                ]
             }
         ],
         currentView: 0,
@@ -59,7 +70,6 @@ let app = new Vue({
     },
     methods: {
         onRegisterRequests: function () {
-            this.setListAction();
             this.$http
                 .get('/api/registerrequests')
                 .then(response => {
@@ -78,7 +88,6 @@ let app = new Vue({
                 });
         },
         onInstructors: function () {
-            this.setListAction();
             this.$http
                 .get('/api/instructors')
                 .then(response => {
@@ -99,7 +108,6 @@ let app = new Vue({
                 });
         },
         onStudents: function () {
-            this.setListAction();
             this.$http
                 .get('/api/students')
                 .then(response => {
@@ -120,7 +128,6 @@ let app = new Vue({
                 });
         },
         onAdmins: function () {
-            this.setListAction();
             this.$http
                 .get('/api/admins')
                 .then(response => {
@@ -129,9 +136,29 @@ let app = new Vue({
 
                     this.fullData = response.data;
                     for (let adminData of response.data) {
-                        
+
                         this.data.push([
                             adminData.name
+                        ]);
+                    };
+                }).catch(function (err) {
+                    console.log(err.response);
+                });
+        },
+        onStudentArchive: function () {
+            this.$http
+                .get('/api/students')
+                .then(response => {
+                    this.enableView(this.viewIndex.archive);
+                    this.clearList();
+
+                    this.fullData = response.data;
+                    for (let student of response.data) {
+                        this.data.push([
+                            student.lastName + ' ' + student.firstName,
+                            student.cnp,
+                            student.category,
+                            student.phone
                         ]);
                     };
                 }).catch(function (err) {
@@ -141,7 +168,7 @@ let app = new Vue({
         onCreate: function () {
             this.formEnabled = true;
         },
-        onSubmit: function() {
+        onSubmit: function () {
             console.log(this.formData);
         },
         onEdit: function (index) {
@@ -149,30 +176,31 @@ let app = new Vue({
 
             this.formData = {};
             let propertyNames = Object.getOwnPropertyNames(this.fullData[index]);
-            for(let propName of propertyNames) {
+            for (let propName of propertyNames) {
                 this.formData[propName] = this.fullData[index][propName];
             }
         },
         onDelete: function (index) {
-            if (confirm('Are you sure you want to delete ' + this.data[index][0] + '?')) {
+            if (confirm('Sunteti sigur ca doriti sa stergeti ' + this.data[index][0] + '?')) {
                 this.data.splice(index, 1);
             }
         },
         onArchive: function (index) {
-            if (confirm('Are you sure you want to archive ' + this.data[index][0] + '?')) {
+            if (confirm('Sunteti sigur ca doriti sa arhivati studentul ' + this.data[index][0] + '?')) {
                 this.data.splice(index, 1);
             }
         },
+        onRestore: function (index) {
+            this.data.splice(index, 1);
+        },
         enableView: function (viewIndex) {
             this.formEnabled = false;
+            this.formData = {};
             this.currentView = viewIndex;
         },
         clearList() {
             this.selectedRowIndex = null;
             this.data.splice(0, this.data.length);
-        },
-        setListAction() {
-            this.formEnabled = false;
         }
     }
 });
