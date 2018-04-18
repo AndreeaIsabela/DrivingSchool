@@ -186,6 +186,9 @@ let app = new Vue({
                     console.log(err.response);
                 });
         },
+        onLogout: function() {
+
+        },
         onGenerateFolder: function() {
             console.log(this.formData);
         },

@@ -34,6 +34,11 @@ html, body {
     margin: 20px auto;
 }
 
+.sidebar-item a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .sidebar-item:hover {
     color: rgb(196, 102, 73);
     cursor: pointer;

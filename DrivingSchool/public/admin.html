@@ -41,6 +41,9 @@
                 <div class="sidebar-item" v-on:click="onFolder" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.folder}">
                     {{viewInfo[viewIndex.folder].title}}
                 </div>
+                <div class="sidebar-item" v-on:click="onLogout">
+                    <a href="index.html">Logout</a>
+                </div>
             </div>
 
             <div class="col col-sm-2"></div>
