@@ -78,6 +78,30 @@ class StudentController {
     getArchivedStudents() {
         return this.getStudents();
     }
+    getScheduleForStudent(id) {
+        return [
+            {
+                date: '22/03/2018',
+                hour: '10:30',
+                location: 'Restaurant Minerva'
+            },
+            {
+                date: '22/03/2018',
+                hour: '10:30',
+                location: 'Restaurant Minerva'
+            },
+            {
+                date: '22/03/2018',
+                hour: '10:30',
+                location: 'Restaurant Minerva'
+            },
+            {
+                date: '22/03/2018',
+                hour: '10:30',
+                location: 'Restaurant Minerva'
+            }
+        ];
+    }
 }
 
 module.exports = new StudentController();
