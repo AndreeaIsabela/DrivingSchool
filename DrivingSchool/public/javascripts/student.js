@@ -69,6 +69,9 @@ let app = new Vue({
                     console.log(err.response);
                 });
         },
+        onLogout: function() {
+            
+        },
         enableView: function (viewIndex) {
             this.currentView = viewIndex;
         },

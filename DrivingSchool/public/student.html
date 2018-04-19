@@ -26,44 +26,47 @@
                 <div class="sidebar-item" v-on:click="onSchedule" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.schedule}">
                     {{viewInfo[viewIndex.schedule].title}}
                 </div>
-                <div class="sidebar-item" v-on:click="onLegislation" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.legislation}">
-                    {{viewInfo[viewIndex.legislation].title}}
-                </div>
+
+                <a class="sidebar-item" href="index.html" v-on:click="onLogout">
+                    Logout
+                </a>
             </div>
+        </div>
 
-            <div class="col col-sm-2"></div>
-            <div class="col col-sm-1"></div>
+        <div class="col col-sm-2"></div>
+        <div class="col col-sm-1"></div>
 
-            <div class="col col-sm-8 sidepage">
-                <div v-if="currentView === viewIndex.schedule">
-                    <div class="create-btn">
-                        <!-- create button placeholder -->
-                    </div>
-                    <div>
-                        <div v-for="(item, index) in data" class="list-item aligner" v-bind:class="{ 'selected-row' : index == selectedRowIndex }">
-                            <div class="list-item-info">
-                                <div class="list-item-name">
-                                    {{item[0]}}
-                                </div>
-                                <span v-for="(prop, itemIndex) in item">
-                                    <span v-if="itemIndex >= 1" class="list-item-description">
-                                        <span v-if="itemIndex > 1" class="list-item-description">
-                                            ,
-                                        </span>
-                                        {{ viewInfo[currentView].descriptors[itemIndex - 1].text }} : {{prop}}
-                                    </span>
-                                </span>
+        <div class="col col-sm-8 sidepage">
+            <div v-if="currentView === viewIndex.schedule">
+                <div v-if="!viewInfo[currentView].canCreate" class="create-btn">
+                    <!-- create button placeholder -->
+                </div>
+                <div>
+                    <div v-for="(item, index) in data" class="list-item aligner" v-bind:class="{ 'selected-row' : index == selectedRowIndex }">
+                        <div class="list-item-info">
+                            <div class="list-item-name">
+                                {{item[0]}}
                             </div>
+                            <span v-for="(prop, itemIndex) in item">
+                                <span v-if="itemIndex >= 1" class="list-item-description">
+                                    <span v-if="itemIndex > 1" class="list-item-description">
+                                        ,
+                                    </span>
+                                    {{ viewInfo[currentView].descriptors[itemIndex - 1].text }} : {{prop}}
+                                </span>
+                            </span>
                         </div>
                     </div>
                 </div>
-                <div v-if="currentView == viewIndex.registerRequest">
-
-                </div>
+                <button class="btn btn-success download-btn" v-on:click="onLegislation">
+                    <i class="fa fa-arrow-circle-down"></i>
+                    Legislatie auto
+                </button>
             </div>
-
-            <div class="col col-sm-1"></div>
         </div>
+
+        <div class="col col-sm-1"></div>
+    </div>
     </div>
 
     <script src="/javascripts/student.js"></script>
