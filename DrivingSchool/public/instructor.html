@@ -39,7 +39,8 @@
                 <div class="nav navbar-nav navbar-right collapse navbar-collapse" id="myNavbar">
                     <ul class=" nav navbar-nav navbar-right">
                         <li>
-                            <a href="index.html"><span class="glyphicon glyphicon-log-out"></span> Log Out</a>
+                            <a href="index.html">
+                                <span class="glyphicon glyphicon-log-out"></span> Log Out</a>
                         </li>
 
                     </ul>
@@ -55,10 +56,12 @@
             <div class="col col-sm-2 sidebar">
                 <img src="/images/brand.jpg" class="img-responsive" />
                 <div class="sidebar-item" v-on:click="onSchedule" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.schedule}">
+
                     <i class="fa fa-calendar"> Schedule</i>
+
                 </div>
                 <div class="sidebar-item" v-on:click="onStudents" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.student}">
-                        <span class="glyphicon glyphicon-education"></span> Students
+                    <span class="glyphicon glyphicon-education"></span> Students
                 </div>
 
             </div>
@@ -69,7 +72,7 @@
 
                 <div class="container">
 
-                    <div>
+                    <div v-if="viewIndex==0">
                         <div v-for="(item, index) in data" class="list-item aligner">
                             <div class="list-item-info">
                                 <div v-for="(prop, itemIndex) in item">
@@ -79,19 +82,48 @@
                                     <div v-else class="list-item-description">
                                         {{ viewInfo[currentView].descriptors[itemIndex - 1].text }} : {{prop}}
                                     </div>
+
                                 </div>
+
                             </div>
                         </div>
                     </div>
 
-                    <!-- <div v-if="createFormEnabled" class="create-form">
-                <div v-if="currentView === viewIndex.instructor">
-                   
-                </div>
-                <div v-else-if="currentView === viewIndex.admin">
-                    
-                </div>
-            </div> -->
+                    <div v-else>
+                        <div>
+                            <div v-for="(item, index) in data" class="list-item aligner" v-bind:class="{ 'selected-row' : index == selectedRowIndex }">
+                                <div class="list-item-info">
+                                    <div class="list-item-name">
+                                        {{item[0]}}
+                                    </div>
+                                    <span v-for="(prop, itemIndex) in item">
+                                        <span v-if="itemIndex >= 1" class="list-item-description">
+                                            <span v-if="itemIndex > 1" class="list-item-description">
+                                                ,
+                                            </span>
+                                            {{ viewInfo[currentView].descriptors[itemIndex - 1].text }} : {{prop}}
+                                        </span>
+                                    </span>
+                                    <div class="list-item-actions">
+                                        <div class="list-item-actions-center">
+                                            <button  class="btn btn-success " v-on:click="onCreate">
+                                                <i class="fa fa-plus"></i>
+                                                Adauga
+                                            </button>
+                                            <button  class="btn btn-primary" v-on:click="onEdit(index)">
+                                                <i class="fa fa-edit"></i>
+                                                Editeaza
+                                            </button>
+                                            <button class="btn btn-danger" v-on:click="onDelete(index)">
+                                                <i class="fa fa-trash"></i>
+                                                Sterge
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

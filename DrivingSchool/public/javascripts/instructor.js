@@ -1,6 +1,7 @@
 Vue.prototype.$http = axios;
 
 
+
 let app = new Vue({
     el: '#app',
     data: {
@@ -22,11 +23,8 @@ let app = new Vue({
             {
                 title: 'Cursanti',
                 descriptors: [
-                    { text: 'CNP', width: 10 },
-                    { text: 'Nume', width: 30 },
-                    { text: 'Prenume', width: 30 },
-                    { text: 'Categorie', width: 10 },
-                    { text: 'Numar telefon', width: 20 }
+                    { text: 'CNP' },
+                    { text: 'Numar telefon' },
                 ]
             }
         ],
@@ -39,46 +37,65 @@ let app = new Vue({
                 .get('/api/students')
                 .then(response => {
                     this.enableView(this.viewIndex.student);
-                    this.clearTable();
+                    this.clearList();
 
+                    this.fullData = response.data;
                     for (let student of response.data) {
+                        console.log(student);
                         this.data.push([
                             student.lastName + ' ' + student.firstName,
                             student.cnp,
-                            student.category,
                             student.phone
                         ]);
                     };
                 }).catch(function (err) {
-                    console.log(err.response);
+                    console.log(err);
                 });
         },
         onSchedule: function () {
             this.$http
-                .get('/api/students')
+                .get('/api/students/sss/schedule')
                 .then(response => {
-                    this.enableView(this.viewIndex.student);
-                    this.clearTable();
+                    this.enableView(this.viewIndex.schedule);
+                    this.clearList();
 
-                    for (let student of response.data) {
+                    this.fullData = response.data;
+                    for (let request of response.data) {
                         this.data.push([
-                            student.lastName + ' ' + student.firstName,
-                            student.cnp,
-                            student.category,
-                            student.phone
+                            request.date + ' ' + request.hour,
+                            request.location
                         ]);
-                    };
-                    console.log(this.data);
-                }).catch(function (err) {
-                    console.log(err.response);
+                    }
+                }).catch(err => {
+                    console.log(err);
                 });
         },
         enableView: function (viewIndex) {
             this.currentView = viewIndex;
         },
-        clearTable() {
-            this.data.splice(0, this.data.length);
+        onEdit: function (index) {
+            this.formEnabled = true;
+
+            this.formData = {};
+            let propertyNames = Object.getOwnPropertyNames(this.fullData[index]);
+            for (let propName of propertyNames) {
+                this.formData[propName] = this.fullData[index][propName];
+            }
+
+            if(this.formData.password) {
+                this.formData.confirmPassword = this.formData.password;
+            }
         },
+        
+        onDelete: function (index) {
+            if (confirm('Sunteti sigur ca doriti sa stergeti ' + this.data[index][0] + '?')) {
+                this.data.splice(index, 1);
+            }
+        },
+        clearList() {
+            this.selectedRowIndex = null;
+            this.data.splice(0, this.data.length);
+        }
 
 
     }
