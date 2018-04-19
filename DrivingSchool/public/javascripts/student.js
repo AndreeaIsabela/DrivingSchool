@@ -10,7 +10,7 @@ let app = new Vue({
             {
                 title: 'Sedinte auto',
                 descriptors: [
-                    { text: 'Numar telefon' }
+                    { text: 'Location' }
                 ]
             },
         ],
@@ -23,7 +23,7 @@ let app = new Vue({
     methods: {
         onSchedule: function () {
             this.$http
-                .get('/api/registerrequests')
+                .get('/api/students/sss/schedule')
                 .then(response => {
                     this.enableView(this.viewIndex.schedule);
                     this.clearList();
@@ -31,8 +31,8 @@ let app = new Vue({
                     this.fullData = response.data;
                     for (let request of response.data) {
                         this.data.push([
-                            request.lastName + ' ' + request.firstName,
-                            request.phone
+                            request.date + ' ' + request.hour,
+                            request.location
                         ]);
                     }
                 }).catch(err => {

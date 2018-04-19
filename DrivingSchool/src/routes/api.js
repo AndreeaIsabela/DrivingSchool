@@ -18,6 +18,12 @@ router.get('/students', (req, res, next) => {
     res.json(students);
 });
 
+/* GET student listing. */
+router.get('/students/:id/schedule', (req, res, next) => {
+    let students = studentController.getScheduleForStudent(req.params.id);
+    res.json(students);
+});
+
 /* GET student archive listing. */
 router.get('/archive', (req, res, next) => {
     let students = studentController.getArchivedStudents();
