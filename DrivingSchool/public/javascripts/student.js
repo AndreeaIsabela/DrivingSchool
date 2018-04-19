@@ -5,7 +5,6 @@ let app = new Vue({
     data: {
         viewIndex: {
             schedule: 0,
-            legislation: 1
         },
         viewInfo: [
             {
@@ -14,14 +13,6 @@ let app = new Vue({
                     { text: 'Numar telefon' }
                 ]
             },
-            {
-                title: 'Legislatie auto',
-                descriptors: [
-                    { text: 'Autorizatie' },
-                    { text: 'Masina' },
-                    { text: 'Numar telefon' }
-                ]
-            }
         ],
         currentView: 0,
         data: [],
@@ -50,27 +41,15 @@ let app = new Vue({
         },
         onLegislation: function () {
             this.$http
-                .get('/api/instructors')
+                .get('/api/legislation')
                 .then(response => {
-                    this.enableView(this.viewIndex.legislation);
-                    this.clearList();
-
-                    this.fullData = response.data;
-                    for (let instructor of response.data) {
-                        this.data.push([
-                            instructor.lastName + ' ' + instructor.firstName,
-                            instructor.authorization,
-                            instructor.carNumber,
-                            instructor.phone
-                        ]);
-                    }
-                    console.log(this.fullData);
+                    
                 }).catch(function (err) {
                     console.log(err.response);
                 });
         },
         onLogout: function() {
-            
+
         },
         enableView: function (viewIndex) {
             this.currentView = viewIndex;

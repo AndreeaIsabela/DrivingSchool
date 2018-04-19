@@ -23,6 +23,7 @@
             <div class="col col-sm-2 sidebar">
                 <img src="/images/brand.jpg" class="img-responsive" />
                 <hr />
+                
                 <div class="sidebar-item" v-on:click="onSchedule" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.schedule}">
                     {{viewInfo[viewIndex.schedule].title}}
                 </div>
