@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!--[if lt IE 9]>
+       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/stylesheets/admin.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.2/axios.js"></script>
+    <title>Panou administrator</title>
+</head>
+
+<body>
+    <div class="container-fluid" id="app">
+        <div class="row">
+            <div class="col col-sm-2 sidebar">
+                <img src="/images/brand.jpg" class="img-responsive" />
+                <hr />
+                <div class="sidebar-item" v-on:click="onSchedule" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.schedule}">
+                    {{viewInfo[viewIndex.schedule].title}}
+                </div>
+                <div class="sidebar-item" v-on:click="onLegislation" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.legislation}">
+                    {{viewInfo[viewIndex.legislation].title}}
+                </div>
+            </div>
+
+            <div class="col col-sm-2"></div>
+            <div class="col col-sm-1"></div>
+
+            <div class="col col-sm-8 sidepage">
+                <div v-if="currentView === viewIndex.schedule">
+                    <div class="create-btn">
+                        <!-- create button placeholder -->
+                    </div>
+                    <div>
+                        <div v-for="(item, index) in data" class="list-item aligner" v-bind:class="{ 'selected-row' : index == selectedRowIndex }">
+                            <div class="list-item-info">
+                                <div class="list-item-name">
+                                    {{item[0]}}
+                                </div>
+                                <span v-for="(prop, itemIndex) in item">
+                                    <span v-if="itemIndex >= 1" class="list-item-description">
+                                        <span v-if="itemIndex > 1" class="list-item-description">
+                                            ,
+                                        </span>
+                                        {{ viewInfo[currentView].descriptors[itemIndex - 1].text }} : {{prop}}
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div v-if="currentView == viewIndex.registerRequest">
+
+                </div>
+            </div>
+
+            <div class="col col-sm-1"></div>
+        </div>
+    </div>
+
+    <script src="/javascripts/student.js"></script>
+</body>
+
+</html>
