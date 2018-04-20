@@ -6,27 +6,28 @@ let app = new Vue({
     el: '#app',
     data: {
         viewIndex: {
-            schedule: 0,
-            student: 1,
+            student: 0,
+            schedule: 1,
         },
         viewInfo: [
-            {
-                title: 'Schedule',
-                descriptors: [
-                    { text: 'CNP', width: 10 },
-                    { text: 'Nume', width: 30 },
-                    { text: 'Prenume', width: 30 },
-                    { text: 'Categorie', width: 10 },
-                    { text: 'Numar telefon', width: 20 }
-                ]
-            }, 
+
             {
                 title: 'Cursanti',
                 descriptors: [
                     { text: 'CNP' },
                     { text: 'Numar telefon' },
                 ]
+            }, {
+                title: 'Schedule',
+                descriptors: [
+                    { text: 'Locatie', width: 10 },
+                    { text: 'CNP', width: 30 },
+                    { text: 'Prenume', width: 30 },
+                    { text: 'Categorie', width: 10 },
+                    { text: 'Numar telefon', width: 20 }
+                ]
             }
+
         ],
         currentView: 0,
         data: []
@@ -62,8 +63,11 @@ let app = new Vue({
                     this.fullData = response.data;
                     for (let request of response.data) {
                         this.data.push([
+                            
                             request.date + ' ' + request.hour,
-                            request.location
+                            request.location,
+                            request.cnp
+
                         ]);
                     }
                 }).catch(err => {
@@ -82,11 +86,14 @@ let app = new Vue({
                 this.formData[propName] = this.fullData[index][propName];
             }
 
-            if(this.formData.password) {
+            if (this.formData.password) {
                 this.formData.confirmPassword = this.formData.password;
             }
         },
-        
+        onCreate: function () {
+            this.formEnabled = true;
+        },
+
         onDelete: function (index) {
             if (confirm('Sunteti sigur ca doriti sa stergeti ' + this.data[index][0] + '?')) {
                 this.data.splice(index, 1);

@@ -89,41 +89,7 @@
                         </div>
                     </div>
 
-                    <div v-else>
-                        <div>
-                            <div v-for="(item, index) in data" class="list-item aligner" v-bind:class="{ 'selected-row' : index == selectedRowIndex }">
-                                <div class="list-item-info">
-                                    <div class="list-item-name">
-                                        {{item[0]}}
-                                    </div>
-                                    <span v-for="(prop, itemIndex) in item">
-                                        <span v-if="itemIndex >= 1" class="list-item-description">
-                                            <span v-if="itemIndex > 1" class="list-item-description">
-                                                ,
-                                            </span>
-                                            {{ viewInfo[currentView].descriptors[itemIndex - 1].text }} : {{prop}}
-                                        </span>
-                                    </span>
-                                    <div class="list-item-actions btn-group">
-                                        <div class="list-item-actions-center">
-                                            <button  class="btn btn-success " v-on:click="onCreate">
-                                                <i class="fa fa-plus"></i>
-                                               <a href="programareLectie.html"> Adauga</a>
-                                            </button>
-                                            <button  class="btn btn-primary" v-on:click="onEdit(index)">
-                                                <i class="fa fa-edit"></i>
-                                                <a href="programareLectie.html"> Editeaza</a>
-                                            </button>
-                                            <button class="btn btn-danger" v-on:click="onDelete(index)">
-                                                <i class="fa fa-trash"></i>
-                                                Sterge
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                   
                 </div>
             </div>
         </div>
@@ -132,6 +98,24 @@
     </div>
     </div>
     </div>
+    <div class="col-xs-4"></div>
+    <div class="container-fluid col-xs-6">
+
+    <form class="create-form" v-on:submit.prevent>
+        <div class="form-group">
+            <label for="date">Data:</label>
+            <input type="date" class="form-control" id="data" autofocus >
+        </div>
+        <div class="form-group">
+            <label for="Locatia">Locatia</label>
+            <input type="text" class="form-control" id="text" placeholder="Locatia">
+        </div>
+      
+        <button type="submit" class="btn btn-primary btn-block submit-btn">Submit</button>
+    </form>
+</div>
+<div class="col-xs-2"></div>
+</div>
 
     <script src="/javascripts/instructor.js">
 
