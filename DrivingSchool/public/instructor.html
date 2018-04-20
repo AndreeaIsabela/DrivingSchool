@@ -89,7 +89,8 @@
                         </div>
                     </div>
 
-                    <div v-else>
+                    <div v-if="currentView==1">
+                        
                         <div>
                             <div v-for="(item, index) in data" class="list-item aligner" v-bind:class="{ 'selected-row' : index == selectedRowIndex }">
                                 <div class="list-item-info">
