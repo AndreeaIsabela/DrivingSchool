@@ -1,5 +1,6 @@
 body {
   position: relative;
+  background-color: black;
 }
 
 #home {
@@ -25,11 +26,6 @@ body {
 #home, #personal, #location, #contact {
   color: white;
   background-color: black;
-}
-
-.carousel-inner>.item>img, .carousel-inner>.item>a>img {
-  margin: none;
-  position: relative;
 }
 
 .nav .open>a, .nav .open>a:hover, .nav .open>a:focus {
@@ -85,18 +81,19 @@ table {
 table td, table th {
   margin-left: 0;
   padding: 8 px;
-
 }
 
 table tr:nth-child(even) {
-  background-color: #ff0000c2;
+  background-color: red;
 }
 
 table tr:nth-child(odd) {
-  background-color: rgba(0, 0, 0, 0.822);
+  background-color: black;
   color: white;
 }
-
+table tr:nth-child(odd):hover{
+  color: black;
+}
 table tr:hover {
   background-color: #ddd;
 }
@@ -106,7 +103,7 @@ table th {
   padding-bottom: 12px;
   text-align: left;
   background-color: black;
-  color: #fd7070;
+  color: white;
 }
 
 .btn {
@@ -125,9 +122,10 @@ table th {
 }
 
 footer {
-  background-color: red;
+  margin-top: 5%;
+  background-color: black;
   color: #f5f5f5;
-  padding: 20px;
+  padding: 10px;
 }
 
 footer a {
@@ -159,15 +157,26 @@ footer a:hover {
   margin-top: 5%;
 }
 
-#submitBtn {
+#registerBtn {
   border: 1px solid red;
   background-color: red;
   color: azure;
   border-radius: 5px;
 }
 
-#submitBtn:hover {
+#registerBtn:hover {
   background-color: rgb(179, 14, 14);
+}
+
+#submitBtn {
+  border: 1px solid rgb(66, 66, 255);
+  background-color: rgb(66, 66, 255);
+  color: azure;
+  border-radius: 5px;
+}
+
+#submitBtn:hover {
+  background-color: rgb(32, 32, 129);
 }
 
 span {
@@ -209,6 +218,51 @@ i {
   padding-right: 30px;
 }
 
-.forgotPass{
-  color:red;
+.forgotPass {
+  color: red;
+}
+
+.form-inline {
+  margin-bottom: 2%;
+}
+
+.registerForm {
+  margin-top: 4%;
+  text-align: center;
+}
+
+.title {
+  margin-top: 10%;
+  text-align: center;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  color: white;
+}
+
+.registerForm .form-group {
+  margin-left: 2%;
+}
+
+.row {
+  margin-top: 2%;
+}
+
+#register {
+  margin-top: 10px;
+  background-color: blue;
+  padding-right: 15%;
+  padding-left: 15%;
+  align-self: center;
+}
+
+#passForgot {
+  margin-bottom: 20%;
+}
+.resetMargin{
+  margin-top:0;
+}
+label{
+  color: white;
+}
+#radio{
+  color: white;
 }

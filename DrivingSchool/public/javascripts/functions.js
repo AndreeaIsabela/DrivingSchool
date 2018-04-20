@@ -25,14 +25,14 @@ $(document).ready(function () {
     });
     //$.get("/api/instructors", populateInstructors);
 
-    let instructors = [{name: 'Ion',categorie:'B',tarif:1200 },{name: 'Ion',categorie:'B',tarif:1200},{name: 'Ion',categorie:'B',tarif:1200},{name: 'Ion',categorie:'B',tarif:1200},{name: 'Ion',categorie:'B',tarif:1200}];
+    let instructors = [{ name: 'Ion', categorie: 'B', tarif: 1200 }, { name: 'Ion', categorie: 'B', tarif: 1200 }, { name: 'Ion', categorie: 'B', tarif: 1200 }, { name: 'Ion', categorie: 'B', tarif: 1200 }, { name: 'Ion', categorie: 'B', tarif: 1200 },{ name: 'Ion', categorie: 'B', tarif: 1200 }, { name: 'Ion', categorie: 'B', tarif: 1200 }, { name: 'Ion', categorie: 'B', tarif: 1200 }, { name: 'Ion', categorie: 'B', tarif: 1200 }, { name: 'Ion', categorie: 'B', tarif: 1200 },{ name: 'Ion', categorie: 'B', tarif: 1200 }, { name: 'Ion', categorie: 'B', tarif: 1200 },{ name: 'Ion', categorie: 'B', tarif: 1200 }, { name: 'Ion', categorie: 'B', tarif: 1200 }];
     populateInstructors(instructors);
 });
 
 function populateInstructors(instructors) {
     let tableBody = $("tbody");
-    
-    for(let instructor of instructors) {
+
+    for (let instructor of instructors) {
         console.log(tableBody.html());
         tableBody.append(
             `<tr>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!--[if lt IE 9]>
+       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+
+    <script href="functions.js"></script>
+
+
+    <title>Scoala de Soferi</title>
+</head>
+
+<body>
+    <!--data-spy="scroll" data-target=".navbar" data-offset="50"-->
+    <header>
+        <nav class="navbar navbar-inverse navbar-fixed-top" id="navCol">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand">
+                        <img src="images/brand.jpg">
+                    </a>
+                </div>
+                <div class="nav navbar-nav navbar-right collapse navbar-collapse" id="myNavbar">
+                    <ul class=" nav navbar-nav navbar-right">
+                        <li>
+                            <a href="index.html"><span class="glyphicon glyphicon-home"></a>
+                        </li>
+
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="title">
+            Formular de inscriere:
+        </h2>
+        <form class="registerForm" action="">
+            <div class="form-group row">
+                <div class="col-xs-2">
+                </div>
+                <div class="col-xs-2">
+                    <label for="Nume"><i class="fa fa-user"></i> Nume:</label>
+                    <input class="form-control" id="Nume" type="text" autofocus placeholder="Ex: Popescu">
+                </div>
+                <div class="col-xs-2">
+                    <label for="prenume">Prenume:</label>
+                    <input class="form-control" id="prenume" type="text" placeholder="Ex: Ion">
+                </div>
+                <div class="col-xs-2">
+                    <label for="prenumeM">Prenume Mama:</label>
+                    <input class="form-control" id="prenumeM" type="text" placeholder="Ex: Maria">
+                </div>
+                <div class="col-xs-2">
+                    <label for="prenumeT">Prenume Tata:</label>
+                    <input class="form-control" id="prenumeT" type="text" placeholder="ex: Ion">
+                </div>
+                <div class="col-xs-2">
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-xs-2">
+                </div>
+                <div class="col-xs-2">
+                    <label for="judet">Judet:</label>
+                    <input class="form-control" id="judet" type="text" placeholder="Ex: Dolj">
+                </div>
+                <div class="col-xs-2">
+                    <label for="localtate">Localitate:</label>
+                    <input class="form-control" id="localitate" type="text" placeholder="Ex: Craiova">
+                </div>
+                <div class="col-xs-4">
+                    <label for="adresa">Adresa:</label>
+                    <input class="form-control" id="adresa" type="text" placeholder="Ex: Bl.75 B2, Sc.3, Ap15..">
+                </div>
+
+                <div class="col-xs-2">
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-xs-2">
+                </div>
+                <div class="col-xs-2">
+                    <label for="cnp">CNP:</label>
+                    <input class="form-control" id="cnp" type="text" placeholder="cod numeric personal">
+                </div>
+                <div class="col-xs-2">
+                    <label for="serie">Serie Buletin:</label>
+                    <input class="form-control" id="serie" type="text" placeholder="Ex: DZ/DX/CZ...">
+                </div>
+                <div class="col-xs-2">
+                    <label for="numar">Numar Buletin:</label>
+                    <input class="form-control" id="numar" type="text" placeholder="Number">
+                </div>
+                <div class="col-xs-2">
+                    <label for="data">Data Nasterii:</label>
+                    <input class="form-control" id="data" type="date">
+                </div>
+                <div class="col-xs-2">
+                </div>
+            </div>
+            <div class="form-group row"id="radio">
+                <div class="col-xs-2">
+                </div>
+                <div class="col-xs-4" >
+                    <label for="gender"><i class="fa fa-venus-mars"></i> Sex:</label>
+                    <br>
+                    <input type="radio" name="gender" value="male" checked><i class="fa fa-venus"></i> Feminin<br>
+                    <input type="radio" name="gender" value="female"><i class="fa fa-mars"></i> Masculin
+
+                </div>
+                <div class="col-xs-4">
+                    <label for="status">Stare Civila:</label>
+                    <br>
+                    <input type="radio" name="status" value="necasatorit" checked> Necasatorit/a<br>
+                    <input type="radio" name="status" value="casatorit"> Casatorit/a
+                </div>
+
+                <div class="col-xs-2">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-xs-2">
+                </div>
+                <div class="col-xs-2">
+                    <label for="tel"> <span class="glyphicon glyphicon-phone-alt"></span> Telefon:</label>
+                    <input class="form-control" id="tel" type="tel" placeholder="+0 xxx xxx xxx">
+                </div>
+                <div class="col-xs-2">
+                    <label for="email">Email:</label>
+                    <input class="form-control" id="email" type="email" placeholder="Ex:email@ex.com">
+                </div>
+                <div class="col-xs-2">
+                    <label for="parola"><i class="fa fa-lock"></i> Parola:</label>
+                    <input class="form-control" id="parola" type="password" placeholder="Password">
+                </div>
+                <div class="col-xs-2">
+                    <label for="cParola"><i class="fa fa-lock"></i> Confirma Parola:</label>
+                    <input class="form-control" id="cParola" type="password" placeholder="Password">
+                </div>
+                <div class="col-xs-2">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-submit" id="register">Register</button>
+        </form>
+
+    </main>
+    <footer class="text-center">
+        <a class="up-arrow" href="#" data-toggle="tooltip" title="Get me up">
+            <i class="fa fa-paper-plane-o"></i>
+        </a>
+        <br>
+        <p>Posted by: Us</p>
+        <p>Contact information:
+            <a href="mailto:someone@example.com">
+                someone@example.com</a>.</p>
+    </footer>
+</body>
+
+</html>
