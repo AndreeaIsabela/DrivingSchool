@@ -17,11 +17,9 @@ $(document).ready(function () {
         }
         else {
             getPwdLogin.attr("type", "password");
-            eyeChange.attr('class', 'glyphicon glyphicon-eye-closed ');
+            eyeChange.attr('class', 'glyphicon glyphicon-eye-close ');
             viewLoginPwd = false;
         }
-
-
     });
     //$.get("/api/instructors", populateInstructors);
 

@@ -106,20 +106,6 @@ table th {
   color: white;
 }
 
-.btn {
-  padding: 10px 20px;
-  background-color: red;
-  color: #f1f1f1;
-  border-radius: 0;
-  transition: .2s;
-  border-radius: 5px;
-}
-
-.btn:hover, .btn:focus {
-  border: 1px solid rgb(223, 58, 58);
-  background-color: rgb(223, 58, 58);
-  color: rgb(250, 254, 255);
-}
 
 footer {
   margin-top: 5%;

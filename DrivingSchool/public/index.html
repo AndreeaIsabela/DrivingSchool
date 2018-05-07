@@ -37,13 +37,16 @@
         <div class="nav navbar-nav navbar-right collapse navbar-collapse" id="myNavbar">
           <ul class=" nav navbar-nav navbar-right">
             <li>
-              <a href="#home"><span class="glyphicon glyphicon-home"></span></a>
+              <a href="#home">
+                <span class="glyphicon glyphicon-home"></span>
+              </a>
             </li>
             <li>
               <a href="#personal">Despre</a>
             </li>
             <li>
-              <a href="#location"><i class="fa fa-comments-o"></i> Contact</a>
+              <a href="#location">
+                <i class="fa fa-comments-o"></i> Contact</a>
             </li>
 
           </ul>
@@ -54,59 +57,46 @@
 
 
   <section id="home" class="container-fluid">
-
     <div class="schoolImg" id="img1">
-
-
       <div class="index-form " autocomplete="on">
-
-        <div class="container">
-
-          <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
-              <form>
-                <div class="form-group">
-                  <div class="inner-addon left-addon">
-
-                    <input class="form-control" type="text" name="name" placeholder="Username" pattern="(.*)" required/>
-                    <a id="userClick">
-                      <i class="glyphicon glyphicon-user"></i>
-                    </a>
-                  </div>
+        <div class="row">
+          <!-- <div class="col-md-4"></div>-->
+          <div class="col-md-6 col-md-offset-3">
+            <form>
+              <div class="form-group">
+                <div class="inner-addon left-addon">
+                  <input class="form-control" type="text" name="name" placeholder="Username" pattern="(.*)" required/>
+                  <a id="userClick">
+                    <i class="glyphicon glyphicon-user"></i>
+                  </a>
                 </div>
-                <div class="form-group">
-
-
-                  <div class="inner-addon left ">
-                    <input class="form-control" id="viewPwdLogin" type="password" name="pass" placeholder="Password" required/>
-                    <a>
-                      <i id="eyeClick" class="glyphicon glyphicon-eye-close"></i>
-                    </a>
-                    <a id="lockClick">
-                      <i class="glyphicon glyphicon-lock"></i>
-                    </a>
-                  </div>
+              </div>
+              <div class="form-group">
+                <div class="inner-addon left ">
+                  <input class="form-control" id="viewPwdLogin" type="password" name="pass" placeholder="Password" required/>
+                  <a>
+                    <i id="eyeClick" class="glyphicon glyphicon-eye-close"></i>
+                  </a>
+                  <a id="lockClick">
+                    <i class="glyphicon glyphicon-lock"></i>
+                  </a>
                 </div>
-                
-                <div class="btn-group btn-group-justified">
+              </div>
 
-                  <div class="btn-group">
-                    <button class="btn" id="submitBtn" type="submit"><span class="glyphicon glyphicon-log-in"></span> Log In</button>
-
-                  </div>
-                  <div class="btn-group">
-                    <a href="register.html"class="btn" id="registerBtn" type="button"><span class="glyphicon glyphicon-paste"></span> Sign Up</a>
-
-                  </div>
-                </div>
-                <div class=" text-center">
-                    <a href="forgotPass.html" class="forgotPass">Forgot password?</a>
-                  </div>
-              </form>
-            </div>
-            <div class="col-md-4"></div>
+              <div class="text-center">
+                <button class="btn btn-info" type="submit">
+                  <span class="glyphicon glyphicon-log-in"></span>
+                  Log In
+                </button>
+                <a href="register.html" class="btn btn-success" type="button">
+                  <span class="glyphicon glyphicon-paste"></span>
+                  Sign Up
+                </a>
+                <a href="forgotPass.html" class="btn btn-danger">Forgot password?</a>
+              </div>
+            </form>
           </div>
+          <div class="col-md-4"></div>
         </div>
       </div>
 
@@ -120,9 +110,15 @@
         <table class="table  fullOpacity">
           <thead>
             <tr>
-              <th><i class="fa fa-group"></i> Profesori</th>
-              <th><i class="fa fa-truck"></i> <i class="fa fa-automobile"></i><i class="fa fa-motorcycle"></i> Categorie</th>
-              <th><i class="fa fa-card"></i><span class="glyphicon glyphicon-piggy-bank"></span> Preturi</th>
+              <th>
+                <i class="fa fa-group"></i> Profesori</th>
+              <th>
+                <i class="fa fa-truck"></i>
+                <i class="fa fa-automobile"></i>
+                <i class="fa fa-motorcycle"></i> Categorie</th>
+              <th>
+                <i class="fa fa-card"></i>
+                <span class="glyphicon glyphicon-piggy-bank"></span> Preturi</th>
             </tr>
           </thead>
           <tbody>
