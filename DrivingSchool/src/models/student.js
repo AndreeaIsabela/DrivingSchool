@@ -20,7 +20,7 @@ var StudentSchema = new Schema(
                 message: '{VALUE} is not a valid CNP!'
             },
             required: [true, 'User CNP required'],
-            unique:true
+            unique: true
         },
         ser: { type: String, required: true, max: 2 },
         icNo: { type: String, required: true, max: 5 },
@@ -38,19 +38,20 @@ var StudentSchema = new Schema(
             required: [true, 'User phone number required']
         },
         email: {
-            type:String,
-            validate:{
-            validator: function (email) {
-                var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-                return emailReg.test(email);
+            type: String,
+            validate: {
+                validator: function (email) {
+                    var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                    return emailReg.test(email);
+                },
+                message: 'not a valid email'
             },
-            message: 'not a valid email'   
+            required: [true, 'User email required']
         },
-        required: [true, 'User email required']
-     } ,
-     passwordHash:{type:String,required:true},
-     instructor:{type: Schema.ObjectId, ref: 'Instructor'},
-  });
+        passwordHash: { type: String, required: true },
+        instructor: { type: Schema.ObjectId, ref: 'Instructor' },
+        archived: { type: Boolean, default: false }
+    });
 
 // Virtual for student's full name
 StudentSchema
