@@ -5,7 +5,7 @@ class StudentController {
     }
 
     getStudents(done) {
-        this.student.find({}).exec(done);
+        this.student.find({ archived: false }).exec(done);
     }
     getStudent(id, done) {
         this.student.findById(id, done);
