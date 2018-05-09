@@ -3,8 +3,12 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/testdb');
+
+var mongoDB = 'mongodb://isabela:Pulifrici4@ds111410.mlab.com:11410/movie_list';
+mongoose.connect(mongoDB);
+mongoose.Promise = global.Promise;
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 mongoose.set('debug',true);
 
 var indexRouter = require('./src/routes/index');
