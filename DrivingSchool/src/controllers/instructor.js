@@ -13,9 +13,9 @@ class InstructorController {
         newInstructor.save(done);
       }
     
-      deleteInstructor(cnp, done) {
+      deleteInstructor(id, done) {
        
-        this.instructors.find({cnp: cnp}).remove()
+        this.instructors.find({id: id}).remove()
         .exec(done);
       }
 

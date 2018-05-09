@@ -27,14 +27,6 @@ adminRoutes.post('/', (req, res) => {
   });
 });
 
-adminRoutes.delete('/:cnp', (req, res) => {
-  adminControllerIns.deleteAdmin(req.params.cnp, (err, result) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).end();
-    }
-    res.status(204).end();
-  });
-});
+
 
 module.exports = adminRoutes;
