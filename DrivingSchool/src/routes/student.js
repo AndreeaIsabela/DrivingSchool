@@ -5,7 +5,7 @@ const StudentController = require('../controllers/student.js');
 
 var studentController = new StudentController(studentModel);
 
-router.get('/students', function(req, res) {
+router.get('/', function(req, res) {
     studentController.getStudents((err, docs) => {
         if(err) {
             console.log(err);
@@ -15,7 +15,7 @@ router.get('/students', function(req, res) {
     });
 });
 
-router.get('/students/archive', function(req, res) {
+router.get('/archive', function(req, res) {
     studentController.getArchivedStudents((err, docs) => {
         if(err) {
             console.log(err);
@@ -25,7 +25,7 @@ router.get('/students/archive', function(req, res) {
     });
 });
 
-router.get('/students/:id', function(req, res) {
+router.get('/:id', function(req, res) {
     studentController.getStudent((err, res) => {
         if(err) {
             console.log(err);
@@ -38,7 +38,7 @@ router.get('/students/:id', function(req, res) {
     });
 });
 
-router.post('/students/:id/archive', function(req, res) {
+router.post('/:id/archive', function(req, res) {
     studentController.archiveStudent((err, res) => {
         if(err) {
             console.log(err);
@@ -51,7 +51,7 @@ router.post('/students/:id/archive', function(req, res) {
     });
 });
 
-router.post('/students/:id/unarchive', function(req, res) {
+router.post('/:id/unarchive', function(req, res) {
     studentController.unarchiveStudent((err, res) => {
         if(err) {
             console.log(err);
@@ -64,7 +64,7 @@ router.post('/students/:id/unarchive', function(req, res) {
     });
 });
 
-router.put('/students/:id', function(req, res) {
+router.put('/:id', function(req, res) {
     studentController.updateStudent((err, res) => {
         if(err) {
             console.log(err);
@@ -77,7 +77,7 @@ router.put('/students/:id', function(req, res) {
     });
 });
 
-router.delete('/students/:id', function(req, res) {
+router.delete('/:id', function(req, res) {
     studentController.deleteStudent((err, doc) => {
         if(err) {
             console.log(err);
