@@ -2,9 +2,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mongoose = require('mongoose');
 
-
-var mongoDB = 'mongodb://isabela:Pulifrici4@ds111410.mlab.com:11410/movie_list';
+var mongoDB = 'mongodb://root:root@ds016118.mlab.com:16118/drivingschool';
 mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
