@@ -1,5 +1,3 @@
-const StudentModel = require('../models/student');
-const DrivingLessonModel = require('../models/drivingLesson');
 
 class StudentController {
     constructor(studentModel) {
@@ -125,4 +123,4 @@ class StudentController {
       }
 }
 
-module.exports = new StudentController();
+module.exports = StudentController;

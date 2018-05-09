@@ -37,4 +37,4 @@ class AdminController {
    
 }
 
-module.exports = new AdminController();
+module.exports =AdminController;

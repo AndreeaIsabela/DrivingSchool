@@ -1,6 +1,6 @@
 const Router = require('express').Router;
 const AdminController = require('../controllers/admin');
-let adminModel = require('../model/admin');
+let adminModel = require('../models/admin');
 var adminRoutes = new Router();
 
 // injecting the admin model in the controller instance

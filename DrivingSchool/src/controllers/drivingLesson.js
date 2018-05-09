@@ -37,4 +37,4 @@ class DrivingLessonController {
    
 }
 
-module.exports = new DrivingLessonController();
+module.exports = DrivingLessonController;

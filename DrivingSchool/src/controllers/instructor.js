@@ -63,4 +63,4 @@ class InstructorController {
     }*/
 }
 
-module.exports = new InstructorController();
+module.exports = InstructorController;
