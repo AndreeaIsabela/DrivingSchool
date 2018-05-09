@@ -7,6 +7,17 @@ var AdminSchema = new Schema(
     first_name: {type: String, required: true, max: 100},
     family_name: {type: String, required: true, max: 100},
     date_of_birth: {type: Date},
+    cnp: {
+      type: String,
+      validate: {
+          validator: function (v) {
+              return /\d{10}/.test(v);
+          },
+          message: '{VALUE} is not a valid CNP!'
+      },
+      required: [true, 'User CNP required'],
+      unique:true
+  },
    
   }
 );

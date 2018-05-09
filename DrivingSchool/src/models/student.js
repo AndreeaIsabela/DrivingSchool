@@ -49,7 +49,7 @@ var StudentSchema = new Schema(
         required: [true, 'User email required']
      } ,
      passwordHash:{type:String,required:true},
-     instructor:{instructor:{type: Schema.ObjectId, ref: 'Instructor'},}
+     instructor:{type: Schema.ObjectId, ref: 'Instructor'},
   });
 
 // Virtual for student's full name

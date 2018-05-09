@@ -1,5 +1,27 @@
 class InstructorController {
-    getInstructors() {
+
+    constructor(instructorModel) {
+        this.instructors = instructorModel;
+      }
+
+      getInstructors(done) {
+        this.instructors.find({}, done);
+      }
+
+      addInstructor(instructor, done) {
+        let newInstructor = new this.instructors(instructor);
+        newInstructor.save(done);
+      }
+    
+      deleteInstructor(cnp, done) {
+       
+        this.instructors.find({cnp: cnp}).remove()
+        .exec(done);
+      }
+
+
+
+   /* getInstructors() {
         return [
             {
                 email: 'ion@gmail.com',
@@ -38,7 +60,7 @@ class InstructorController {
                 phone: '0755110011'
             }
         ];
-    }
+    }*/
 }
 
 module.exports = new InstructorController();

@@ -1,6 +1,6 @@
 body {
   position: relative;
-  background-color: black;
+  background-color: white;
 }
 
 #home {
@@ -24,12 +24,12 @@ body {
 }
 
 #home, #personal, #location, #contact {
-  color: white;
-  background-color: black;
+  color: black;
+  background-color: rgba(187, 187, 187, 0.877);
 }
 
 .nav .open>a, .nav .open>a:hover, .nav .open>a:focus {
-  background-color: red;
+  background-color:  rgba(77, 133, 185, 0.911);
   border-bottom: 1px gray solid;
   color: white;
 }
@@ -43,9 +43,9 @@ body {
 }
 
 .navbar-inverse:hover .navbar-nav>li>a:hover, .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
-  color: red;
+  color:  rgba(77, 133, 185, 0.911);
   background-color: black;
-  border-bottom: 2px solid red;
+  border-bottom: 2px solid  rgba(77, 133, 185, 0.911);
 }
 
 .schoolImg {
@@ -84,7 +84,7 @@ table td, table th {
 }
 
 table tr:nth-child(even) {
-  background-color: red;
+  background-color: rgba(77, 133, 185, 0.911);
 }
 
 table tr:nth-child(odd) {
@@ -144,14 +144,14 @@ footer a:hover {
 }
 
 #registerBtn {
-  border: 1px solid red;
-  background-color: red;
+  border: 1px solid  rgba(77, 133, 185, 0.911);
+  background-color:  rgba(77, 133, 185, 0.911);
   color: azure;
   border-radius: 5px;
 }
 
 #registerBtn:hover {
-  background-color: rgb(179, 14, 14);
+  background-color:  rgba(49, 104, 155, 0.911);
 }
 
 #submitBtn {
@@ -234,10 +234,11 @@ i {
 
 #register {
   margin-top: 10px;
-  background-color: blue;
+  background-color:  rgba(77, 133, 185, 0.911);
   padding-right: 15%;
   padding-left: 15%;
   align-self: center;
+  color:white;
 }
 
 #passForgot {
@@ -252,3 +253,4 @@ label{
 #radio{
   color: white;
 }
+

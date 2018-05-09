@@ -1,5 +1,15 @@
+const StudentModel = require('../models/student');
+const DrivingLessonModel = require('../models/drivingLesson');
+
 class StudentController {
-    getStudents() {
+    constructor(studentModel) {
+        this.students = studentModel;
+      }
+
+      getStudents(done) {
+        this.students.find({}, done);
+      }
+   /* getStudents (){
         return [
             {
                 lastName: 'Georgescu',
@@ -74,10 +84,11 @@ class StudentController {
                 password: 'password'
             }
         ];
+    }*/
+    getArchivedStudents(done) {
+        return this.getStudents(done);
     }
-    getArchivedStudents() {
-        return this.getStudents();
-    }
+    /*
     getScheduleForStudent(id) {
         return [
             {
@@ -101,7 +112,17 @@ class StudentController {
                 location: 'Restaurant Minerva'
             }
         ];
-    }
+    }*/
+    addStudent(student, done) {
+        let newStudent = new this.students(student);
+        newStudent.save(done);
+      }
+    
+      deleteStudent(cnp, done) {
+       
+        this.students.find({cnp: cnp}).remove()
+        .exec(done);
+      }
 }
 
 module.exports = new StudentController();
