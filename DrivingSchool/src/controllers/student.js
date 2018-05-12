@@ -1,3 +1,4 @@
+const studentState = require('../models/studentState');
 
 class StudentController {
     constructor(studentModel) {
@@ -5,23 +6,30 @@ class StudentController {
     }
 
     getStudents(done) {
-        this.student.find({ archived: false }).exec(done);
+        this.student.find({ state: studentState.registered }).exec(done);
     }
     getStudent(id, done) {
         this.student.findById(id, done);
     }
     getArchivedStudents(done) {
-        this.student.find({ archived: true }).exec(done);
+        this.student.find({ state: studentState.archived }).exec(done);
+    }
+    getStudentRequests(done) {
+        this.student.find({ state: studentState.unregistered }).exec(done);
     }
     archiveStudent(id, done) {
         this.student.findOneAndUpdate({ _id: id },
-            { $set: { archived: true } },
+            { $set: { state: studentState.archived } },
             { new: true }, done);
     }
     unarchiveStudent(id, done) {
         this.student.findOneAndUpdate({ _id: id }, 
-            { $set: { archived: false } }, 
+            { $set: { state: studentState.registered } }, 
             { new: true }, done);
+    }
+    registerStudent(id, done) {
+        this.student.findOneAndUpdate({ _id: id }, 
+            { $set: { state: studentState.registered } }, done);
     }
     updateStudent(id, student, done) {
         this.student.findOneAndUpdate({ _id: id }, student, { new: true }, done);

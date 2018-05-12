@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+const studentState = require('studentState')
 
 var Schema = mongoose.Schema;
 
@@ -50,7 +51,7 @@ var StudentSchema = new Schema(
         },
         passwordHash: { type: String, required: true },
         instructor: { type: Schema.ObjectId, ref: 'Instructor' },
-        archived: { type: Boolean, default: false }
+        state: { type: Number, default: studentState.unregistered }
     });
 
 // Virtual for student's full name
