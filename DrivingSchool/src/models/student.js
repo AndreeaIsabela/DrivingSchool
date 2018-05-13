@@ -15,7 +15,7 @@ var StudentSchema = new Schema(
             type: String,
             validate: {
                 validator: function (v) {
-                    return /\d{10}/.test(v);
+                    return /\d{13}/.test(v);
                 },
                 message: '{VALUE} is not a valid CNP!'
             },
@@ -25,8 +25,8 @@ var StudentSchema = new Schema(
         ser: { type: String, required: true, max: 2 },
         icNo: { type: String, required: true, max: 5 },
         date_of_birth: { type: Date },
-        gender: { type: String, enum: ["Male", "Female"] },
-        civilState: { type: String, enum: ["Married", "Notmarried"] },
+        gender: { type: Boolean, enum: ["Male", "Female"] },
+        civilState: { type: Boolean, enum: ["Married", "Notmarried"] },
         phone: {
             type: String,
             validate: {
