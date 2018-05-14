@@ -75,7 +75,7 @@ let app = new Vue({
     methods: {
         onRegisterRequests: function () {
             this.$http
-                .get('/api/registerrequests')
+                .get('/student/requests')
                 .then(response => {
                     this.enableView(this.viewIndex.registerRequest);
                     this.clearList();
