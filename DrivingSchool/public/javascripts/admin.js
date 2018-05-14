@@ -93,7 +93,7 @@ let app = new Vue({
         },
         onInstructors: function () {
             this.$http
-                .get('/api/instructors')
+                .get('/instructor')
                 .then(response => {
                     this.enableView(this.viewIndex.instructor);
                     this.clearList();
@@ -113,7 +113,7 @@ let app = new Vue({
         },
         onStudents: function () {
             this.$http
-                .get('/api/students')
+                .get('/student')
                 .then(response => {
                     this.enableView(this.viewIndex.student);
                     this.clearList();
@@ -133,7 +133,7 @@ let app = new Vue({
         },
         onAdmins: function () {
             this.$http
-                .get('/api/admins')
+                .get('/admin')
                 .then(response => {
                     this.enableView(this.viewIndex.admin);
                     this.clearList();
@@ -151,7 +151,7 @@ let app = new Vue({
         },
         onStudentArchive: function () {
             this.$http
-                .get('/api/archive')
+                .get('/student/archive')
                 .then(response => {
                     this.enableView(this.viewIndex.archive);
                     this.clearList();
