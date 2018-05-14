@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-const studentState = require('studentState')
+var studentState = require('./studentState')
 
 var Schema = mongoose.Schema;
 
