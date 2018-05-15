@@ -37,6 +37,11 @@ class StudentController {
     deleteStudent(id, done) {
         this.student.findByIdAndRemove(id, done);
     }
+    createRegisterRequest(body, done) {
+        body.state = studentState.unregistered;
+        let request = new this.student(body);
+        request.save(done);
+    }
 }
 
 module.exports = StudentController;

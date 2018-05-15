@@ -1,15 +1,18 @@
 var mongoose = require('mongoose');
 var studentState = require('./studentState')
 
+var mongoDB = 'mongodb://root:root@ds016118.mlab.com:16118/drivingschool';
+mongoose.connect(mongoDB);
+
 var Schema = mongoose.Schema;
 
 var StudentSchema = new Schema(
     {
         firstName: { type: String, required: true, max: 100 },
         familyName: { type: String, required: true, max: 100 },
-        motherFName: { type: String, required: true, max: 100 },
-        fatherFName: { type: String, required: true, max: 100 },
-        county: { type: String, required: true, max: 100 },
+        motherName: { type: String, required: true, max: 100 },
+        fatherName: { type: String, required: true, max: 100 },
+        country: { type: String, required: true, max: 100 },
         town: { type: String, required: true, max: 100 },
         address: { type: String, required: true, max: 200 },
         cnp: {
@@ -23,11 +26,11 @@ var StudentSchema = new Schema(
             required: [true, 'User CNP required'],
             unique: true
         },
-        ser: { type: String, required: true, max: 2 },
-        icNo: { type: String, required: true, max: 5 },
-        date_of_birth: { type: Date },
-        gender: { type: Boolean, enum: ["Male", "Female"] },
-        civilState: { type: Boolean, enum: ["Married", "Notmarried"] },
+        serialNumber: { type: String, required: true, max: 2 },
+        idCardNumber: { type: String, required: true, max: 5 },
+        birthDate: { type: Date },
+        isFemale: { type: Boolean, required: true },
+        isMarried: { type: Boolean, required: true },
         phone: {
             type: String,
             validate: {
@@ -49,8 +52,7 @@ var StudentSchema = new Schema(
             },
             required: [true, 'User email required']
         },
-        passwordHash: { type: String, required: true },
-        instructor: { type: Schema.ObjectId, ref: 'Instructor' },
+        instructorId: { type: Schema.ObjectId, ref: 'Instructor' },
         state: { type: Number, default: studentState.unregistered }
     });
 

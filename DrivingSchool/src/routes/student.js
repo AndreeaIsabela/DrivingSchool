@@ -25,6 +25,17 @@ router.get('/archive', function(req, res) {
     });
 });
 
+router.post('/register', function(req, res) {
+    studentController.createRegisterRequest(req.body, (err, registerRequest) => {
+        if(err) {
+            console.log(err);
+            return res.status(400).end();
+        }
+
+        return res.status(201).json(registerRequest);
+    });
+});
+
 router.get('/requests', function(req, res) {
     studentController.getStudentRequests((err, docs) => {
         if(err) {
@@ -36,7 +47,7 @@ router.get('/requests', function(req, res) {
 });
 
 router.get('/:id', function(req, res) {
-    studentController.getStudent((err, res) => {
+    studentController.getStudent(req.id, (err, student) => {
         if(err) {
             console.log(err);
             res.status(500).end();
@@ -44,12 +55,12 @@ router.get('/:id', function(req, res) {
         if(!res) {
             res.status(404).end();
         }
-        res.json(res);
+        res.json(student);
     });
 });
 
 router.post('/:id/archive', function(req, res) {
-    studentController.archiveStudent((err, res) => {
+    studentController.archiveStudent(req.id, (err, student) => {
         if(err) {
             console.log(err);
             res.status(500).end();
@@ -57,12 +68,12 @@ router.post('/:id/archive', function(req, res) {
         if(!res) {
             res.status(404).end();
         }
-        res.json(res);
+        res.json(student);
     });
 });
 
 router.post('/:id/unarchive', function(req, res) {
-    studentController.unarchiveStudent((err, res) => {
+    studentController.unarchiveStudent(req.id, (err, student) => {
         if(err) {
             console.log(err);
             res.status(500).end();
@@ -70,12 +81,13 @@ router.post('/:id/unarchive', function(req, res) {
         if(!res) {
             res.status(404).end();
         }
-        res.json(res);
+        res.json(student);
     });
 });
 
 router.post('/:id/accept', function(req, res) {
-    studentController.registerStudent((err, res) => {
+    studentController.registerStudent(req.id, (err, student) => {
+        console.log("hello");
         if(err) {
             console.log(err);
             res.status(500).end();
@@ -83,12 +95,12 @@ router.post('/:id/accept', function(req, res) {
         if(!res) {
             res.status(404).end();
         }
-        res.json(res);
+        res.json(student);
     });
 });
 
 router.put('/:id', function(req, res) {
-    studentController.updateStudent((err, res) => {
+    studentController.updateStudent(req.id, (err, student) => {
         if(err) {
             console.log(err);
             res.status(500).end();
@@ -96,20 +108,20 @@ router.put('/:id', function(req, res) {
         if(!res) {
             res.status(404).end();
         }
-        res.json(res);
+        res.json(student);
     });
 });
 
 router.delete('/:id', function(req, res) {
-    studentController.deleteStudent((err, doc) => {
+    studentController.deleteStudent(req.id, (err, student) => {
         if(err) {
             console.log(err);
             res.status(500).end();
         }
-        if(!doc) {
+        if(!student) {
             res.status(404).end();
         }
-        res.send(204).end();
+        res.status(204).send(student);
     });
 });
 
