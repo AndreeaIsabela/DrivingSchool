@@ -47,7 +47,7 @@ router.get('/requests', function(req, res) {
 });
 
 router.get('/:id', function(req, res) {
-    studentController.getStudent(req.id, (err, student) => {
+    studentController.getStudent(req.params.id, (err, student) => {
         if(err) {
             console.log(err);
             res.status(500).end();
@@ -60,7 +60,7 @@ router.get('/:id', function(req, res) {
 });
 
 router.post('/:id/archive', function(req, res) {
-    studentController.archiveStudent(req.id, (err, student) => {
+    studentController.archiveStudent(req.params.id, (err, student) => {
         if(err) {
             console.log(err);
             res.status(500).end();
@@ -73,7 +73,7 @@ router.post('/:id/archive', function(req, res) {
 });
 
 router.post('/:id/unarchive', function(req, res) {
-    studentController.unarchiveStudent(req.id, (err, student) => {
+    studentController.unarchiveStudent(req.params.id, (err, student) => {
         if(err) {
             console.log(err);
             res.status(500).end();
@@ -86,7 +86,7 @@ router.post('/:id/unarchive', function(req, res) {
 });
 
 router.post('/:id/accept', function(req, res) {
-    studentController.registerStudent(req.id, (err, student) => {
+    studentController.registerStudent(req.params.id, (err, student) => {
         console.log("hello");
         if(err) {
             console.log(err);
@@ -100,7 +100,7 @@ router.post('/:id/accept', function(req, res) {
 });
 
 router.put('/:id', function(req, res) {
-    studentController.updateStudent(req.id, (err, student) => {
+    studentController.updateStudent(req.params.id, (err, student) => {
         if(err) {
             console.log(err);
             res.status(500).end();
@@ -113,7 +113,7 @@ router.put('/:id', function(req, res) {
 });
 
 router.delete('/:id', function(req, res) {
-    studentController.deleteStudent(req.id, (err, student) => {
+    studentController.deleteStudent(req.params.id, (err, student) => {
         if(err) {
             console.log(err);
             res.status(500).end();
