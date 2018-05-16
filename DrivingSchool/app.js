@@ -9,14 +9,15 @@ mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-mongoose.set('debug',true);
+mongoose.set('debug', true);
 
 var indexRouter = require('./src/routes/index');
-var apiRouter   = require('./src/routes/api');
+var apiRouter = require('./src/routes/api');
 
-var studentRuter=require('./src/routes/student');
-var instructorRuter=require('./src/routes/instructor');
-var adminRuter=require('./src/routes/admin');
+var studentRuter = require('./src/routes/student');
+var instructorRuter = require('./src/routes/instructor');
+var adminRuter = require('./src/routes/admin');
+var userRouter = require('./src/routes/user');
 
 var app = express();
 
@@ -30,8 +31,8 @@ app.use(express.static(path.join(__dirname, 'node_modules')));
 
 app.use('/', indexRouter);
 app.use('/api', apiRouter);
-app.use('/student',studentRuter);
-app.use('/instructor',instructorRuter);
-app.use('/admin',adminRuter);
+app.use('/student', studentRuter);
+app.use('/instructor', instructorRuter);
+app.use('/admin', adminRuter);
 
 module.exports = app;
