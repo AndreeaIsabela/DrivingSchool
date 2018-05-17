@@ -125,7 +125,7 @@ let app = new Vue({
                     this.fullData = response.data;
 
                     for (let student of response.data) {
-                        this.ids.push(student.id);
+                        this.ids.push(student._id);
 
                         this.data.push([
                             student.familyName + ' ' + student.firstName,
@@ -293,7 +293,19 @@ let app = new Vue({
         },
         onArchive: function (index) {
             if (confirm('Sunteti sigur ca doriti sa arhivati studentul ' + this.data[index][0] + '?')) {
-                this.data.splice(index, 1);
+
+                let url = "/student/" + this.ids[index] + "/archive";
+                this.$http.post(url, {})
+                    .then(response => {
+                        console.log("success");
+
+                        this.ids.splice(index), 1;
+                        this.data.splice(index, 1);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
+
             }
         },
         onRestore: function (index) {
