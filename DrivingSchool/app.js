@@ -34,5 +34,6 @@ app.use('/api', apiRouter);
 app.use('/student', studentRuter);
 app.use('/instructor', instructorRuter);
 app.use('/admin', adminRuter);
+app.use('/user', userRouter);
 
 module.exports = app;

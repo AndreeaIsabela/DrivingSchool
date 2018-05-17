@@ -39,7 +39,6 @@ let app = new Vue({
                 canArchive: true,
                 descriptors: [
                     { text: 'CNP' },
-                    { text: 'Categorie' },
                     { text: 'Numar telefon' }
                 ]
             },
@@ -66,6 +65,7 @@ let app = new Vue({
         viewTitle: 'Inscrieri',
         data: [],
         fullData: [],
+        ids: [],
         formEnabled: false,
         formData: {}
     },
@@ -82,8 +82,10 @@ let app = new Vue({
 
                     this.fullData = response.data;
                     for (let request of response.data) {
+                        this.ids.push(request._id);
+
                         this.data.push([
-                            request.lastName + ' ' + request.firstName,
+                            request.familyName + ' ' + request.firstName,
                             request.phone
                         ]);
                     }
@@ -100,6 +102,8 @@ let app = new Vue({
 
                     this.fullData = response.data;
                     for (let instructor of response.data) {
+                        this.ids.push(instructor.id);
+
                         this.data.push([
                             instructor.lastName + ' ' + instructor.firstName,
                             instructor.authorization,
@@ -119,11 +123,13 @@ let app = new Vue({
                     this.clearList();
 
                     this.fullData = response.data;
+
                     for (let student of response.data) {
+                        this.ids.push(student.id);
+
                         this.data.push([
-                            student.lastName + ' ' + student.firstName,
+                            student.familyName + ' ' + student.firstName,
                             student.cnp,
-                            student.category,
                             student.phone
                         ]);
                     };
@@ -140,7 +146,7 @@ let app = new Vue({
 
                     this.fullData = response.data;
                     for (let adminData of response.data) {
-
+                        this.ids.push(student.id);
                         this.data.push([
                             adminData.name
                         ]);
@@ -158,6 +164,7 @@ let app = new Vue({
 
                     this.fullData = response.data;
                     for (let student of response.data) {
+                        this.ids.push(student.id);
                         this.data.push([
                             student.lastName + ' ' + student.firstName,
                             student.cnp,
@@ -177,47 +184,111 @@ let app = new Vue({
             };
 
             this.$http
-                .get('/api/students')
+                .get('/student')
                 .then(response => {
                     for (let student of response.data) {
-                        this.formData.students.push(student.lastName + ' ' + student.firstName);
+                        this.formData.students.push(student.familyName + ' ' + student.firstName);
                     };
                 }).catch(function (err) {
                     console.log(err.response);
                 });
         },
-        onLogout: function() {
+        onLogout: function () {
 
         },
-        onGenerateFolder: function() {
+        onGenerateFolder: function () {
             console.log(this.formData);
         },
         onCreate: function () {
             this.formEnabled = true;
         },
         onAccept: function (index) {
-            this.data.splice(index, 1);
-            alert(`Student ${this.data[index][0]} has been added`);
+            console.log(this.ids[index]);
+            let url = "/student/" + this.ids[index] + "/accept";
+            console.log(url);
+
+            this.$http.post(url, {})
+                .then((response) => {
+
+                    alert(`Student ${this.data[index][0]} has been added`);
+
+                    this.ids.splice(index, 1);
+                    this.data.splice(index, 1);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
         },
         onSubmit: function () {
             console.log(this.formData);
+
+            let httpLink = "";
+            if (this.currentView == this.viewIndex.student) {
+                httpLink = "/student/" + this.fullData[index].id;
+            } else if (this.currentView == this.viewIndex.instructor) {
+                httpLink = "/instructor/" + this.fullData[index].id;
+            }
+
+            this.$http
+                .post(httpLink, {
+                    'Content-Type': 'Application/JSON',
+                    'body': JSON.stringify(this.formData)
+                })
+                .then(response => {
+                    this.formEnabled = true;
+                    this.formData = {};
+
+                    let propertyNames = Object.getOwnPropertyNames(response.data);
+                    for (let propName of propertyNames) {
+                        this.formData[propName] = response.data[propName];
+                    }
+                }).catch(function (err) {
+                    console.log(err.response);
+                });
         },
         onEdit: function (index) {
-            this.formEnabled = true;
-
-            this.formData = {};
-            let propertyNames = Object.getOwnPropertyNames(this.fullData[index]);
-            for (let propName of propertyNames) {
-                this.formData[propName] = this.fullData[index][propName];
+            let httpLink = "";
+            if (this.currentView == this.viewIndex.student) {
+                httpLink = "/student/" + this.fullData[index].id;
+            } else if (this.currentView == this.viewIndex.instructor) {
+                httpLink = "/instructor/" + this.fullData[index].id;
             }
 
-            if(this.formData.password) {
-                this.formData.confirmPassword = this.formData.password;
-            }
+            this.$http
+                .get(httpLink)
+                .then(response => {
+
+                    this.formEnabled = true;
+                    this.formData = {};
+                    let propertyNames = Object.getOwnPropertyNames(response.data);
+                    for (let propName of propertyNames) {
+                        this.formData[propName] = response.data[propName];
+                    }
+                }).catch(function (err) {
+                    console.log(err.response);
+                });
         },
         onDelete: function (index) {
+            let url = "/";
+            if (this.currentView == this.viewIndex.student || this.currentView == this.viewIndex.registerRequest) {
+                url += "student";
+            }
+            else if (this.currentView == this.viewIndex.instructor) {
+                url += "instructor";
+            }
+            url += "/" + this.ids[index];
+
             if (confirm('Sunteti sigur ca doriti sa stergeti ' + this.data[index][0] + '?')) {
                 this.data.splice(index, 1);
+                console.log(url);
+                this.$http.delete(url, {})
+                    .then((response) => {
+                        this.ids.splice(index, 1);
+                        this.data.splice(index, 1);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
             }
         },
         onArchive: function (index) {
@@ -236,6 +307,7 @@ let app = new Vue({
         clearList() {
             this.selectedRowIndex = null;
             this.data.splice(0, this.data.length);
+            this.ids.splice(0, this.data.length);
         }
     }
 });

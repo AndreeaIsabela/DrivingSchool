@@ -18,12 +18,12 @@ class StudentController {
         this.student.find({ state: studentState.unregistered }).exec(done);
     }
     archiveStudent(id, done) {
-        this.student.findOneAndUpdate({ _id: id },
+        this.student.findOneAndUpdate({ id: id },
             { $set: { state: studentState.archived } },
             { new: true }, done);
     }
     unarchiveStudent(id, done) {
-        this.student.findOneAndUpdate({ _id: id }, 
+        this.student.findOneAndUpdate({ id: id }, 
             { $set: { state: studentState.registered } }, 
             { new: true }, done);
     }
@@ -32,7 +32,7 @@ class StudentController {
             { $set: { state: studentState.registered } }, done);
     }
     updateStudent(id, student, done) {
-        this.student.findOneAndUpdate({ _id: id }, student, { new: true }, done);
+        this.student.findOneAndUpdate({ id: id }, student, { new: true }, done);
     }
     deleteStudent(id, done) {
         this.student.findByIdAndRemove(id, done);

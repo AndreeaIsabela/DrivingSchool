@@ -87,7 +87,7 @@ router.post('/:id/unarchive', function(req, res) {
 
 router.post('/:id/accept', function(req, res) {
     studentController.registerStudent(req.params.id, (err, student) => {
-        console.log("hello");
+        console.log(req.params.id);
         if(err) {
             console.log(err);
             res.status(500).end();
@@ -95,6 +95,7 @@ router.post('/:id/accept', function(req, res) {
         if(!res) {
             res.status(404).end();
         }
+        console.log(student);
         res.json(student);
     });
 });
