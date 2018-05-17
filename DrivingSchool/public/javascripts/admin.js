@@ -53,7 +53,6 @@ let app = new Vue({
                 canRestore: true,
                 descriptors: [
                     { text: 'CNP' },
-                    { text: 'Categorie' },
                     { text: 'Numar telefon' }
                 ]
             },
@@ -164,10 +163,9 @@ let app = new Vue({
 
                     this.fullData = response.data;
                     for (let student of response.data) {
-                        this.ids.push(student.id);
+                        this.ids.push(student._id);
                         this.data.push([
-                            student.lastName + ' ' + student.firstName,
-                            student.cnp,
+                            student.familyName + ' ' + student.firstName,
                             student.category,
                             student.phone
                         ]);
@@ -270,7 +268,10 @@ let app = new Vue({
         },
         onDelete: function (index) {
             let url = "/";
-            if (this.currentView == this.viewIndex.student || this.currentView == this.viewIndex.registerRequest) {
+            if (this.currentView == this.viewIndex.student ||
+                this.currentView == this.viewIndex.registerRequest ||
+                this.currentView == this.viewIndex.archive) {
+
                 url += "student";
             }
             else if (this.currentView == this.viewIndex.instructor) {
@@ -297,19 +298,25 @@ let app = new Vue({
                 let url = "/student/" + this.ids[index] + "/archive";
                 this.$http.post(url, {})
                     .then(response => {
-                        console.log("success");
-
                         this.ids.splice(index), 1;
                         this.data.splice(index, 1);
                     })
                     .catch(err => {
                         console.log(err);
                     });
-
             }
         },
         onRestore: function (index) {
-            this.data.splice(index, 1);
+            let url = "/student/" + this.ids[index] + "/unarchive";
+            console.log(url);
+            this.$http.post(url, {})
+                .then(response => {
+                    this.ids.splice(index), 1;
+                    this.data.splice(index, 1);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
         },
         enableView: function (viewIndex) {
             this.formEnabled = false;
