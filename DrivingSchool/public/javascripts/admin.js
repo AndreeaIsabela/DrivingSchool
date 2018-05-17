@@ -247,9 +247,9 @@ let app = new Vue({
         onEdit: function (index) {
             let httpLink = "";
             if (this.currentView == this.viewIndex.student) {
-                httpLink = "/student/" + this.fullData[index].id;
+                httpLink = "/student/" + this.ids[index];
             } else if (this.currentView == this.viewIndex.instructor) {
-                httpLink = "/instructor/" + this.fullData[index].id;
+                httpLink = "/instructor/" + this.ids[index];
             }
 
             this.$http
@@ -280,7 +280,6 @@ let app = new Vue({
             url += "/" + this.ids[index];
 
             if (confirm('Sunteti sigur ca doriti sa stergeti ' + this.data[index][0] + '?')) {
-                this.data.splice(index, 1);
                 console.log(url);
                 this.$http.delete(url, {})
                     .then((response) => {
@@ -326,7 +325,7 @@ let app = new Vue({
         clearList() {
             this.selectedRowIndex = null;
             this.data.splice(0, this.data.length);
-            this.ids.splice(0, this.data.length);
+            this.ids.splice(0, this.ids.length);
         }
     }
 });

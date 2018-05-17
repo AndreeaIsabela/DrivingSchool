@@ -38,6 +38,7 @@ router.post('/register', function(req, res) {
 
 router.get('/requests', function(req, res) {
     studentController.getStudentRequests((err, docs) => {
+        console.log(docs);
         if(err) {
             console.log(err);
             res.status(500).end();

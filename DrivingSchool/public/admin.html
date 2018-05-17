@@ -158,7 +158,7 @@
                         <form class="create-form" v-on:submit.prevent>
                             <div class="form-group">
                                 <label for="Nume">Nume:</label>
-                                <input class="form-control" id="Nume" type="text" autofocus placeholder="Ex: Popescu" v-model="formData.lastName">
+                                <input class="form-control" id="Nume" type="text" autofocus placeholder="Ex: Popescu" v-model="formData.familyName">
                             </div>
                             <div class="form-group">
                                 <label for="prenume">Prenume:</label>
@@ -166,15 +166,15 @@
                             </div>
                             <div class="form-group">
                                 <label for="prenumeM">Prenume Mama:</label>
-                                <input class="form-control" id="prenumeM" type="text" placeholder="Ex: Maria" v-model="formData.motherFirstName">
+                                <input class="form-control" id="prenumeM" type="text" placeholder="Ex: Maria" v-model="formData.motherName">
                             </div>
                             <div class="form-group">
                                 <label for="prenumeT">Prenume Tata:</label>
-                                <input class="form-control" id="prenumeT" type="text" placeholder="ex: Ion" v-model="formData.fatherFirstName">
+                                <input class="form-control" id="prenumeT" type="text" placeholder="ex: Ion" v-model="formData.fatherName">
                             </div>
                             <div class="form-group">
                                 <label for="judet">Judet:</label>
-                                <input class="form-control" id="judet" type="text" placeholder="Ex: Dolj" v-model="formData.region">
+                                <input class="form-control" id="judet" type="text" placeholder="Ex: Dolj" v-model="formData.county">
                             </div>
                             <div class="form-group">
                                 <label for="localtate">Localitate:</label>
@@ -190,29 +190,25 @@
                             </div>
                             <div class="form-group">
                                 <label for="serie">Serie Buletin:</label>
-                                <input class="form-control" id="serie" type="text" placeholder="Ex: DZ/DX/CZ..." v-model="formData.idSeries">
+                                <input class="form-control" id="serie" type="text" placeholder="Ex: DZ/DX/CZ..." v-model="formData.serialNumber">
                             </div>
                             <div class="form-group">
                                 <label for="numar">Numar Buletin:</label>
-                                <input class="form-control" id="numar" type="text" placeholder="Number" v-model="formData.idNumber">
-                            </div>
-                            <div class="form-group">
-                                <label for="data">Data Nasterii:</label>
-                                <input class="form-control" id="data" type="date" v-model="formData.dateOfBirth">
+                                <input class="form-control" id="numar" type="text" placeholder="Number" v-model="formData.idCardNumber">
                             </div>
                             <div class="form-group">
                                 <label for="gender">Sex:</label>
                                 <br />
-                                <input type="radio" name="gender" value="male" checked v-model="formData.gender"> Masculin
+                                <input type="radio" name="gender" value="male" checked v-model="formData.isFemale"> Masculin
                                 <br />
-                                <input type="radio" name="gender" value="female" v-model="formData.gender"> Feminin
+                                <input type="radio" name="gender" value="female" v-model="formData.isFemale"> Feminin
                             </div>
                             <div class="form-group">
                                 <label for="status">Stare Civila:</label>
                                 <br />
-                                <input type="radio" name="status" value="single" checked v-model="formData.marriageStatus"> Necasatorit/a
+                                <input type="radio" name="status" value="single" checked v-model="formData.isMarried"> Necasatorit/a
                                 <br />
-                                <input type="radio" name="status" value="married" v-model="formData.marriageStatus"> Casatorit/a
+                                <input type="radio" name="status" value="married" v-model="formData.isMarried"> Casatorit/a
                             </div>
                             <div class="form-group">
                                 <label for="tel">Telefon:</label>

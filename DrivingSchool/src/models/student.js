@@ -12,8 +12,8 @@ var StudentSchema = new Schema(
         familyName: { type: String, required: true, max: 100 },
         motherName: { type: String, required: true, max: 100 },
         fatherName: { type: String, required: true, max: 100 },
-        country: { type: String, required: true, max: 100 },
-        town: { type: String, required: true, max: 100 },
+        county: { type: String, required: true, max: 100 },
+        city: { type: String, required: true, max: 100 },
         address: { type: String, required: true, max: 200 },
         cnp: {
             type: String,
@@ -28,7 +28,6 @@ var StudentSchema = new Schema(
         },
         serialNumber: { type: String, required: true, max: 2 },
         idCardNumber: { type: String, required: true, max: 5 },
-        birthDate: { type: Date },
         isFemale: { type: Boolean, required: true },
         isMarried: { type: Boolean, required: true },
         phone: {
