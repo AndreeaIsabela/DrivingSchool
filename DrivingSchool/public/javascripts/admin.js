@@ -27,7 +27,6 @@ let app = new Vue({
                 canEdit: true,
                 canDelete: true,
                 descriptors: [
-                    { text: 'Autorizatie' },
                     { text: 'Masina' },
                     { text: 'Numar telefon' }
                 ]
@@ -104,10 +103,9 @@ let app = new Vue({
                         this.ids.push(instructor.id);
 
                         this.data.push([
-                            instructor.lastName + ' ' + instructor.firstName,
-                            instructor.authorization,
+                            instructor.familyName + ' ' + instructor.firstName,
                             instructor.carNumber,
-                            instructor.phone
+                            instructor.phoneNumber
                         ]);
                     }
                 }).catch(function (err) {
@@ -218,20 +216,11 @@ let app = new Vue({
                 });
         },
         onSubmit: function () {
-            console.log(this.formData);
-
-            let httpLink = "";
-            if (this.currentView == this.viewIndex.student) {
-                httpLink = "/student/" + this.fullData[index].id;
-            } else if (this.currentView == this.viewIndex.instructor) {
-                httpLink = "/instructor/" + this.fullData[index].id;
-            }
+            
+            const url = "/instructor/";
 
             this.$http
-                .post(httpLink, {
-                    'Content-Type': 'Application/JSON',
-                    'body': JSON.stringify(this.formData)
-                })
+                .post(url, this.formData)
                 .then(response => {
                     this.formEnabled = true;
                     this.formData = {};

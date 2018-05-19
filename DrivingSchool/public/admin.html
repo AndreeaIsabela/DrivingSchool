@@ -118,7 +118,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="name">Nume</label>
-                                <input type="text" class="form-control" id="lastName" v-model="formData.lastName" placeholder="Popescu">
+                                <input type="text" class="form-control" id="lastName" v-model="formData.familyName" placeholder="Popescu">
                             </div>
                             <div class="form-group">
                                 <label for="name">Prenume</label>
@@ -130,7 +130,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="phone">Telefon</label>
-                                <input type="tel" class="form-control" id="phone" v-model="formData.phone" placeholder="07xxxxxxxx">
+                                <input type="tel" class="form-control" id="phone" v-model="formData.phoneNumber" placeholder="07xxxxxxxx">
                             </div>
 
                             <button type="submit" class="btn btn-primary btn-block submit-btn" v-on:click="onSubmit">Submit</button>
