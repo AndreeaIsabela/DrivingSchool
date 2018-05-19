@@ -52,7 +52,8 @@ var StudentSchema = new Schema(
             required: [true, 'User email required']
         },
         instructorId: { type: Schema.ObjectId, ref: 'Instructor' },
-        state: { type: Number, default: studentState.unregistered }
+        state: { type: Number, default: studentState.unregistered },
+        password: { type: String, required: true }
     });
 
 // Virtual for student's full name

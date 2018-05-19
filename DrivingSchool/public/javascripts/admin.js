@@ -67,7 +67,8 @@ let app = new Vue({
         formEnabled: false,
         formData: {},
         edit: false,
-        editId: ''
+        editId: '',
+        folderId: 0
     },
     created: function () {
         this.onRegisterRequests();
@@ -184,18 +185,37 @@ let app = new Vue({
             this.$http
                 .get('/student')
                 .then(response => {
-                    for (let student of response.data) {
-                        this.formData.students.push(student.familyName + ' ' + student.firstName);
-                    };
+                    for (let i in response.data) {
+                        
+                        let student = response.data[i];
+
+                        this.formData.students.push({
+                            name: `${student.familyName} ${student.firstName}`,
+                            id: student._id
+                        });
+
+                        if (i == 0) {
+                            this.formData.studentId = { id : student._id };
+                        }
+                    }
                 }).catch(function (err) {
                     console.log(err.response);
                 });
         },
+        onGenerateFolder: function () {
+            this.formData.students = undefined;
+            let id = this.formData.studentId.id;
+            this.formData.studentId = undefined;
+
+            this.$http.post(`/student/${id}/folder`, this.formData)
+                .then(response => {
+
+                }).catch(err => {
+                    console.log(err);
+                });
+        },
         onLogout: function () {
 
-        },
-        onGenerateFolder: function () {
-            console.log(this.formData);
         },
         onCreate: function () {
             this.formEnabled = true;
@@ -231,7 +251,7 @@ let app = new Vue({
             this.$http
                 .post(url, this.formData)
                 .then(response => {
-                    if(this.currentView == this.viewIndex.instructor) {
+                    if (this.currentView == this.viewIndex.instructor) {
                         this.onInstructors();
                     } else {
                         this.onAdmins();
@@ -282,6 +302,7 @@ let app = new Vue({
                     for (let propName of propertyNames) {
                         this.formData[propName] = response.data[propName];
                     }
+                    this.formData.confirmPassword = response.data.password;
                 }).catch(function (err) {
                     console.log(err.response);
                 });

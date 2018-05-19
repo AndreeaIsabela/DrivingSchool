@@ -13,10 +13,20 @@ class InstructorController {
     }
 
     updateInstructor(id, instructor, done) {
+        if(instructor.password != instructor.confirmPassword) {
+            let err = new Error('Password mismatch');
+            return done(err, null);
+        }
+
         this.instructors.findOneAndUpdate({ _id: id }, instructor, { new: true }, done);
     }
 
     addInstructor(instructor, done) {
+        if(instructor.password != instructor.confirmPassword) {
+            let err = new Error('Password mismatch');
+            return done(err, null);
+        }
+
         let newInstructor = new this.instructors(instructor);
         newInstructor.save(done);
     }

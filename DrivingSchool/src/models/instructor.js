@@ -27,7 +27,8 @@ var InstructorSchema = new Schema(
         },
         message: '{VALUE} is not a valid phone number!'
       },
-    }
+    },
+    password: { type: String, required: true }
   }
 );
 
