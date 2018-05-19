@@ -65,7 +65,9 @@ let app = new Vue({
         fullData: [],
         ids: [],
         formEnabled: false,
-        formData: {}
+        formData: {},
+        edit: false,
+        editId: ''
     },
     created: function () {
         this.onRegisterRequests();
@@ -100,7 +102,7 @@ let app = new Vue({
 
                     this.fullData = response.data;
                     for (let instructor of response.data) {
-                        this.ids.push(instructor.id);
+                        this.ids.push(instructor._id);
 
                         this.data.push([
                             instructor.familyName + ' ' + instructor.firstName,
@@ -216,19 +218,39 @@ let app = new Vue({
                 });
         },
         onSubmit: function () {
-            
+            if(this.edit) {
+                return this.onSubmitEdit();
+            }
+            return this.onSubmitCreate();
+        },
+        onSubmitCreate: function () {
             const url = "/instructor/";
 
             this.$http
                 .post(url, this.formData)
                 .then(response => {
-                    this.formEnabled = true;
-                    this.formData = {};
 
-                    let propertyNames = Object.getOwnPropertyNames(response.data);
-                    for (let propName of propertyNames) {
-                        this.formData[propName] = response.data[propName];
+                }).catch(function (err) {
+                    console.log(err.response);
+                });
+        },
+        onSubmitEdit: function () {
+            const url = this.currentView == this.viewIndex.instructor
+                ? "/instructor/" + this.editId
+                : "/student/" + this.editId;
+
+            this.$http
+                .put(url, this.formData)
+                .then(response => {
+                    alert('Modificarile au fost salvate cu succes!');
+
+                    if(this.currentView == this.viewIndex.instructor) {
+                        this.onInstructors();
                     }
+                    else if (this.currentView == this.viewIndex.student){
+                        this.onStudents();
+                    }
+
                 }).catch(function (err) {
                     console.log(err.response);
                 });
@@ -241,12 +263,15 @@ let app = new Vue({
                 httpLink = "/instructor/" + this.ids[index];
             }
 
+            this.editId = this.ids[index];
+
             this.$http
                 .get(httpLink)
                 .then(response => {
-
+                    this.edit = true;
                     this.formEnabled = true;
                     this.formData = {};
+
                     let propertyNames = Object.getOwnPropertyNames(response.data);
                     for (let propName of propertyNames) {
                         this.formData[propName] = response.data[propName];

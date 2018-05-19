@@ -102,7 +102,7 @@ router.post('/:id/accept', function(req, res) {
 });
 
 router.put('/:id', function(req, res) {
-    studentController.updateStudent(req.params.id, (err, student) => {
+    studentController.updateStudent(req.params.id, req.body, (err, student) => {
         if(err) {
             console.log(err);
             res.status(500).end();

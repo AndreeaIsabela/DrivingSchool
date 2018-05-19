@@ -199,16 +199,16 @@
                             <div class="form-group">
                                 <label for="gender">Sex:</label>
                                 <br />
-                                <input type="radio" name="gender" value="male" checked v-model="formData.isFemale"> Masculin
+                                <input type="radio" name="gender" value="false" checked v-model="formData.isFemale"> Masculin
                                 <br />
-                                <input type="radio" name="gender" value="female" v-model="formData.isFemale"> Feminin
+                                <input type="radio" name="gender" value="true" v-model="formData.isFemale"> Feminin
                             </div>
                             <div class="form-group">
                                 <label for="status">Stare Civila:</label>
                                 <br />
-                                <input type="radio" name="status" value="single" checked v-model="formData.isMarried"> Necasatorit/a
+                                <input type="radio" name="status" value="false" checked v-model="formData.isMarried"> Necasatorit/a
                                 <br />
-                                <input type="radio" name="status" value="married" v-model="formData.isMarried"> Casatorit/a
+                                <input type="radio" name="status" value="true" v-model="formData.isMarried"> Casatorit/a
                             </div>
                             <div class="form-group">
                                 <label for="tel">Telefon:</label>
@@ -227,7 +227,7 @@
                                 <input class="form-control" id="cParola" type="password" placeholder="Password" v-model="formData.confirmPassword">
                             </div>
 
-                            <button type="submit" class="btn btn-primary btn-block submit-btn">Submit</button>
+                            <button type="submit" class="btn btn-primary btn-block submit-btn" v-on:click="onSubmit()">Submit</button>
                         </form>
                     </div>
                     <div v-else-if="currentView === viewIndex.folder">

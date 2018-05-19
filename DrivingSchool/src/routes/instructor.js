@@ -27,6 +27,32 @@ instructorRoutes.post('/', (req, res) => {
   });
 });
 
+instructorRoutes.get('/:id', (req, res) => {
+  instructorControllerIns.getInstructor(req.params.id, (err, doc) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).end();
+    }
+    if(!doc) {
+      return res.status(404).end();
+    }
+    res.json(doc);
+  });
+});
+
+instructorRoutes.put('/:id', (req, res) => {
+  instructorControllerIns.updateInstructor(req.params.id, req.body, (err, doc) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).end();
+    }
+    if(!doc) {
+      return res.status(404).end();
+    }
+    res.json(doc);
+  });
+});
+
 instructorRoutes.delete('/:id', (req, res) => {
   instructorControllerIns.deleteAdmin(req.params.id, (err, result) => {
     if (err) {
