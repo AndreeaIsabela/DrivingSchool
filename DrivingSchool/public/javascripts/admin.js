@@ -145,9 +145,9 @@ let app = new Vue({
 
                     this.fullData = response.data;
                     for (let adminData of response.data) {
-                        this.ids.push(student.id);
+                        this.ids.push(adminData._id);
                         this.data.push([
-                            adminData.name
+                            adminData.email
                         ]);
                     };
                 }).catch(function (err) {
@@ -218,18 +218,24 @@ let app = new Vue({
                 });
         },
         onSubmit: function () {
-            if(this.edit) {
+            if (this.edit) {
                 return this.onSubmitEdit();
             }
             return this.onSubmitCreate();
         },
         onSubmitCreate: function () {
-            const url = "/instructor/";
+            const url = this.currentView == this.viewIndex.instructor
+                ? "/instructor/"
+                : "/admin/";
 
             this.$http
                 .post(url, this.formData)
                 .then(response => {
-
+                    if(this.currentView == this.viewIndex.instructor) {
+                        this.onInstructors();
+                    } else {
+                        this.onAdmins();
+                    }
                 }).catch(function (err) {
                     console.log(err.response);
                 });
@@ -244,10 +250,10 @@ let app = new Vue({
                 .then(response => {
                     alert('Modificarile au fost salvate cu succes!');
 
-                    if(this.currentView == this.viewIndex.instructor) {
+                    if (this.currentView == this.viewIndex.instructor) {
                         this.onInstructors();
                     }
-                    else if (this.currentView == this.viewIndex.student){
+                    else if (this.currentView == this.viewIndex.student) {
                         this.onStudents();
                     }
 

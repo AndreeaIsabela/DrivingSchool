@@ -7,6 +7,7 @@ var adminRoutes = new Router();
 var adminControllerIns = new AdminController(adminModel);
 
 adminRoutes.get('/', (req, res) => {
+  
   adminControllerIns.getAdmins((err, docs) => {
     if (err) {
       console.error(err);
@@ -17,7 +18,7 @@ adminRoutes.get('/', (req, res) => {
 });
 
 adminRoutes.post('/', (req, res) => {
-  adminControllerIns.addAdmin(req.body, (err, result) => {
+  adminControllerIns.createAdmin(req.body, (err, result) => {
     if (err) {
       console.error(err);
       return res.status(500).end();

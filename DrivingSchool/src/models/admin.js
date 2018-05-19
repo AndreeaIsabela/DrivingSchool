@@ -4,9 +4,8 @@ var Schema = mongoose.Schema;
 
 var AdminSchema = new Schema(
   {
-    email: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
   }
 );
 
-//Export model
-module.exports = mongoose.model('Admin', AdminSchema);
+module.exports = mongoose.model('Admin2', AdminSchema);

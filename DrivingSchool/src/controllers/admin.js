@@ -1,21 +1,21 @@
 class AdminController {
 
     constructor(adminModel) {
-        this.admins = adminModel;
+        this.adminModel = adminModel;
     }
 
     getAdmins(done) {
-        this.admins.find({}, done);
+        this.adminModel.find({}, done);
     }
 
-    addAdmin(admin, done) {
-        let newAdmin = new this.admins(admin);
+    createAdmin(admin, done) {
+        let newAdmin = new this.adminModel(admin);
         newAdmin.save(done);
     }
 
     deleteAdmin(cnp, done) {
 
-        this.admins.find({ cnp: cnp }).remove()
+        this.adminModel.find({ cnp: cnp }).remove()
             .exec(done);
     }
 }

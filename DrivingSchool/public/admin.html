@@ -140,7 +140,7 @@
                         <form class="create-form" v-on:submit.prevent>
                             <div class="form-group">
                                 <label for="email">E-mail</label>
-                                <input type="email" class="form-control" id="email" autofocus placeholder="example@google.com" v-model="formData.email">
+                                <input type="email" class="form-control" id="email" placeholder="example@google.com" v-model="formData.email">
                             </div>
                             <div class="form-group">
                                 <label for="password">Parola</label>
@@ -151,14 +151,26 @@
                                 <input type="password" class="form-control" id="confirmPassword" placeholder="Parola" v-model="formData.confirmPassword">
                             </div>
 
-                            <button type="submit" class="btn btn-primary btn-block submit-btn">Submit</button>
+                            <button type="submit" class="btn btn-primary btn-block submit-btn" v-on:click="onSubmit()">Submit</button>
                         </form>
                     </div>
                     <div v-else-if="currentView === viewIndex.student">
                         <form class="create-form" v-on:submit.prevent>
                             <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input class="form-control" id="email" type="email" placeholder="Ex:email@ex.com" v-model="formData.email">
+                            </div>
+                            <div class="form-group">
+                                <label for="parola">Parola:</label>
+                                <input class="form-control" id="parola" type="password" placeholder="Password" v-model="formData.password">
+                            </div>
+                            <div class="form-group">
+                                <label for="cParola">Confirma Parola:</label>
+                                <input class="form-control" id="cParola" type="password" placeholder="Password" v-model="formData.confirmPassword">
+                            </div>
+                            <div class="form-group">
                                 <label for="Nume">Nume:</label>
-                                <input class="form-control" id="Nume" type="text" autofocus placeholder="Ex: Popescu" v-model="formData.familyName">
+                                <input class="form-control" id="Nume" type="text" placeholder="Ex: Popescu" v-model="formData.familyName">
                             </div>
                             <div class="form-group">
                                 <label for="prenume">Prenume:</label>
@@ -213,18 +225,6 @@
                             <div class="form-group">
                                 <label for="tel">Telefon:</label>
                                 <input class="form-control" id="tel" type="tel" placeholder="07xxxxxxxx" v-model="formData.phone">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email:</label>
-                                <input class="form-control" id="email" type="email" placeholder="Ex:email@ex.com" v-model="formData.email">
-                            </div>
-                            <div class="form-group">
-                                <label for="parola">Parola:</label>
-                                <input class="form-control" id="parola" type="password" placeholder="Password" v-model="formData.password">
-                            </div>
-                            <div class="form-group">
-                                <label for="cParola">Confirma Parola:</label>
-                                <input class="form-control" id="cParola" type="password" placeholder="Password" v-model="formData.confirmPassword">
                             </div>
 
                             <button type="submit" class="btn btn-primary btn-block submit-btn" v-on:click="onSubmit()">Submit</button>
