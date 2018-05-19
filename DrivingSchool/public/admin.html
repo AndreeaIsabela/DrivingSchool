@@ -269,7 +269,7 @@
                                     <div class="col col-sm-4"></div>
                                 </div>
 
-                                <div class="row">
+                                <div class="row" v-show="formData.schoolApplication || formData.contract || formData.notebook || formData.graduationCertificate || formData.schoolFile || formData.examApplication || formData.medicalFile">
                                     <div class="col col-sm-4"></div>
                                     <div class="col col-sm-4">
                                         <button type="submit" class="btn btn-primary btn-block submit-btn" v-on:click="onGenerateFolder">Generare dosar</button>
