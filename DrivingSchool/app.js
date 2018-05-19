@@ -17,7 +17,6 @@ var apiRouter = require('./src/routes/api');
 var studentRuter = require('./src/routes/student');
 var instructorRuter = require('./src/routes/instructor');
 var adminRuter = require('./src/routes/admin');
-var userRouter = require('./src/routes/user');
 
 var app = express();
 
@@ -34,6 +33,5 @@ app.use('/api', apiRouter);
 app.use('/student', studentRuter);
 app.use('/instructor', instructorRuter);
 app.use('/admin', adminRuter);
-app.use('/user', userRouter);
 
 module.exports = app;
