@@ -203,11 +203,12 @@ let app = new Vue({
                 });
         },
         onGenerateFolder: function () {
-            this.formData.students = undefined;
-            let id = this.formData.studentId.id;
-            this.formData.studentId = undefined;
+            let folderData = Object.assign({}, this.formData);
 
-            this.$http.post(`/student/${id}/folder`, this.formData)
+            folderData.students = undefined;
+            folderData.studentId = undefined;
+
+            this.$http.post(`/student/${this.formData.studentId.id}/folder`, folderData)
                 .then(response => {
 
                 }).catch(err => {
