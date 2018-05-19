@@ -1,4 +1,8 @@
 const studentState = require('../models/studentState');
+const PDF = require('pdfkit');
+const fs = require('fs');
+const path = require('path');
+const text = 'ANY_TEXT_YOU_WANT_TO_WRITE_IN_PDF_DOC';
 
 class StudentController {
     constructor(studentModel) {
@@ -52,6 +56,101 @@ class StudentController {
         body.state = studentState.unregistered;
         let request = new this.student(body);
         request.save(done);
+    }
+    generateFolder(id, config, done) {
+        this.student.findById(id, (err, student) => {
+
+            if (err) {
+                return done(err, null);
+            }
+
+            if (!student) {
+                return done(null, null);
+            }
+
+            let pdfPath = path.join(__dirname, `/../../pdfs/${id}.pdf`);
+
+            var doc = new PDF();
+
+            this.addPdfPages(doc, config, student);
+
+            let stream = fs.createWriteStream(pdfPath);
+            stream.on('finish', () => {
+                done(null, pdfPath);
+            })
+            doc.pipe(stream);
+            doc.end();
+        });
+    }
+
+    addPdfPages(pdfDoc, config, student) {
+        console.log(config);
+
+        let first = false;
+        let addNewPdfPage = function() {
+            if(!first) {
+                first = true;
+                return;
+            }
+            pdfDoc.addPage();
+        };
+
+        if (config.schoolApplication) {
+            addNewPdfPage();
+            this.addPdfPage(pdfDoc, 'Cerere de scolarizare', student);
+        }
+        if (config.contract) {
+            addNewPdfPage();
+            this.addPdfPage(pdfDoc, 'Contract de scolarizare', student);
+        }
+        if (config.notebook) {
+            addNewPdfPage();
+            this.addPdfPage(pdfDoc, 'Caietul cursantului', student);
+        }
+        if (config.graduationCertificate) {
+            addNewPdfPage();
+            this.addPdfPage(pdfDoc, 'Adeverinta de absolvire', student);
+        }
+        if (config.schoolFile) {
+            addNewPdfPage();
+            this.addPdfPage(pdfDoc, 'Fisa de scolarizare', student);
+        }
+        if (config.examApplication) {
+            addNewPdfPage();
+            this.addPdfPage(pdfDoc, 'Cerere pentru examen', student);
+        }
+        if (config.medicalFile) {
+            addNewPdfPage();
+            this.addPdfPage(pdfDoc, 'Fisa medicala', student);
+        }
+    }
+
+    addPdfPage(pdfDoc, pageTitle, student) {
+        pdfDoc.fontSize(24);
+        pdfDoc.text(pageTitle, 100, 100);
+        pdfDoc.fontSize(12);
+
+        let txt = '';
+        let addLine = (propName, propValue) => {
+            txt += `${propName}: ${propValue}\n`;
+        };
+
+        addLine('Email', student.email);
+        addLine('Prenume', student.firstName);
+        addLine('Nume', student.familyName);
+        addLine('Mama', student.motherName);
+        addLine('Tata', student.fatherName);
+        addLine('Judet', student.county);
+        addLine('Oras', student.city);
+        addLine('Adresa', student.address);
+        addLine('CNP', student.cnp);
+        addLine('Serie buletin', student.serialNumber);
+        addLine('Numar buletin', student.idCardNumber);
+        addLine('Sex', student.isFemale ? 'Feminin' : 'Masculin');
+        addLine('Casatorit', student.isMarried ? 'Da' : 'Nu');
+        addLine('Numar telefon', student.phone);
+
+        pdfDoc.text(txt, 100, 150);
     }
 }
 

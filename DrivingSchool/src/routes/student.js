@@ -53,7 +53,7 @@ router.get('/:id', function(req, res) {
             console.log(err);
             res.status(500).end();
         }
-        if(!res) {
+        if(!student) {
             res.status(404).end();
         }
         res.json(student);
@@ -66,7 +66,7 @@ router.post('/:id/archive', function(req, res) {
             console.log(err);
             res.status(500).end();
         }
-        if(!res) {
+        if(!student) {
             res.status(404).end();
         }
         res.json(student);
@@ -79,7 +79,7 @@ router.post('/:id/unarchive', function(req, res) {
             console.log(err);
             res.status(500).end();
         }
-        if(!res) {
+        if(!student) {
             res.status(404).end();
         }
         res.json(student);
@@ -87,17 +87,30 @@ router.post('/:id/unarchive', function(req, res) {
 });
 
 router.post('/:id/accept', function(req, res) {
-    studentController.registerStudent(req.params.id, (err, student) => {
-        console.log(req.params.id);
+    studentController.registerStudent(req.params.id, (err, reportPath) => {
         if(err) {
             console.log(err);
             res.status(500).end();
         }
-        if(!res) {
+        if(!student) {
             res.status(404).end();
         }
-        console.log(student);
         res.json(student);
+    });
+});
+
+router.post('/:id/folder', function(req, res) {
+    studentController.generateFolder(req.params.id, req.body, (err, pdfPath) => {
+
+        if(err) {
+            console.log(err);
+            res.status(500).end();
+        }
+
+        if(!pdfPath) {
+            res.status(404).end();
+        }
+        res.sendFile(pdfPath);
     });
 });
 
@@ -107,7 +120,7 @@ router.put('/:id', function(req, res) {
             console.log(err);
             res.status(500).end();
         }
-        if(!res) {
+        if(!student) {
             res.status(404).end();
         }
         res.json(student);
