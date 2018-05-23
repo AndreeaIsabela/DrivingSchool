@@ -51,7 +51,7 @@ var StudentSchema = new Schema(
             },
             required: [true, 'User email required']
         },
-        instructorId: { type: Schema.ObjectId, ref: 'Instructor' },
+        instructorId: { type: Schema.ObjectId, ref: 'Instructor', required: true },
         state: { type: Number, default: studentState.unregistered },
         password: { type: String, required: true }
     });
