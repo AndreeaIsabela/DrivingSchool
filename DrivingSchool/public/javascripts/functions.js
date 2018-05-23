@@ -1,5 +1,4 @@
 
-"use strict";
 $(document).ready(function () {
     $('body').scrollspy({ target: ".navbar", offset: 70 });
     $('[data-toggle="tooltip"]').tooltip();
@@ -40,3 +39,28 @@ function populateInstructors(instructors) {
             </tr>`);
     }
 }
+Vue.prototype.$http=axios;
+
+let logIn = new Vue({
+    el: '#logIn',
+    data: {
+        formData:{},
+    },
+    methods:{
+        onLogIn:function(){
+            this.$http
+                .post('/',{
+                    email:this.formData.email,
+                    password:this.formData.password
+                })
+                .then(function(response){
+                    console.log(response);
+                })
+                .catch(function(error){
+                 console.log(error);
+                })
+
+        }
+    }
+
+})

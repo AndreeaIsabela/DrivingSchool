@@ -1,6 +1,6 @@
 body {
   position: relative;
-  background-color: white;
+  background-color: black;
 }
 
 #home {
@@ -24,7 +24,7 @@ body {
 }
 
 #home, #personal, #location, #contact {
-  color: black;
+  color: white;
   background-color: rgba(187, 187, 187, 0.877);
 }
 
