@@ -28,9 +28,16 @@ var InstructorSchema = new Schema(
         message: '{VALUE} is not a valid phone number!'
       },
     },
-    password: { type: String, required: true }
+    password: { type: String, required: true },
+  }, {
+    toObject: { virtuals: true },
+    toJSON: { virtuals: true }
   }
 );
+
+InstructorSchema.virtual('fullName').get(function () {
+  return this.familyName + ' ' + this.firstName;
+});
 
 //Export model
 module.exports = mongoose.model('Instructor', InstructorSchema);

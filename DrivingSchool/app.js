@@ -14,9 +14,10 @@ mongoose.set('debug', true);
 var indexRouter = require('./src/routes/index');
 var apiRouter = require('./src/routes/api');
 
-var studentRuter = require('./src/routes/student');
-var instructorRuter = require('./src/routes/instructor');
-var adminRuter = require('./src/routes/admin');
+var studentRouter = require('./src/routes/student');
+var instructorRouter = require('./src/routes/instructor');
+var adminRouter = require('./src/routes/admin');
+var anonymousRouter = require('./src/routes/anonymous');
 
 var app = express();
 
@@ -30,8 +31,9 @@ app.use(express.static(path.join(__dirname, 'node_modules')));
 
 app.use('/', indexRouter);
 app.use('/api', apiRouter);
-app.use('/student', studentRuter);
-app.use('/instructor', instructorRuter);
-app.use('/admin', adminRuter);
+app.use('/student', studentRouter);
+app.use('/instructor', instructorRouter);
+app.use('/admin', adminRouter);
+app.use('/anonymous', anonymousRouter);
 
 module.exports = app;
