@@ -13,9 +13,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/stylesheets/style.css">
 
-    <script href="functions.js"></script>
-
-
     <title>Scoala de Soferi</title>
 </head>
 
@@ -53,26 +50,26 @@
         <h2 class="title">
             Formular de inscriere:
         </h2>
-        <form class="registerForm" action="">
+        <form class="registerForm" id="registerVue" action="">
             <div class="form-group row">
                 <div class="col-xs-2">
                 </div>
                 <div class="col-xs-2">
                     <label for="Nume">
                         <i class="fa fa-user"></i> Nume:</label>
-                    <input class="form-control" id="Nume" type="text" autofocus placeholder="Ex: Popescu">
+                    <input class="form-control" id="Nume" type="text" autofocus v-model="registerFormData.firstName" placeholder="Ex: Popescu">
                 </div>
                 <div class="col-xs-2">
                     <label for="prenume">Prenume:</label>
-                    <input class="form-control" id="prenume" type="text" placeholder="Ex: Ion">
+                    <input class="form-control" id="prenume" type="text" v-model="registerFormData.familyName" placeholder="Ex: Ion">
                 </div>
                 <div class="col-xs-2">
                     <label for="prenumeM">Prenume Mama:</label>
-                    <input class="form-control" id="prenumeM" type="text" placeholder="Ex: Maria">
+                    <input class="form-control" id="prenumeM" type="text" v-model="registerFormData.motherName" placeholder="Ex: Maria">
                 </div>
                 <div class="col-xs-2">
                     <label for="prenumeT">Prenume Tata:</label>
-                    <input class="form-control" id="prenumeT" type="text" placeholder="ex: Ion">
+                    <input class="form-control" id="prenumeT" type="text" v-model="registerFormData.fatherName" placeholder="ex: Ion">
                 </div>
                 <div class="col-xs-2">
                 </div>
@@ -82,15 +79,15 @@
                 </div>
                 <div class="col-xs-2">
                     <label for="judet">Judet:</label>
-                    <input class="form-control" id="judet" type="text" placeholder="Ex: Dolj">
+                    <input class="form-control" id="judet" type="text" v-model="registerFormData.county" placeholder="Ex: Dolj">
                 </div>
                 <div class="col-xs-2">
                     <label for="localtate">Localitate:</label>
-                    <input class="form-control" id="localitate" type="text" placeholder="Ex: Craiova">
+                    <input class="form-control" id="localitate" type="text" v-model="registerFormData.city" placeholder="Ex: Craiova">
                 </div>
                 <div class="col-xs-4">
                     <label for="adresa">Adresa:</label>
-                    <input class="form-control" id="adresa" type="text" placeholder="Ex: Bl.75 B2, Sc.3, Ap15..">
+                    <input class="form-control" id="adresa" type="text" v-model="registerFormData.address" placeholder="Ex: Bl.75 B2, Sc.3, Ap15..">
                 </div>
 
                 <div class="col-xs-2">
@@ -101,19 +98,19 @@
                 </div>
                 <div class="col-xs-2">
                     <label for="cnp">CNP:</label>
-                    <input class="form-control" id="cnp" type="text" placeholder="cod numeric personal">
+                    <input class="form-control" id="cnp" type="text" v-model="registerFormData.cnp" placeholder="cod numeric personal">
                 </div>
                 <div class="col-xs-2">
                     <label for="serie">Serie Buletin:</label>
-                    <input class="form-control" id="serie" type="text" placeholder="Ex: DZ/DX/CZ...">
+                    <input class="form-control" id="serie" type="text" v-model="registerFormData.serialNumber" placeholder="Ex: DZ/DX/CZ...">
                 </div>
                 <div class="col-xs-2">
                     <label for="numar">Numar Buletin:</label>
-                    <input class="form-control" id="numar" type="text" placeholder="Number">
+                    <input class="form-control" id="numar" type="text" v-model="registerFormData.idCardNumber" placeholder="Number">
                 </div>
                 <div class="col-xs-2">
                     <label for="data">Data Nasterii:</label>
-                    <input class="form-control" id="data" type="date">
+                    <input class="form-control" id="data" v-model="registerFormData.birthday" type="date">
                 </div>
                 <div class="col-xs-2">
                 </div>
@@ -125,19 +122,19 @@
                     <label for="gender">
                         <i class="fa fa-venus-mars"></i> Sex:</label>
                     <br>
-                    <input type="radio" name="gender" value="male" checked>
+                    <input type="radio" name="gender" value="0" v-model="registerFormData.isFemale" >
                     <i class="fa fa-venus"></i> Feminin
                     <br>
-                    <input type="radio" name="gender" value="female">
+                    <input type="radio" name="gender" v-model="registerFormData.isFemale" value="1">
                     <i class="fa fa-mars"></i> Masculin
 
                 </div>
                 <div class="col-xs-4">
                     <label for="status">Stare Civila:</label>
                     <br>
-                    <input type="radio" name="status" value="necasatorit" checked> Necasatorit/a
+                    <input type="radio" name="status" value="0" v-model="registerFormData.isMarried" > Necasatorit/a
                     <br>
-                    <input type="radio" name="status" value="casatorit"> Casatorit/a
+                    <input type="radio" name="status" value="1" v-model="registerFormData.isMarried"> Casatorit/a
                 </div>
 
                 <div class="col-xs-2">
@@ -150,22 +147,18 @@
                 <div class="col-xs-2">
                     <label for="tel">
                         <span class="glyphicon glyphicon-phone-alt"></span> Telefon:</label>
-                    <input class="form-control" id="tel" type="tel" placeholder="+0 xxx xxx xxx">
+                    <input class="form-control" id="tel" type="tel" v-model="registerFormData.phone" placeholder="+0 xxx xxx xxx">
                 </div>
                 <div class="col-xs-2">
                     <label for="email">Email:</label>
-                    <input class="form-control" id="email" type="email" placeholder="Ex:email@ex.com">
+                    <input class="form-control" id="email" type="email" v-model="registerFormData.email" placeholder="Ex:email@ex.com">
                 </div>
                 <div class="col-xs-2">
                     <label for="parola">
                         <i class="fa fa-lock"></i> Parola:</label>
-                    <input class="form-control" id="parola" type="password" placeholder="Password">
+                    <input class="form-control" id="parola" type="password" v-model="registerFormData.password" placeholder="Password">
                 </div>
-                <div class="col-xs-2">
-                    <label for="cParola">
-                        <i class="fa fa-lock"></i> Confirma Parola:</label>
-                    <input class="form-control" id="cParola" type="password" placeholder="Password">
-                </div>
+
                 <div class="col-xs-2">
                 </div>
             </div>
@@ -174,13 +167,13 @@
                 <div class="col-xs-8">
                     <label for="instructorId">
                         <i class="fa fa-lock"></i> Parola:</label>
-                    <select class="form-control" id="instructorId" placeholder="Password">
+                    <select class="form-control" id="instructorId" v-model="registerFormData.firstName" placeholder="Password">
 
                     </select>
                 </div>
                 <div class="col-xs-2"></div>
             </div>
-            <button type="submit" class="btn btn-submit" id="register">Register</button>
+            <button type="submit" class="btn btn-submit"  v-on:click="onRegister">Register</button>
         </form>
 
     </main>
@@ -195,7 +188,10 @@
                 someone@example.com</a>.</p>
     </footer>
 
-    <script src="/javascripts/register.js"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.2/axios.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./javascripts/register.js"></script>
 </body>
 
 </html>

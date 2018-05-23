@@ -26,6 +26,7 @@ var StudentSchema = new Schema(
             required: [true, 'User CNP required'],
             unique: true
         },
+        birthday:{type:Date,required:true},
         serialNumber: { type: String, required: true, max: 2 },
         idCardNumber: { type: String, required: true, max: 5 },
         isFemale: { type: Boolean, required: true },
@@ -51,7 +52,7 @@ var StudentSchema = new Schema(
             },
             required: [true, 'User email required']
         },
-        instructorId: { type: Schema.ObjectId, ref: 'Instructor', required: true },
+        instructorId: { type: Schema.ObjectId, ref: 'Instructor' },
         state: { type: Number, default: studentState.unregistered },
         password: { type: String, required: true }
     });

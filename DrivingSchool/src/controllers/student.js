@@ -48,10 +48,6 @@ class StudentController {
         this.student.findByIdAndRemove(id, done);
     }
     createRegisterRequest(body, done) {
-        if (student.password != student.confirmPassword) {
-            let err = new Error('Password mismatch');
-            return done(err, null);
-        }
 
         body.state = studentState.unregistered;
         let request = new this.student(body);

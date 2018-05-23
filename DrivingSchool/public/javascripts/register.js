@@ -19,3 +19,45 @@ function populateInstructorCombo(instructors) {
             </option>`);
     }
 }
+
+Vue.prototype.$http=axios;
+
+let registerVue=new Vue({
+    el: '#registerVue',
+    data: {
+        registerFormData:{},
+    },
+    methods:{
+        onRegister:function(){
+            this.$http
+                .post('/student/register',{
+                    firstName:this.registerFormData.firstName,
+                    familyName:this.registerFormData.familyName,
+                    motherName:this.registerFormData.motherName,
+                    fatherName:this.registerFormData.fatherName,
+                    county:this.registerFormData.county,
+                    city:this.registerFormData.city,
+                    address:this.registerFormData.address,
+                    cnp:this.registerFormData.cnp,
+                    serialNumber:this.registerFormData.serialNumber,
+                    idCardNumber:this.registerFormData.idCardNumber,
+                    isFemale:this.registerFormData.isFemale,
+                    isMarried:this.registerFormData.isMarried,
+                    phone:this.registerFormData.phone,
+                    email:this.registerFormData.email,
+                    password:this.registerFormData.password,
+                    birthday:this.registerFormData.birthday
+                })
+                .then(function(response){
+                    console.log(response);
+                })
+                .catch(function(error){
+                 console.log(error);
+                })
+
+        }
+
+    }
+
+});
+

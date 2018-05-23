@@ -18,6 +18,8 @@ var studentRouter = require('./src/routes/student');
 var instructorRouter = require('./src/routes/instructor');
 var adminRouter = require('./src/routes/admin');
 var anonymousRouter = require('./src/routes/anonymous');
+var logInRouter = require('./src/routes/logIn');
+
 
 var app = express();
 
@@ -35,5 +37,6 @@ app.use('/student', studentRouter);
 app.use('/instructor', instructorRouter);
 app.use('/admin', adminRouter);
 app.use('/anonymous', anonymousRouter);
+app.use('/login',logInRouter);
 
 module.exports = app;

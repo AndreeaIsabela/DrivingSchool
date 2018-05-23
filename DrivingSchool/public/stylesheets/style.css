@@ -25,7 +25,7 @@ body {
 
 #home, #personal, #location, #contact {
   color: white;
-  background-color: rgba(187, 187, 187, 0.877);
+  background-color: black;
 }
 
 .nav .open>a, .nav .open>a:hover, .nav .open>a:focus {

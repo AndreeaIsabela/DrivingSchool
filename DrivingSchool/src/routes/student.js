@@ -25,6 +25,7 @@ router.get('/archive', function(req, res) {
     });
 });
 
+
 router.post('/register', function(req, res) {
     studentController.createRegisterRequest(req.body, (err, registerRequest) => {
         if(err) {
