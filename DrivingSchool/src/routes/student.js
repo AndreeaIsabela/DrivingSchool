@@ -88,7 +88,7 @@ router.post('/:id/unarchive', function(req, res) {
 });
 
 router.post('/:id/accept', function(req, res) {
-    studentController.registerStudent(req.params.id, (err, reportPath) => {
+    studentController.registerStudent(req.params.id, (err, student) => {
         if(err) {
             console.log(err);
             res.status(500).end();

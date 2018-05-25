@@ -31,7 +31,7 @@ function populateInstructors(instructors) {
     let tableBody = $("tbody");
 
     for (let instructor of instructors) {
-        console.log(tableBody.html());
+        
         tableBody.append(
             `<tr>
                 <td>${instructor.name}</td>
@@ -46,9 +46,10 @@ let logIn = new Vue({
     el: '#logIn',
     data: {
         formData:{},
-    },
+    }, 
     methods:{
         onLogIn:function(){
+            console.log("this is the form:"+this.formData.email + " , "+this.formData.password);
             this.$http
                 .post('/logIn',{
                     email:this.formData.email,
@@ -56,10 +57,14 @@ let logIn = new Vue({
                 })
                 .then(function(response){
                     console.log(response);
+                    window.location.href = "http://localhost:3000/student.html"
                 })
                 .catch(function(error){
                  console.log(error);
-                })
+                 
+                 
+                }
+            );
 
         }
     }
