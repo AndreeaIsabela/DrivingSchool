@@ -46,7 +46,8 @@ let registerVue=new Vue({
                     phone:this.registerFormData.phone,
                     email:this.registerFormData.email,
                     password:this.registerFormData.password,
-                    birthday:this.registerFormData.birthday
+                    birthday:this.registerFormData.birthday,
+                    instructor:this.registerFormData.instructor
                 })
                 .then(function(response){
                     console.log(response);

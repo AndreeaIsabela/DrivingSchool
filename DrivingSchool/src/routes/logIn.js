@@ -15,7 +15,7 @@ router.post('/', function (req, res, next) {
       res.status(500).end();
     }
     if (!user) {
-      console.log("User not found");
+      console.log("User doesn't exist");
       res.status(404).end();
     }
     try {
@@ -37,6 +37,13 @@ router.post('/', function (req, res, next) {
 
   });
 
+  LogInControllerIns.jwtSignUser(user,(err,signUser)=>{
+    console.log(user);
+    if (err) {
+      console.log(err);
+      res.status(500).end();
+    }
+  });
 
 });
 

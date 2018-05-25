@@ -1,9 +1,17 @@
 let adminModel = require('../models/admin');
 let studentModel = require('../models/student');
 let instructorModel = require('../models/instructor');
-
+const jwt=require('jsonwebtoken');
+const config=require('../Config/config');
 
 class LogInController {
+
+    jwtSignUser(user,done){
+        const ONE_HOUR=60*60;
+        return jwt.sign(user,config.authentification.jwtSecret,{
+            expiresIn:ONE_HOUR
+        })
+    }
     async isUser(email, done) {
 
         let admin = 0;

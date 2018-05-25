@@ -57,7 +57,6 @@ let logIn = new Vue({
                 })
                 .then(function(response){
                     console.log(response);
-                    window.location.href = "http://localhost:3000/student.html"
                 })
                 .catch(function(error){
                  console.log(error);
