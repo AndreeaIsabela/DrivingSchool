@@ -1,4 +1,6 @@
 var mongoose = require('mongoose');
+const Promise=require('bluebird');
+const bcrypt=Promise.promisifyAll(require('bcrypt'))
 
 var Schema = mongoose.Schema;
 
@@ -35,9 +37,12 @@ var InstructorSchema = new Schema(
   }
 );
 
-InstructorSchema.virtual('fullName').get(function () {
-  return this.familyName + ' ' + this.firstName;
-});
+
+const User=mongoose.model('Instructor', InstructorSchema);
+
+User.prototype.comparePassword=function(password){
+    return bcrypt.compareAsync(password,this.password)
+}
 
 //Export model
-module.exports = mongoose.model('Instructor', InstructorSchema);
+module.exports = User;

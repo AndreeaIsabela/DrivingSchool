@@ -6,7 +6,7 @@ const config=require('../Config/config');
 
 class LogInController {
 
-    jwtSignUser(user,done){
+    jwtSignUser(user){
         const ONE_HOUR=60*60;
         return jwt.sign(user,config.authentification.jwtSecret,{
             expiresIn:ONE_HOUR

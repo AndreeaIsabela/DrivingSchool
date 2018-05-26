@@ -29,6 +29,7 @@ let registerVue=new Vue({
     },
     methods:{
         onRegister:function(){
+            console.log(this.registerFormData.birthday);
             this.$http
                 .post('/student/register',{
                     firstName:this.registerFormData.firstName,

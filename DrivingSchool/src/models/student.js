@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
-var studentState = require('./studentState')
+var studentState = require('./studentState');
+const Promise=require('bluebird');
+const bcrypt=Promise.promisifyAll(require('bcrypt'))
 
 var mongoDB = 'mongodb://root:root@ds016118.mlab.com:16118/drivingschool';
 mongoose.connect(mongoDB);
@@ -57,13 +59,12 @@ var StudentSchema = new Schema(
         password: { type: String, required: true }
     });
 
-// Virtual for student's full name
-StudentSchema
-    .virtual('name')
-    .get(function () {
-        return this.familyName + ', ' + this.firstName;
-    });
+    
+const User=mongoose.model('Student', StudentSchema);
 
+User.prototype.comparePassword=function(password){
+    return bcrypt.compareAsync(password,this.password)
+}
 
 //Export model
-module.exports = mongoose.model('Student', StudentSchema);
+module.exports = User;

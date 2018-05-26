@@ -4,7 +4,9 @@ const LogInController = require('../controllers/logIn.js');
 
 var LogInControllerIns = new LogInController();
 
-
+var userJson;
+var userToken;
+var loggedUser;
 router.post('/', function (req, res, next) {
 
 
@@ -19,17 +21,21 @@ router.post('/', function (req, res, next) {
       res.status(404).end();
     }
     try {
-      const isPasswordValid = req.body.password === user.password;
+      const isPasswordValid = user.comparePassword(req.body.password);
       if (!isPasswordValid) {
         console.log(`Parola ${user.password} este incorecta pentru adresa ${user.email} `);
         res.status(404).end();
       }
-
-      const userJson = user.toJSON();
-      console.log(userJson);
-      res.send(userJson);
+      userJson = user.toJSON();
+      res.send({
+        user: userJson,
+        token: LogInControllerIns.jwtSignUser(userJson)
+      });
       res.status(200).end();
+
+      console.log(userJson);
     } catch (err) {
+      console.log(err);
       res.status(500).send({
         error: "Error stuff"
       })
@@ -37,13 +43,6 @@ router.post('/', function (req, res, next) {
 
   });
 
-  LogInControllerIns.jwtSignUser(user,(err,signUser)=>{
-    console.log(user);
-    if (err) {
-      console.log(err);
-      res.status(500).end();
-    }
-  });
 
 });
 

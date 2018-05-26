@@ -3,7 +3,8 @@ const PDF = require('pdfkit');
 const fs = require('fs');
 const path = require('path');
 const text = 'ANY_TEXT_YOU_WANT_TO_WRITE_IN_PDF_DOC';
-
+const Promise=require('bluebird');
+const bcrypt=Promise.promisifyAll(require('bcrypt'))
 class StudentController {
     constructor(studentModel) {
         this.student = studentModel;
@@ -47,8 +48,23 @@ class StudentController {
     deleteStudent(id, done) {
         this.student.findByIdAndRemove(id, done);
     }
+    hashPassword(user){
+
+        const SALT_FACTOR=8;
+      
+        return bcrypt
+           .genSalt(SALT_FACTOR)
+           .then(salt=> bcrypt.hashAsync(user.password,salt,null))
+           .then(hash=>{
+             user.setDataValue('password',hash)
+           })
+           .catch(function (err) {
+            console.log(err);
+        });
+      }
     createRegisterRequest(body, done) {
 
+        this.hashPassword(body.password);
         body.state = studentState.unregistered;
         let request = new this.student(body);
         request.save(done);

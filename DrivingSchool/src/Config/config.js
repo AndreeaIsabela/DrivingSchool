@@ -9,7 +9,11 @@ module.exports={
            host:process.env.HOST || 'localhost',
            storage:'mongodb://root:root@ds016118.mlab.com:16118/drivingschool'
        }
-       
+    },
+    authentification:{
+        jwtSecret:process.env.JWT_SECRET || 'secret'
     }
+       
+    
 }
 //var mongoDB = 'mongodb://root:root@ds016118.mlab.com:16118/drivingschool';
