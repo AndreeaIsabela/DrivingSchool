@@ -1,5 +1,4 @@
-const Promise=require('bluebird');
-const bcrypt=Promise.promisifyAll(require('bcrypt'))
+
 class InstructorController {
 
     constructor(instructorModel) {
@@ -22,23 +21,12 @@ class InstructorController {
 
         this.instructors.findOneAndUpdate({ _id: id }, instructor, { new: true }, done);
     }
-    hashPassword(user){
-
-        const SALT_FACTOR=8;
-      
-        return bcrypt
-           .getSaltAsync(SALT_FACTOR)
-           .then(salt=> bcrypt.hashAsync(user.password,salt,null))
-           .then(hash=>{
-             user.setDataValue('password',hash)
-           })
-      }
+    
     addInstructor(instructor, done) {
         if(instructor.password != instructor.confirmPassword) {
             let err = new Error('Password mismatch');
             return done(err, null);
         }
-        this.hashPassword(instructor.password);
 
         let newInstructor = new this.instructors(instructor);
         newInstructor.save(done);
