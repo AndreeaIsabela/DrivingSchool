@@ -13,9 +13,9 @@ class DrivingLessonController {
         newDrivingLesson.save(done);
     }
 
-    deleteDrivingLesson(cnp, done) {
+    deleteDrivingLesson(id, done) {
 
-        this.drivingLessons.find({ cnp: cnp }).remove()
+        this.drivingLessons.find({ _id: id }).remove()
             .exec(done);
     }
 }

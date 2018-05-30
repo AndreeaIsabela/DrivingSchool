@@ -17,6 +17,7 @@ var StudentSchema = new Schema(
         county: { type: String, required: true, max: 100 },
         city: { type: String, required: true, max: 100 },
         address: { type: String, required: true, max: 200 },
+    rank:{type:Number,default:1},        
         cnp: {
             type: String,
             validate: {

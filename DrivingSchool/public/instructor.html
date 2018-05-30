@@ -73,9 +73,9 @@
                 <div class="container">
 
                     <div v-if="currentView==0">
-                        <div v-for="(item, index) in data" class="list-item aligner">
+                        <div v-for="student in studentList" class="list-item aligner">
                             <div class="list-item-info">
-                                <div v-for="(prop, itemIndex) in item">
+                                <!-- <div v-for="(prop, itemIndex) in item">
                                     <div v-if="itemIndex == 0" class="list-item-name">
                                         {{prop}}
                                     </div>
@@ -83,52 +83,77 @@
                                         {{ viewInfo[currentView].descriptors[itemIndex - 1].text }} : {{prop}}
                                     </div>
 
-                                </div>
+                                </div> -->
+                                Student Name: {{student.firstName}}
+                                <br>
+                                Student phone: {{student.phone}}
 
                             </div>
                         </div>
                     </div>
 
                     <div v-if="currentView==1">
-                        
+
                         <div>
-                            <div v-for="(item, index) in data" class="list-item aligner" v-bind:class="{ 'selected-row' : index == selectedRowIndex }">
+                            <div class="row">
+<br>
+<br>
+<br>
+Ziua cursului:<br>
+
+                                <input type="date" v-model="lessons.date">
+                                <br>Ora:<br>
+                                <input type="time" v-model="lessons.time">
+                                <br>Studentul:<br>
+                                <input type="text" v-model="lessons.studentName">
+                                <br>Instructorul:<br>
+                                <input type="text" v-model="lessons.teacherName">
+                                <br>Locatia:<br>
+                                <input tupe="text" v-model="lessons.location">
+                                <br>
+                            </div>
+                            <div class="row">
+
+                                <button class="btn btn-success " v-on:click="onAddLesson">
+                                    <i class="fa fa-plus"></i>
+                                    <a> Adauga</a>
+                                </button>
+                                <br><br>
+
+                            </div>
+
+                        </div>
+                        <div>
+                            <div v-for="lesson in responseLesson" class="list-item aligner" >
+
                                 <div class="list-item-info">
                                     <div class="list-item-name">
-                                        {{item[0]}}
+                                       Student: {{lesson.studentName}}
                                     </div>
-                                    <span v-for="(prop, itemIndex) in item">
-                                        <span v-if="itemIndex >= 1" class="list-item-description">
-                                            <span v-if="itemIndex > 1" class="list-item-description">
-                                                ,
-                                            </span>
-                                            {{ viewInfo[currentView].descriptors[itemIndex - 1].text }} : {{prop}}
-                                        </span>
-                                    </span>
+                                    <div>
+                                            Teacher: {{lesson.teacherName}}
+                                            Ora: {{lesson.time}}
+                                            Ziua: {{lesson.date}}
+                                            location: {{lesson.location}}
+                                    </div>
+                                    
                                     <div class="list-item-actions btn-group">
                                         <div class="list-item-actions-center">
-                                            <button  class="btn btn-success " v-on:click="onCreate">
-                                                <i class="fa fa-plus"></i>
-                                               <a href="programareLectie.html"> Adauga</a>
-                                            </button>
-                                            <button  class="btn btn-primary" v-on:click="onEdit(index)">
-                                                <i class="fa fa-edit"></i>
-                                                <a href="programareLectie.html"> Editeaza</a>
-                                            </button>
-                                            <button class="btn btn-danger" v-on:click="onDelete(index)">
+
+                                            <button class="btn btn-danger" v-on:click="onDelete(lesson._id)">
                                                 <i class="fa fa-trash"></i>
                                                 Sterge
                                             </button>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
     </div>
     </div>

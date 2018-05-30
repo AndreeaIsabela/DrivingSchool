@@ -31,9 +31,11 @@ var InstructorSchema = new Schema(
       },
     },
     password: { type: String, required: true },
+    rank:{type:Number,default:3}
   }, {
     toObject: { virtuals: true },
-    toJSON: { virtuals: true }
+    toJSON: { virtuals: true },
+  
   }
 );
 

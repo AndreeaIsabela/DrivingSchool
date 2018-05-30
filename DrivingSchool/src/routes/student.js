@@ -14,7 +14,16 @@ router.get('/', function(req, res) {
         res.json(docs);
     });
 });
-
+router.get('/students/schedule', (req, res, next) => {
+    let lesson = drivingLessonControllerIns.getDrivingLessons((err, result) => {
+        if (err) {
+          console.error(err);
+          return res.status(500).end();
+        }
+        console.log(result);
+        res.json(result);
+      });
+});
 router.get('/archive', function(req, res) {
     studentController.getArchivedStudents((err, docs) => {
         if(err) {

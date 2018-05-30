@@ -4,10 +4,11 @@ const Schema = mongoose.Schema;
 
 const DrivingLessonsSchema = new Schema(
   {
-    student:{type: Schema.ObjectId, ref: 'Student'},
-    instructor:{type: Schema.ObjectId, ref: 'Instructor'},
+    studentName:{type: String},
+    teacherName:{type: String},
     date: {type: Date},
-    place: { type: String, required: true, max: 200 }, 
+    time:{type:String},
+    location: { type: String, required: true, max: 200 }, 
   }
 );
 

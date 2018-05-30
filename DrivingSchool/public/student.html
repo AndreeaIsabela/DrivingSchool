@@ -23,7 +23,7 @@
             <div class="col col-sm-2 sidebar">
                 <img src="/images/brand.jpg" class="img-responsive" />
                 <hr />
-                
+
                 <div class="sidebar-item" v-on:click="onSchedule" v-bind:class="{ 'sidebar-item-active': currentView == viewIndex.schedule}">
                     {{viewInfo[viewIndex.schedule].title}}
                 </div>
@@ -33,42 +33,69 @@
                 </a>
             </div>
         </div>
+        <div class="row">
+            <div class="row">
+            <div class="col col-sm-2"></div>
+            <div class="col col-sm-1"></div>
 
-        <div class="col col-sm-2"></div>
-        <div class="col col-sm-1"></div>
-
-        <div class="col col-sm-8 sidepage">
-            <div v-if="currentView === viewIndex.schedule">
-                <div v-if="!viewInfo[currentView].canCreate" class="create-btn">
-                    <!-- create button placeholder -->
-                </div>
-                <div>
-                    <div v-for="(item, index) in data" class="list-item aligner" v-bind:class="{ 'selected-row' : index == selectedRowIndex }">
-                        <div class="list-item-info">
-                            <div class="list-item-name">
-                                {{item[0]}}
-                            </div>
-                            <span v-for="(prop, itemIndex) in item">
-                                <span v-if="itemIndex >= 1" class="list-item-description">
-                                    <span v-if="itemIndex > 1" class="list-item-description">
-                                        ,
+            <div class="col col-sm-8 sidepage">
+                <div v-if="currentView === viewIndex.schedule">
+                    <div v-if="!viewInfo[currentView].canCreate" class="create-btn">
+                        <!-- create button placeholder -->
+                    </div>
+                    <div>
+                        <div v-for="(item, index) in data" class="list-item aligner" v-bind:class="{ 'selected-row' : index == selectedRowIndex }">
+                            <div class="list-item-info">
+                                <div class="list-item-name">
+                                    {{item[0]}}
+                                </div>
+                                <span v-for="(prop, itemIndex) in item">
+                                    <span v-if="itemIndex >= 1" class="list-item-description">
+                                        <span v-if="itemIndex > 1" class="list-item-description">
+                                            ,
+                                        </span>
+                                        {{ viewInfo[currentView].descriptors[itemIndex - 1].text }} : {{prop}}
                                     </span>
-                                    {{ viewInfo[currentView].descriptors[itemIndex - 1].text }} : {{prop}}
                                 </span>
-                            </span>
+                            </div>
                         </div>
                     </div>
+
+                    <a href="https://www.e-drpciv.ro/curs_legislatie.pdf" target="_blank">
+                        <button class="btn btn-success download-btn">
+                            <i class="fa fa-arrow-circle-down"></i>
+                            Legislatie auto
+                        </button>
+                    </a>
+                    <div>
+                        <iframe src="http://www.scoalarutiera.ro/curs-legislatie" height="500" width="100%"></iframe>
+                    </div>
                 </div>
-                <button class="btn btn-success download-btn" v-on:click="onLegislation">
-                    <i class="fa fa-arrow-circle-down"></i>
-                    Legislatie auto
-                </button>
+
+                <div class="col col-sm-1"></div>
             </div>
         </div>
+        <div class="row">
+            <div v-for="lesson in responseLesson" class="list-item aligner">
+                    <div class="col-md-1"></div>
 
-        <div class="col col-sm-1"></div>
+                <div class="list-item-info">
+                    <div class="list-item-name">
+                        Student: {{lesson.studentName}}
+                    </div>
+                    <div>
+                        Student: {{lesson.studentName}} Ora: {{lesson.time}} Ziua: {{lesson.date}} location: {{lesson.location}}
+                    </div>
+
+
+                </div>
+            </div>
+            </div>
+        </div>
     </div>
     </div>
+
+
 
     <script src="./javascripts/student.js"></script>
 </body>

@@ -56,6 +56,18 @@ let logIn = new Vue({
                     password:this.formData.password
                 })
                 .then(function(response){
+                    
+                    if(response.user.rank==3){
+                        res.redirect('/admin.html')
+                    }
+                    else if(response.user.rank==2){
+                        var url='localhost:3000/instructor'+response.user._id;
+                        res.redirect(url);
+                    }
+                    else if(response.user.rank==1){
+                        var url='localhost:3000/student'+response.user._id;
+                        res.redirect(url);
+                    }
                     console.log(response);
                 })
                 .catch(function(error){

@@ -9,95 +9,104 @@ let app = new Vue({
             student: 0,
             schedule: 1,
         },
-        viewInfo: [
+       
 
-            {
-                title: 'Cursanti',
-                descriptors: [
-                    { text: 'CNP' },
-                    { text: 'Numar telefon' },
-                ]
-            }, {
-                title: 'Schedule',
-                descriptors: [
-                    { text: 'Locatie', width: 10 },
-                    { text: 'CNP', width: 30 },
-                    { text: 'Prenume', width: 30 },
-                    { text: 'Categorie', width: 10 },
-                    { text: 'Numar telefon', width: 20 }
-                ]
-            }
-
-        ],
-        currentView: 0,
-        data: []
+        currentView: 1,
+        studentList: [],
+        data: [],
+        lessons: {
+            // date:null,
+            // time:null,
+            // studentName:null,
+            // teacherName:null,
+            // location:null
+        },
+        responseLesson: [],
     },
     methods: {
         onStudents: function () {
             this.$http
-                .get('/api/students')
+                .get('/instructor/students')
                 .then(response => {
                     this.enableView(this.viewIndex.student);
                     this.clearList();
 
-                    this.fullData = response.data;
+                   
                     for (let student of response.data) {
                         console.log(student);
-                        this.data.push([
-                            student.lastName + ' ' + student.firstName,
-                            student.cnp,
-                            student.phone
-                        ]);
+                        this.studentList.push(
+                            {
+                            firstName:student.firstName,
+                            
+                            phone:student.phone
+                            }
+                        );
                     };
                 }).catch(function (err) {
                     console.log(err);
                 });
         },
+        onAddLesson: function () {
+            console.log(this.lessons);
+            this.$http
+                .post('/instructor/drivingLesson', {
+
+                    time: this.lessons.time.toString(),
+                    date: this.lessons.date,
+                    studentName: this.lessons.studentName,
+                    teacherName: this.lessons.teacherName,
+                    location: this.lessons.location,
+                })
+                .then(function (response) {
+                    console.log(response);
+                    window.location.reload(true);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
         onSchedule: function () {
             this.$http
-                .get('/api/students/sss/schedule')
+                .get('/instructor/drivingLesson')
                 .then(response => {
+                    this.responseLesson = [];
                     this.enableView(this.viewIndex.schedule);
                     this.clearList();
 
-                    this.fullData = response.data;
-                    for (let request of response.data) {
-                        this.data.push([
-                            
-                            request.date + ' ' + request.hour,
-                            request.location,
-                            request.cnp
-
-                        ]);
-                    }
-                }).catch(err => {
-                    console.log(err);
-                });
+                    for (let lesson of response.data) {
+                        
+                        this.responseLesson.push({
+                            _id: lesson._id,
+                            time: lesson.time,
+                            date: lesson.date,
+                            studentName:lesson.studentName,
+                            teacherName: lesson.teacherName,
+                            location: lesson.location
+                        });}
+                        console.log(this.responseLesson);
+                    }).catch(err => {
+                        console.log(err);
+                    });
         },
         enableView: function (viewIndex) {
             this.currentView = viewIndex;
         },
-        onEdit: function (index) {
-            this.formEnabled = true;
-
-            this.formData = {};
-            let propertyNames = Object.getOwnPropertyNames(this.fullData[index]);
-            for (let propName of propertyNames) {
-                this.formData[propName] = this.fullData[index][propName];
-            }
-
-            if (this.formData.password) {
-                this.formData.confirmPassword = this.formData.password;
-            }
-        },
+       
         onCreate: function () {
             this.formEnabled = true;
         },
 
-        onDelete: function (index) {
-            if (confirm('Sunteti sigur ca doriti sa stergeti ' + this.data[index][0] + '?')) {
-                this.data.splice(index, 1);
-            }
+        onDelete: function (id) {
+            console.log(id);
+            let url='/instructor/drivingLesson/'+id;
+            console.log("URL ESTE  ", url);
+            this.$http.delete(url)
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
         },
         clearList() {
             this.selectedRowIndex = null;

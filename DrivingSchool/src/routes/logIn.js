@@ -11,6 +11,7 @@ router.post('/', function (req, res, next) {
 
 
   LogInControllerIns.isUser(req.body.email, (err, user) => {
+    
     console.log(user);
     if (err) {
       console.log(err);

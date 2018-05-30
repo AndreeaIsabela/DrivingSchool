@@ -16,37 +16,36 @@ let app = new Vue({
         ],
         currentView: 0,
         data: [],
+        legislation:0,
+        
+        responseLesson: [],
     },
     created: function () {
         this.onSchedule();
     },
     methods: {
+       
         onSchedule: function () {
             this.$http
-                .get('/api/students/sss/schedule')
+                .get('/instructor/drivingLesson')
                 .then(response => {
+                    this.responseLesson = [];
                     this.enableView(this.viewIndex.schedule);
                     this.clearList();
 
-                    this.fullData = response.data;
-                    for (let request of response.data) {
-                        this.data.push([
-                            request.date + ' ' + request.hour,
-                            request.location
-                        ]);
-                    }
-                }).catch(err => {
-                    console.log(err);
-                });
-        },
-        onLegislation: function () {
-            this.$http
-                .get('/api/legislation')
-                .then(response => {
-                    
-                }).catch(function (err) {
-                    console.log(err.response);
-                });
+                    for (let lesson of response.data) {
+                        
+                        this.responseLesson.push({
+                            time: lesson.time,
+                            date: lesson.date,
+                            studentName:lesson.studentName,
+                            teacherName: lesson.teacherName,
+                            location: lesson.location
+                        });}
+                        console.log(this.responseLesson);
+                    }).catch(err => {
+                        console.log(err);
+                    });
         },
         onLogout: function() {
 
